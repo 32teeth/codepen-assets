@@ -1,0 +1,80 @@
+<data class='battery status'></data>
+
+<style>
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+:root {
+  --width: 10px;
+  --color: #FFFFFF;
+  --base: #AAAAAA;
+  --icon: "⚡";
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  font-family: "roboto";
+  background: var(--base);
+}
+
+.battery {
+  width: 110px;
+  height: 50px;
+  border: solid 5px black;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.battery:before {
+  content: "";
+  position: absolute;
+  background: black;
+  border-radius: 5px;
+  width: 10px;
+  height: 40px;
+  right: -10px;
+  top: 5px;
+}
+.battery:after {
+  content: "";
+  font-size: 40px;
+  position: absolute;
+  left: 0;
+  height: 40px;
+  z-index: -1;
+  transition: all ease 100ms;
+  border: solid 5px var(--base);
+  border-radius: 10px;
+}
+
+.status:after {
+  width: var(--width);
+  background: var(--color);
+}  
+</style>
+
+<script>
+const root = document.querySelector(':root');
+const indicator = document.querySelector('.battery');
+
+const monitor = (battery) => {
+  const percent = Math.floor(battery.level*100);
+  const index = Math.floor((percent*0.6)/10);
+  const color = `hsl(${percent}, 100%, 40%)`;
+  root.style.setProperty('--color', color);
+  root.style.setProperty('--width', `${percent}px`);
+  indicator.innerHTML = `${percent}%`; 
+}
+
+if ('getBattery' in navigator) {
+  navigator.getBattery().then(monitor);
+  setInterval( () => {
+    navigator.getBattery().then(monitor);
+  }, 60*1000);
+}  
+</script>

@@ -1,0 +1,182 @@
+<main>
+  <aside>
+    <span>
+      <button aria-label='left trigger'></button>
+    </span>
+    <button aria-label='select'></button>    
+    <nav aria-label='left analog'></nav>
+    <div>
+      <button aria-label='up'></button>
+      <button aria-label='right'></button>
+      <button aria-label='left'></button>
+      <button aria-label='down'></button>      
+    </div>
+    <button aria-label='screengrab'></button>    
+  </aside>
+  <section>
+    <h1>32teeth</h1>
+    <h2>this pen needs ❤</h2>
+  </section>
+  <aside>
+    <span>
+      <button aria-label='right trigger'></button>
+    </span>    
+    <button aria-label='start'></button>    
+    <div>
+      <button arial-label='x'></button>
+      <button arial-label='a'></button>
+      <button arial-label='y'></button>
+      <button arial-label='b'></button>      
+    </div>    
+    <nav aria-label='right analog'></nav>
+    <button aria-label='home'></button>
+  </aside>
+</main>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+    background: #fc1068;
+    user-select: none;
+  }
+
+  main {
+    width: 239mm;
+    height: 102mm;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 18mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  aside {
+    width: 23mm;
+    height: 87mm;
+    border-radius: 18mm 0 0 18mm;
+    background: rgba(0, 0, 0, 0.25);
+    outline: solid 0.5mm rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 5mm 7mm 10mm 3mm;
+    position: relative;
+  }
+  aside > button {
+    background: white;
+    border: none;
+    width: 6mm;
+    height: 2mm;
+    border-radius: 1mm;
+    position: relative;
+  }
+  aside:first-child > button:last-child {
+    width: 6mm;
+    height: 6mm;
+    border-radius: 2mm;
+  }
+  aside:last-child {
+    border-radius: 0 18mm 18mm 0;
+    padding: 5mm 3mm 10mm 7mm;
+    align-items: flex-start;
+  }
+  aside:last-child > button:first-child:before {
+    content: "";
+    position: absolute;
+    left: 2mm;
+    top: -2mm;
+    background: white;
+    border: none;
+    width: 2mm;
+    height: 6mm;
+    border-radius: 1mm;
+  }
+  aside:last-child > button:last-child {
+    width: 8mm;
+    height: 8mm;
+    border-radius: 8mm;
+  }
+  aside:last-child span {
+    right: 0mm;
+  }
+  aside:last-child span button {
+    border-radius: 2mm 18mm 0mm 0mm;
+    border-width: 1mm 0mm 0mm 0mm;
+  }
+  aside nav {
+    width: 16mm;
+    height: 16mm;
+    border-radius: 16mm;
+    background: #363636;
+  }
+  aside span {
+    position: absolute;
+    top: -1.25mm;
+    right: 1mm;
+    z-index: -1;
+  }
+  aside span button {
+    width: 32mm;
+    height: 20mm;
+    border-radius: 18mm 2mm 0mm 0mm;
+    border-width: 1mm 0mm 0mm 0mm;
+    border-color: white;
+    background: none;
+  }
+  aside div {
+    width: 21mm;
+    height: 22mm;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    transform: rotate(45deg);
+  }
+  aside div button {
+    width: 8mm;
+    height: 8mm;
+    margin: 1mm;
+    border: none;
+    border-radius: 8mm;
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 134.1mm;
+    height: 78.26mm;
+    background: rgba(255, 255, 255, 0.25);
+    border-style: solid;
+    border-width: 9mm 14mm;
+    border-radius: 4mm;
+    border-color: rgba(255, 255, 255, 0.125);
+    outline: solid 0.5mm rgba(0, 0, 0, 0.25);
+  }
+  section h1, section h2 {
+    font-size: 2rem;
+    color: rgba(108, 122, 137, 0.5);
+    margin: 0.25rem;
+  }
+  section h1 {
+    border-style: solid;
+    border-width: 2mm;
+    border-radius: 10mm;
+    font-size: 2rem;
+    padding: 2mm 8mm;
+  }
+  section h2 {
+    font-size: 1rem;
+  }  
+</style>
