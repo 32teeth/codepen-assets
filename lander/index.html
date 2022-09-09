@@ -1,0 +1,53 @@
+<html>
+<head></head>
+<body>
+  <main>
+
+  </main>
+</body>
+</html>
+
+<style>
+  body {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  main {
+    width: 568px;
+    height: 320px;
+    background-image: url('rocks_fg.png'), 
+                      url('bush_fg.png'),  
+                      url('rocks_bg.png'),
+                      url('ground.png'),
+                      url('clouds_bg.png'),
+                      url('clouds_fg.png'),
+                      url('sky.png');
+    background-repeat: repeat-x;
+    background-position: 0 bottom;
+    background-size: cover;    
+    animation: scroll 60s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      background-position: 0 bottom;
+    }
+    100% {
+      background-position: calc(-1704px/2) bottom,
+                           calc(-1704px/2.5) bottom,
+                           calc(-1704px/3) bottom,
+                           calc(-1704px/1.5) bottom,
+                           calc(-1704px/3) bottom,
+                           calc(-1704px/1.25) bottom,
+                           calc(-1704px/1) bottom;
+    }
+  }
+
+
+</style>
