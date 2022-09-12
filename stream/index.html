@@ -1,0 +1,82 @@
+<div>
+  <video autoplay='true' width='480' height='320'/>
+</div>
+<button id='start' onClick='startStream()'>Start Stream</button>
+<button id='stop' onClick='stopStream()'>Stop Stream</button>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+
+body {
+  font-family: "roboto";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 480px;
+  height: 320px;
+  border:solid 1px;
+}
+
+button {
+  width: 250px;
+  height: 40px;
+}
+
+button#stop {
+  display:none;
+}
+</style>
+
+<script>
+
+const startStream = () => {
+  const div = document.querySelector('div');
+  const video = document.querySelector('video'); 
+
+  try {
+    (async () => {
+      await navigator.mediaDevices.getUserMedia(
+        {
+          video: { 
+            width: 480, 
+            height: 320 
+          }
+        }
+      )
+      .then ( ( stream ) => {
+        (async () => {
+           video.srcObject = stream;
+           await video.play();  
+          
+          document.querySelector('#start').style.display = 'none';
+          document.querySelector('#stop').style.display = 'block';          
+        })()  
+      })
+      .catch ( ( err ) => {
+        div.innerHTML = 'Stream error';
+      })
+    })();
+    
+  } catch ( err ) {
+    div.innerHTML = 'Permission error';
+  }
+}
+
+const stopStream = () => {
+  const video = document.querySelector('video');   
+  (async () => {
+    await video.pause();  
+    
+    document.querySelector('#start').style.display = 'block';
+    document.querySelector('#stop').style.display = 'none';              
+  })()    
+}
+</script>

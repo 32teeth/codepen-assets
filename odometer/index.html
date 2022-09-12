@@ -1,0 +1,114 @@
+<!-- JavaScript was used to generate HTML elements -->
+<div class='odometer'></div>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+body {
+  font-family: "roboto";
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.odometer {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  position: relative;
+  height: 25px;
+  border: solid 1px;
+  border-radius: 3px;
+  overflow: hidden;
+  background-image: linear-gradient(to left, red 20px, rgba(0, 0, 0, 0) 20px);
+  transform: scale(4);
+}
+.odometer ul {
+  list-style: none;
+  font-size: 22px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+.odometer ul:nth-child(1) {
+  animation: milage 10s infinite;
+}
+.odometer ul:nth-child(2) {
+  animation: milage 100s infinite;
+}
+.odometer ul:nth-child(3) {
+  animation: milage 1000s infinite;
+}
+.odometer ul:nth-child(4) {
+  animation: milage 10000s infinite;
+}
+.odometer ul:nth-child(5) {
+  animation: milage 100000s infinite;
+}
+.odometer ul:nth-child(6) {
+  animation: milage 1000000s infinite;
+}
+.odometer ul:nth-child(7) {
+  animation: milage 10000000s infinite;
+}
+.odometer ul:first-child {
+  color: white;
+}
+.odometer ul li {
+  height: 25px;
+  width: 20px;
+  text-align: center;
+}
+
+@keyframes milage {
+  10% {
+    margin-top: -25px;
+  }
+  20% {
+    margin-top: -50px;
+  }
+  30% {
+    margin-top: -75px;
+  }
+  40% {
+    margin-top: -100px;
+  }
+  50% {
+    margin-top: -125px;
+  }
+  60% {
+    margin-top: -150px;
+  }
+  70% {
+    margin-top: -175px;
+  }
+  80% {
+    margin-top: -200px;
+  }
+  90% {
+    margin-top: -225px;
+  }
+  100% {
+    margin-top: -250px;
+  }
+}
+</style>
+<script>
+const odometer = document.querySelector('.odometer');
+const ul = document.createElement('ul');
+const li = document.createElement('li');
+
+[...Array(7).keys()].forEach( (list) => {
+  const ul = document.createElement('ul');
+  [...Array(10).keys()].forEach( (number) => {
+    const li = document.createElement('li');
+    li.innerHTML = number;
+    ul.appendChild(li);
+  });
+  const li = document.createElement('li');
+  li.innerHTML = 0;  
+  ul.appendChild(li);  
+  odometer.appendChild(ul);
+});  
+</script>

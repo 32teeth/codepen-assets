@@ -1,0 +1,157 @@
+<main>
+  <header>
+    <h1>Kanban</h1>
+  </header>
+  <section class='section'>
+    <input id="Milk" type="checkbox">
+    <label for="Milk">Milk</label>
+    <input id="Butter" type="checkbox">
+    <label for="Butter">Butter</label>
+    <input id="Cheese" type="checkbox">
+    <label for="Cheese">Cheese</label>
+    <input id="Eggs" type="checkbox">
+    <label for="Eggs">Eggs</label>    
+    <input id="Flour" type="checkbox">
+    <label for="Flour">Flour</label>        
+    <input id="Sugar" type="checkbox">
+    <label for="Sugar">Sugar</label>
+    <input id="Bread" type="checkbox">
+    <label for="Bread">Bread</label>    
+    <h2>To Do</h2>  
+    <h2>Done</h2>
+  </section>
+</main>  
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+body {
+  font-family: "roboto";
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  background-image: linear-gradient(to bottom left, rgba(255, 20, 147, 0.25), white);
+  user-select: none;
+}
+
+main {
+  display: grid;
+  grid-template-areas: "header" "list";
+  grid-template-rows: 100px 1fr;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+  width: 34vw;
+  height: 100vh;
+  background: rgba(255, 20, 147, 0.5);
+  box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  line-height: 1;
+  margin: 0;
+}
+
+h2 {
+  line-height: 1;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 1rem;
+  font-size: 1.25rem;
+  height: 50px;
+}
+h2:after {
+  font-size: 1rem;
+  font-weight: normal;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+}
+h2:first-of-type {
+  grid-row-start: 1;
+  grid-col-start: 1;
+}
+h2:first-of-type:after {
+  content: counter(todo);
+}
+h2:last-child {
+  grid-row-start: 1;
+  grid-col-start: 2;
+}
+h2:last-child:after {
+  content: counter(done);
+}
+
+header {
+  grid-area: header;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 20, 147, 0.5);
+  margin: 1rem;
+}
+
+section {
+  grid-area: list;
+  display: grid;
+  grid-auto-rows: minmax(auto, 25px);
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: dense;
+  counter-reset: todo done;
+  gap: 0 0.5rem;
+  margin: 0 1rem 1rem 1rem;
+  background: rgba(0, 0, 0, 0.1);
+  overflow-y: hidden;
+}
+section > * {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+input {
+  counter-increment: todo;
+  position: absolute;
+  outline: none;
+  margin: -9999rem;
+}
+input + label {
+  grid-column-start: 1;
+  justify-self: stretch;
+}
+input:checked {
+  counter-increment: done;
+}
+input:checked + label {
+  grid-column-start: 2;
+  cursor: w-resize;
+}
+input:checked + label:hover {
+  padding: 0.25rem 1rem;
+}
+input:focus + label {
+  background: rgba(255, 255, 255, 0.5);
+  border: solid 1px rgba(255, 255, 255, 0.25);
+}
+
+label {
+  display: flex;
+  align-items: center;
+  height: 25px;
+  padding: 0.25rem 1.5rem;
+  margin: 0.25rem;
+  background: rgba(255, 255, 255, 0.25);
+  border: solid 1px transparent;
+  user-select: none;
+  cursor: e-resize;
+  transition: all ease 500ms;
+}
+label:hover {
+  background: rgba(255, 255, 255, 0.5);
+  border: solid 1px rgba(255, 255, 255, 0.25);
+  padding: 0.25rem 2rem;
+}  
+</style>

@@ -1,0 +1,85 @@
+<!--
+
+1. Review the HTML form element below (checkbox)
+2. Display using CSS the checkbox into the below toggle
+                                                                                
+              .,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.            
+          .,,,,*************,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.        
+        .,,,*******************,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.      
+       .,,***********************,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.     
+      .,,*************************,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.    
+      ,,,*************************,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, 
+       .,,***********************,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.  
+        .,,,*******************,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.   
+          .,,,,*************,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.     
+              .,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.         
+-->
+<fieldset>
+  <input type='checkbox' id='toggle'>
+  <label for='toggle'></label>
+</fieldset>
+
+<style>
+:root {
+  --cb-height:100px;
+  --cb-width:250px;
+  --cb-background:#CCCCCC;
+  --cb-foreground:#FF7769;
+  --cb-highlight:#CCFF33;  
+  --cb-border:10px;
+  --cb-half:5px;
+}
+
+body {
+  font-family: "roboto";  
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+fieldset {
+  border: none;
+}
+
+label {
+  display:flex;
+  width:calc(var(--cb-width) - var(--cb-half));
+  height:calc(var(--cb-height) - var(--cb-half));
+  border-radius:var(--cb-height);
+  background:var(--cb-background);  
+  overflow:hidden;
+  position:relative;
+  border:solid var(--cb-border) var(--cb-background);    
+  outline: solid 0 rgba(0,0,0,0);
+  outline-offset: 0;    
+  transition: all linear 250ms;
+}
+
+label:before {
+  content: '';
+  width:calc(var(--cb-width) - var(--cb-half));
+  height:calc(var(--cb-height) - var(--cb-half));
+  border-radius:calc(var(--cb-height) - var(--cb-half));
+  background:var(--cb-foreground); 
+  position:absolute;  
+  left:calc(-100% + calc(var(--cb-height) - var(--cb-half)));
+  transition: all cubic-bezier(0,1,1,0) 500ms;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+}
+
+input[type=checkbox]:focus ~ label {
+  outline: solid 5px rgba(0,0,0,0.25);
+}
+
+
+input[type=checkbox]:checked ~ label:before{
+  left:calc(100% - calc(var(--cb-height) - var(--cb-half)));  
+  background:var(--cb-highlight);
+}  
+</style>

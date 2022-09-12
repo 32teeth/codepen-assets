@@ -1,0 +1,90 @@
+<main>
+  <section></section>
+  <section></section>  
+</main>
+
+<style>
+  @charset "UTF-8";
+  @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    font-family: "roboto";
+    background: #061c35;
+  }
+
+  @keyframes kickflip {
+    0% {
+      transform: perspective(200px) rotateX(0) rotateY(0) rotateZ(0) scale(1) rotate3d(1, 0, 0, 0);
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    }
+    60% {
+      transform: perspective(150px) rotateX(-10deg) rotateY(15deg) rotateZ(5deg) scale(1.25) rotate3d(1, 0, 0, 0.5turn);
+      box-shadow: 5px -15px 15px rgba(0, 0, 0, 0.25);
+    }
+    100% {
+      transform: perspective(200px) rotateX(0) rotateY(0) rotateZ(0) scale(1) rotate3d(1, 0, 0, 1turn);
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    }
+  }
+  main {
+    width: 325px;
+    height: 85px;
+    display: block;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 500px;
+    transform: perspective(200px) rotateX(0) rotateY(0) rotateZ(0) scale(1) rotate3d(1, 0, 0, 0);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 50px 45px 45px 50px;
+    border: none;
+  }
+  main:hover {
+    animation: kickflip 1.25s ease-in-out;
+  }
+  main section {
+    width: 325px;
+    height: 85px;
+    border-radius: 50px 45px 45px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: absolute;
+    border: solid 1px #edd2b0;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transform: rotateX(0);
+  }
+  main section:first-child {
+    background: black;
+  }
+  main section:first-child:before, main section:first-child:after {
+    color: rgba(255, 255, 255, 0.15);
+  }
+  main section:last-child {
+    background: linear-gradient(-45deg, #E0BBE4 6.5px, #957DAD 6.5px, #957DAD 13px, #D291BC 13px, #D291BC 19.5px, #FEC8D8 19.5px, #FEC8D8 26px, #FFDFD3 19.5px, #FFDFD3 32.5px), linear-gradient(45deg, #E0BBE4 6.5px, #E0BBE4 6.5px, #957DAD 6.5px, #957DAD 13px, #D291BC 13px, #D291BC 19.5px, #FEC8D8 19.5px, #FEC8D8 26px, #FFDFD3 19.5px, #FFDFD3 32.5px);
+    background-blend-mode: multiply;
+    background-repeat: repeat;
+    background-size: 65px;
+    transform: rotateY(-180deg);
+  }
+  main section:last-child:before, main section:last-child:after {
+    color: rgba(0, 0, 0, 0.15);
+  }
+  main section:before, main section:after {
+    position: absolute;
+    content: "⸬";
+    font-size: 32px;
+    top: 21px;
+  }
+  main section:before {
+    left: 62px;
+  }
+  main section:after {
+    right: 72px;
+  }
+</style>
