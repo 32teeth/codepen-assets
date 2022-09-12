@@ -1,0 +1,120 @@
+<div class="Week"></div>
+<div class="Day"></div>
+<div class="Yesterday"></div>
+<div class="Today"></div>
+<div class="Blockers"></div>
+<div class="Priority"></div>
+<div class="Distractions"></div>
+<div class="Notes"></div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300');
+  body {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-areas: 
+      "Week Week Week"
+      "Day Day Day"
+      "Yesterday Today Blockers"
+      "Priority Priority Distractions"
+      "Notes Notes Distractions";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 32px 32px 160px 160px 1fr;
+    gap: 1px;
+    background: rgba(0, 0, 0, 1);
+    font-family: "poppins";
+  }
+
+  body > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 1);
+    position: relative;
+    line-height: 2;
+    text-indent: 10px;    
+  }
+
+  body > div:before {
+    content: attr(class);
+    display: flex;
+    line-height: 2;
+    text-indent: 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, 
+                  rgba(0, 0, 0, 0.125) 32px, 
+                  rgba(0, 0, 0, 1) 32px,
+                  rgba(0, 0, 0, 1) 33px,
+                  rgba(255, 255, 255, 1) 33px);
+  }
+
+  body > div:first-letter {
+    text-transform: uppercase;
+  }
+
+  .Week {
+    grid-area: Week;
+    background: pink;
+  }
+
+  .Day {
+    grid-area: Day;
+    background: yellow;
+  }
+
+  .Week:before,
+  .Day:before {
+    content: '';
+  }
+
+  .Yesterday {
+    grid-area: Yesterday;
+  }
+
+  .Today {
+    grid-area: Today;
+  }
+
+  .Blockers {
+    grid-area: Blockers;
+  }
+
+  .Priority {
+    grid-area: Priority;
+  }
+
+  .Distractions {
+    grid-area: Distractions;
+  }
+
+  .Notes {
+    grid-area: Notes;
+  }
+</style>
+
+<script>
+  const Today = new Date();
+
+  const week = () => {
+    const date = new Date(new Date())
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+
+    const monday = Intl.DateTimeFormat(navigator.language, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date());
+    const friday = Intl.DateTimeFormat(navigator.language, { month: 'short', day: 'numeric', year: 'numeric'}).format(new Date(date.setDate(diff + 4)));
+    //return new Date(date.setDate(diff)); 
+    return `${monday} - ${friday}`;
+  }
+
+  const weekEl = document.querySelector('.Week');
+  weekEl.innerHTML = week();
+  
+  const dayEl = document.querySelector('.Day');
+  dayEl.innerHTML = `${Intl.DateTimeFormat(navigator.language, { weekday: 'long' }).format(new Date())}`;
+</script>
+
