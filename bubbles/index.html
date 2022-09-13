@@ -23,8 +23,8 @@ body {
 
 canvas {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: calc(100vw + 100px);
+  height: calc(100vh + 100px);
   mix-blend-mode: luminosity;
   outline: solid 100px white;
   outline-offset: -100px;
@@ -59,12 +59,12 @@ section h2 {
 	const ctx = canvas.getContext('2d');  
   const img = document.querySelector('img');
 
-  let width = canvas.width = window.innerWidth;
-  let height = canvas.height = window.innerHeight;
+  let width = canvas.width = window.innerWidth + 100;
+  let height = canvas.height = window.innerHeight + 100;
 
   new ResizeObserver(() => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+    width = canvas.width = window.innerWidth + 100;
+    height = canvas.height = window.innerHeight + 100;
   }).observe(document.body)
 
   const bubbles = {
