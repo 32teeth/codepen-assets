@@ -4,7 +4,8 @@
   <h2>this pen needs ❤</h2>
 </section>
 <style>
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
 html {
   background-color: rgba(255, 255, 255, 1);
 }
@@ -15,11 +16,11 @@ body {
   width: 100vw;
   height: 100vh;
   flex-direction: column;
-  font-family: "roboto";
+  font-family: "Poppins";
   margin: 0;
   padding: 0;
   background: linear-gradient(115deg, red, orange, yellow, green, blue, indigo, violet, red);
-}  
+}
 
 canvas {
   position: absolute;
@@ -56,7 +57,7 @@ section h2 {
 
 <script>
 	const canvas = document.querySelector('canvas');
-	const ctx = canvas.getContext('2d');  
+	const ctx = canvas.getContext('2d');
   const img = document.querySelector('img');
 
   let width = canvas.width = window.innerWidth + 100;
@@ -70,7 +71,7 @@ section h2 {
   const bubbles = {
 		angle:0,
 		count:25,
-		particles:[],    
+		particles:[],
     init:() => {
 			for(var n = 0; n < bubbles.count; n++)
 			{
@@ -89,7 +90,7 @@ section h2 {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = 'rgba(255, 255, 255, 1)';
 			ctx.beginPath();
-      ctx.fillRect(0, 0, canvas.width, canvas.height);            
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 			for(var n = 0; n < bubbles.count; n++)
 			{
 				var p = bubbles.particles[n];
@@ -97,10 +98,10 @@ section h2 {
 				ctx.moveTo(p.x, p.y);
 				ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, true);
         ctx.fillStyle = `rgba(0, 0, 0, ${p.a})`;
-        ctx.fill();	
-			}	
-			ctx.fill();	
-			ctx.closePath();	
+        ctx.fill();
+			}
+			ctx.fill();
+			ctx.closePath();
 
       //img.src = canvas.toDataURL('image/png', 0.1);
 		},
@@ -115,9 +116,9 @@ section h2 {
 				if(p.y < -5){p.y = height;}
 				if(p.x < -5){p.x = width;}
 				if(p.x > width+5){p.x = 0;}
-			}			
-		}    
-  }  
+			}
+		}
+  }
 
   bubbles.init();
 
@@ -125,5 +126,5 @@ section h2 {
 		bubbles.draw();
     bubbles.update();
 		requestAnimationFrame(loop);
-	})();		  
+	})();
 </script>

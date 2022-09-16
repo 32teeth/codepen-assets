@@ -1,0 +1,81 @@
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    font-family: "Poppins";
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to top, #8B5517 120px, #56B30B 120px, #56B30B 160px, #C7FCFD 160px, #C7FCFD 200px, #B6E7E8 200px, #B6E7E8 240px, #A4CFD1 240px, #A4CFD1 260px, #95CDCF 260px, #95CDCF 300px, #8CC2C3 300px, #8CC2C3);
+  }
+
+  ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    position: absolute;
+    width: 200px;
+    height: 120px;
+    background: linear-gradient(to right, transparent 40px, #FFFFFF 40px, #FFFFFF 120px, transparent 120px), linear-gradient(to right, transparent 0px, #EEEEEE 0px, #EEEEEE 160px, transparent 160px), linear-gradient(to right, transparent 0px, #DDDDDD 0px, #DDDDDD 200px, transparent 200px);
+    background-size: 200px 40px, 200px 40px, 200px 40px;
+    background-position: 0 0, 0 40px, 0 80px;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+  }
+  li:nth-child(1) {
+    top: -79px;
+    animation: cloud 25s steps(80, start) 0s infinite;
+  }
+  li:nth-child(2) {
+    top: 41px;
+    animation: cloud 22s steps(80, start) 0s infinite;
+  }
+  li:nth-child(3) {
+    top: -39px;
+    animation: cloud 25s steps(40, start) 0s infinite;
+  }
+  li:nth-child(4) {
+    top: 41px;
+    animation: cloud 25s steps(40, start) 0s infinite;
+  }
+  li:nth-child(5) {
+    top: 1px;
+    animation: cloud 16s steps(80, start) 0s infinite;
+  }
+  li:nth-child(6) {
+    top: 41px;
+    animation: cloud 13s steps(80, start) 0s infinite;
+  }
+  li:nth-child(7) {
+    top: -79px;
+    animation: cloud 22s steps(40, start) 0s infinite;
+  }
+
+  @keyframes cloud {
+    0% {
+      left: calc(100vw);
+    }
+    100% {
+      left: -200px;
+    }
+  }
+  </style>

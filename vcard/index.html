@@ -1,0 +1,86 @@
+<figure class='animating'>
+  <header>
+    <h1>32teeth</h1>
+    <h2>Eugene Andruszczenko</h2>
+  </header>
+  <picture>
+    <source srcset='https://github.com/32teeth/32teeth/raw/main/assets/profile.png' media='min-width:800px'>
+    <img src='https://github.com/32teeth/32teeth/raw/main/assets/profile.png' alt='Photo of me' />
+  </picture>
+  <figcaption>
+    <h3>More About Me</h3>
+  </figcaption>
+</figure>
+
+<style>
+  @charset 'UTF-8';
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300');
+
+  * {
+    transition: all 0.5s ease-in-out;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    font-family: 'Poppins';
+    margin: 0;
+    padding: 0;
+  }
+
+  figure {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 400px;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 1rem;
+  }
+
+  figure > picture > img {
+    height: 100%;
+    position: absolute;
+    left: -200px;
+    filter: grayscale(0.75);
+  }
+
+  figure:hover {
+    width: 800px;
+  }
+
+  figure:hover > picture > img {
+    left: 0px;
+    filter: grayscale(0);
+  }
+
+  picture {
+    height: 100%
+  }
+
+  figcaption, header {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: white;
+    font-weight: bold;
+    z-index: 1;
+  }
+
+  figcaption {
+    top: auto;
+    bottom: 1rem;
+  }
+
+  h1, h2, h3 {
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+</style>
