@@ -222,7 +222,7 @@ opacity = 0;
   explode.draw();
   explode.update();
   section.style.opacity = opacity/balls.particle.length;
-  section.style.zIndex = -balls.particle.length + opacity + 25;
+  section.style.zIndex = -balls.particle.length + opacity + 10;
 })();
 canvas.addEventListener('mousedown', (e) => {
   explode.init(e.clientX, e.clientY);
