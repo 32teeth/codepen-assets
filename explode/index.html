@@ -93,8 +93,7 @@ const explode = {
       c: 5,
       dir: 1,
       state: true,
-      wait: 0,
-      sound: new Audio(`${Math.floor(Math.random() * (36- 0 + 1) + 0)}.mp3`),
+      wait: 0
     });
   },
   draw: () => {
@@ -141,7 +140,7 @@ const explode = {
 }
 const balls = {
   angle: 0,
-  count: 500,
+  count: 250,
   particle: [],
   reset: () => {
     balls.particle = [];
@@ -176,7 +175,6 @@ const balls = {
           var dy = p.y - e.y;
           var dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < e.r + p.r) {
-            e.sound.play();
             balls.explode(p.x, p.y, n);
           }
         }
