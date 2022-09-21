@@ -1,0 +1,239 @@
+<main>
+  <section>
+    <figure class='top'></figure>
+    <figure class='bottom'></figure>
+    <figure class='front'></figure>
+    <figure class='back'></figure>
+    <figure class='left'></figure>
+    <figure class='right'></figure>
+  </section>
+</main>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+    background: #FFEEEE;
+    user-select: none;
+  }
+
+  main {
+    width: 256px;
+    height: 256px;
+    perspective: 500px;
+    position:relative;
+  }
+
+
+  @keyframes spin {
+    0% {
+      transform: rotateX(-15deg) rotateY(25deg) rotateZ(0deg);
+    }
+    50% {
+      transform: rotateX(15deg) rotateY(calc(360deg + 25deg)) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateX(-15deg) rotateY(calc(720deg + 25deg)) rotateZ(0deg);
+    }
+  }
+
+  section {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spin 15s linear infinite;
+  }
+
+  figure {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .top,
+  .bottom {
+    width: 256px;
+    height: 256px;
+  }
+
+  .front,
+  .back {
+    width: 256px;
+    height: 90px;
+  }
+
+  .left,
+  .right {
+    width: 256px;
+    height: 90px;
+  }
+
+  :root {
+    --light: #D9CCCB;
+    --medium: #756F71;
+    --dark: #585455;
+    --black: #2C2C2E;
+  }
+
+  .front {
+    transform: rotateX(0deg) translateZ(128px);
+    background: linear-gradient(to left, transparent 30px, var(--black) 30px, var(--black) 70px, transparent 70px),
+                linear-gradient(var(--light) 41px, var(--medium) 41px),
+                var(--light);
+  }
+
+  .front:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 29px;
+    width: 156px;
+    height: 24px;
+    border-style: solid;
+    border-color: var(--medium);
+    border-width: 0 0 1px 1px;
+    z-index: 9999;
+  }
+
+  .back {
+    transform: rotateX(180deg) translateZ(128px);
+    background: radial-gradient(circle, var(--light) 1px, transparent 1px) 0 0,
+                radial-gradient(circle, var(--black) 5px, transparent 5px) 0 0,
+                radial-gradient(circle, var(--light) 1px, transparent 1px) 0 0,
+                radial-gradient(circle, rgba(0, 0, 0, 0.25) 5px, transparent 5px) 0 0,
+                radial-gradient(circle, var(--dark) 2px, transparent 2px) 0 0,
+                radial-gradient(circle, var(--light) 5px, transparent 5px) 0 0,
+                linear-gradient(to bottom, var(--dark) 10px, var(--dark) 10px) 0 0,
+                linear-gradient(to bottom, var(--dark) 10px, transparent 10px) 0 0,
+                linear-gradient(var(--medium) 49px, transparent 49px),
+                linear-gradient(to left, transparent 30px, var(--black) 30px, var(--black) 70px, transparent 70px),
+                linear-gradient(var(--medium) 49px, var(--light) 49px),
+                var(--light);
+    background-position:
+                110px -30px,
+                110px -30px,
+                96px -30px,
+                96px -30px,
+                82px -30px,
+                82px -30px,
+                calc(100% - 8px) 0px,
+                calc(50% - 7px) 0px,
+                0 0,
+                0 0,
+                0 0;
+    background-size:
+                100%,
+                100%,
+                100%,
+                100%,
+                100%,
+                100%,
+                48px 24px,
+                15px 10px,
+                100%,
+                100%,
+                100%;
+    background-repeat: no-repeat;
+  }
+
+  .left {
+    transform: rotateY(270deg) translateZ(128px);
+    background: linear-gradient(var(--light) 41px, var(--medium) 41px),
+                var(--light);
+  }
+
+  .right {
+    transform: rotateY(90deg) translateZ(128px);
+    background: radial-gradient(circle, var(--black) 2px, transparent 2px) 0 0,
+                radial-gradient(circle, yellow 5px, transparent 5px) 0 0,
+                radial-gradient(circle, var(--black) 2px, transparent 2px) 0 0,
+                radial-gradient(circle, red 5px, transparent 5px) 0 0,
+                linear-gradient(to bottom, var(--dark) 10px, var(--dark) 10px) 0 0,
+                linear-gradient(var(--light) 41px, var(--medium) 41px),
+                var(--light);
+    background-position:
+                100px 36px,
+                100px 36px,
+                84px 36px,
+                84px 36px,
+                204px 72px,
+                0 0,
+                0 0;
+    background-size:
+                100%,
+                100%,
+                100%,
+                100%,
+                32px 24px,
+                100%,
+                100%;
+    background-repeat: no-repeat;
+  }
+
+  .top {
+    transform: rotateX(90deg) translateZ(45px);
+    background: linear-gradient(to top, transparent 10px, var(--black) 10px),
+                linear-gradient(to top, transparent 10px, var(--black) 10px),
+                linear-gradient(to left, var(--light) 30px, transparent 30px, transparent 70px, var(--light) 70px),
+                linear-gradient(to top, transparent 2px, var(--medium) 2px, var(--medium) 4px, transparent 4px),
+                linear-gradient(to left, transparent 30px, var(--black) 30px, var(--black) 70px, transparent 70px),
+                var(--light);
+    background-position:
+                calc(100% - 30px) 0,
+                calc(100% - 30px) calc(100% + 20px),
+                0 0,
+                10px 10px,
+                0 0,
+                0 0;
+    background-size:
+                40px 40px,
+                40px 40px,
+                100%,
+                4px 4px,
+                100%,
+                100%;
+    background-repeat: no-repeat,
+                       no-repeat,
+                       no-repeat,
+                       repeat,
+                       no-repeat,
+                       no-repeat;
+    position: relative;
+  }
+
+  .top:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 29px;
+    width: 156px;
+    height: 24px;
+    border-style: solid;
+    border-color: var(--medium);
+    border-width: 1px 0 0px 1px;
+    z-index: 9999;
+  }
+
+  .bottom {
+    transform: rotateX(270deg) translateZ(45px);
+    background: var(--dark);
+    box-shadow: 0 0 0 10px var(--medium) inset;
+  }
+
+
+
+</style>

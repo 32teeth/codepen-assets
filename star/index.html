@@ -1,0 +1,70 @@
+<form>
+<input type="radio" name="star" id="star-5" value="5">
+<label for="star-5">5</label>
+<input type="radio" name="star" id="star-4" value="4">
+<label for="star-4">4</label>
+<input type="radio" name="star" id="star-3" value="3">
+<label for="star-3">3</label>
+<input type="radio" name="star" id="star-2" value="2">
+<label for="star-2">2</label>
+<input type="radio" name="star" id="star-1" value="1">
+<label for="star-1">1</label>
+</form>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+  }
+
+  form {
+    display: flex;
+    flex-direction: row-reverse;
+    background: paleturquoise;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;;
+  }
+
+  label {
+    outline: none;
+    position: absolute;
+    left: -100vw;
+  }
+
+  input {
+    position: relative;
+    display: block;
+    border: none;
+    appearance: none;
+    margin: 0;
+    font-size: 2rem;
+  }
+
+  input:before {
+    display: block;
+    content: '☆';
+    color: white;
+    padding: 0.25rem;
+    transition: all ease 250ms;
+  }
+
+  input:checked:before,
+  input:checked ~ input:before,
+  input:hover ~ input:before {
+    color: gold;
+    content: '★';
+  }
+
+  input:hover ~ input:before,
+  input:hover:before {
+    color: gray !important;
+    content: '★';
+  }
+</style>

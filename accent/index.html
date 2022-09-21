@@ -1,0 +1,63 @@
+<form>
+  <input type="button">
+  <input type="checkbox">
+  <input type="color">
+  <input type="date">
+  <input type="datetime-local">
+  <input type="email">
+  <input type="file">
+  <input type="hidden">
+  <input type="image">
+  <input type="month">
+  <input type="number">
+  <input type="password">
+  <input type="radio">
+  <input type="range">
+  <input type="reset">
+  <input type="search">
+  <input type="submit">
+  <input type="tel">
+  <input type="text">
+  <input type="time">
+  <input type="url">
+  <input type="week">
+  <select>
+    <option>Option 1</option>
+    <option>Option 2</option>
+    <option>Option 3</option>
+  </select>
+</form>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+  html {
+  --brand: hotpink;
+  scrollbar-color: hotpink Canvas;
+}
+
+:root { accent-color: var(--brand); }
+:focus-visible { outline-color: var(--brand); }
+::selection { background-color: var(--brand); }
+::marker { color: var(--brand); }
+
+:is(
+  ::-webkit-calendar-picker-indicator,
+  ::-webkit-clear-button,
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button
+) {
+  color: var(--brand);
+}
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+  }
+</style>
