@@ -1,0 +1,100 @@
+<form>
+  <fieldset>
+    <input type="radio" name="star" id="star-1" value="1">
+    <label for="star-1">1</label>
+    <input type="radio" name="star" id="star-2" value="2">
+    <label for="star-2">2</label>
+    <input type="radio" name="star" id="star-3" value="3">
+    <label for="star-3">3</label>
+    <input type="radio" name="star" id="star-4" value="4">
+    <label for="star-4">4</label>
+    <input type="radio" name="star" id="star-5" value="5">
+    <label for="star-5">5</label>
+  </fieldset>
+</form>
+
+  <style>
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins";
+  background: gray;
+}
+
+fieldset {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-style: solid;
+  border-color: black;
+  border-width: 10px 25px;
+  border-radius: 15px;
+  position: relative;
+  font-size: 2rem;
+  padding: 0;
+  margin: 0;
+  width: 180px;
+  height: 50px;
+  background: black;
+}
+
+fieldset:before,
+fieldset:after {
+  content: '★★★★★';
+  position: absolute;
+  left: 0;
+  display: flex;
+  letter-spacing: 0.25rem;
+  color: white;
+}
+
+fieldset:after {
+  content: '★';
+  color: gold;
+  mix-blend-mode: multiply;
+}
+
+fieldset:has(input[value='1']:checked):after {
+  content: '★';
+}
+
+fieldset:has(input[value='2']:checked):after {
+  content: '★★';
+}
+
+fieldset:has(input[value='3']:checked):after {
+  content: '★★★';
+}
+
+fieldset:has(input[value='4']:checked):after {
+  content: '★★★★';
+}
+
+fieldset:has(input[value='5']:checked):after {
+  content: '★★★★★';
+}
+
+label {
+  outline: none;
+  position: absolute;
+  left: -100vw;
+}
+
+input {
+  position: relative;
+  display: block;
+  border: none;
+  appearance: none;
+  font-size: 2rem;
+  z-index: 1;
+  padding: 1rem;
+  margin: 0;
+  border: solid 1px transparent;
+}
+  </style>

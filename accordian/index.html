@@ -1,0 +1,102 @@
+<input type='checkbox' id='LikeButton'>
+<label for='LikeButton'><figure>❤</figure></label>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins";
+}
+
+input {
+  position: absolute;
+  outline: none;
+  left: -100vw;
+}
+
+label {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 200px;
+  mix-blend-mode: hue;
+  color: #EEEEEE;
+  font-size: 1.5rem;
+  transform: scale(1);
+}
+
+label:before,
+label:after {
+  content: '❤ Like';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 0.5rem;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 400ms cubic-bezier(.47,1.64,.41,.8);
+  clip-path: polygon(0 0, 0 25px, 0 25px, 200px 25px, 200px 25px, 200px 0);
+  mix-blend-mode: hue;
+  border-radius: 1rem;
+}
+
+label:before {
+  background: linear-gradient(to bottom, gray 25px, #EEEEEE 25px);
+}
+
+label:after {
+  background: linear-gradient(to top, gray 25px, #EEEEEE 25px);
+  clip-path: polygon(0 25px, 0 50px, 0 50px, 200px 50px, 200px 50px, 200px 25px);
+}
+
+input[type=checkbox]:checked  ~ label{
+  transform: scale(1.25);
+}
+input[type=checkbox]:checked ~ label:before {
+  align-items: flex-start;
+  top: -75px;
+  bottom: 25px;
+  clip-path: polygon(0 0, 0 25px, 25px 100px, 175px 100px, 200px 25px, 200px 0);
+  transform: scale(1.25);
+}
+
+input[type=checkbox]:checked ~ label:after {
+  align-items: flex-end ;
+  bottom: -75px;
+  top: 25px;
+  clip-path: polygon(25px 0, 0 75px, 0 100px, 200px 100px, 200px 75px, 175px 0);
+  transform: scale(1.25);
+}
+
+figure {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  color: pink;
+  font-size: 0.1rem;
+  transition: all 400ms cubic-bezier(.47,1.64,.41,.8) 50ms;
+  text-shadow: 0px 0px 0px rgba(0,0,0,0.25);
+  z-index: 999;
+}
+
+input[type=checkbox]:checked ~ label > figure {
+  font-size: 5rem;
+  text-shadow: 5px 30px 20px rgba(0,0,0,0.25);
+  transition: all 400ms cubic-bezier(.47,1.64,.41,.8) 250ms;
+}
+
+
+</style>

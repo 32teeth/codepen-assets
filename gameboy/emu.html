@@ -1,0 +1,78 @@
+<main>
+  <section></section>
+</main>
+
+<style>
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Poppins";
+  font-family: "roboto";
+  background: #000000AA;
+  gap: 5rem;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(320px * (10/9));
+  min-width: calc(50vh * (10/9));
+  height: 320px;
+  min-height: 50vh;
+  background: #84d07d;
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  animation: fade 500ms ease forwards;
+}
+main:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #00000033 0px, transparent 1px), linear-gradient(to bottom, #00000033 0px, transparent 1px);
+  background-size: 2px 2px, 2px 2px;
+}
+main section {
+  width: 50%;
+  height: calc(100% / 12);
+  background: linear-gradient(to right, #00000033 0px, transparent 1px), linear-gradient(to bottom, #00000033 0px, transparent 1px), #5e785d;
+  background-size: 2px 2px, 2px 2px, 100%;
+  position: absolute;
+  top: -10%;
+  mix-blend-mode: difference;
+  animation: scroll 3s linear forwards;
+  animation-delay: 500ms;
+}
+main section:before {
+  content: "®";
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  color: #5e785d;
+  mix-blend-mode: luminosity;
+  z-index: 1;
+}
+
+@keyframes fade {
+  0% {
+    background: #3e4943;
+  }
+  100% {
+    background: #84d07d;
+  }
+}
+@keyframes scroll {
+  0% {
+    top: -10%;
+  }
+  100% {
+    top: calc(50% - 100% / 32);
+  }
+}
+</style>
