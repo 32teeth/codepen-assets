@@ -116,7 +116,7 @@
     position: absolute;
     left: 1px;
     right: 1px;
-    top: 100px;
+    top: 10px;
     bottom: 50px;
     background: BurlyWood;
     transform-origin: bottom;
@@ -148,17 +148,24 @@
   }
 
   input:checked {
-    transform: rotateX(0deg) rotateY(0) rotateZ(0deg) translateY(0) translateZ(50px);
+    transform: rotateX(0deg) rotateY(0) rotateZ(0deg) translateY(0) translateZ(150px);
     z-index: -2;
   }
 
   input:checked:before {
-    top: -50px;
+    top: -150px;
     bottom: 50px;
     transform: rotateX(90deg) rotateY(0) rotateZ(0deg) translateY(0px) translateZ(0px);
   }
 
   input:checked:after {
+    left: -150px;
     transform: rotateX(0) rotateY(-90deg) rotateZ(0deg) translateY(0px) translateZ(0px);
   }
 </style>
+
+<script>
+  setTimeou(() => {
+    document.querySelector("[id='drawer-4']").checked = true;
+  }, 1000);
+</script>
