@@ -1,0 +1,222 @@
+<main>
+  <form>
+    <input type="checkbox" name="candle" id="candle">
+    <label for="candle"></label>
+  </form>
+</main>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+    user-select: none;
+    perspective: 400px;
+    background: #EEEEEE;
+  }
+
+  main {
+    transform-style: preserve-3D;
+  }
+
+  form {
+    width: 250px;
+	  height: 250px;
+    border-radius: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    background: radial-gradient(circle, white 15px, transparent 15px),
+    LightSeaGreen;
+    transform: rotateX(-25deg);
+    border: solid 1px DarkCyan;
+    box-shadow: 0 10px 0 1px LightSeaGreen,
+                0 20px 0 1px LightSeaGreen,
+                0 30px 0 1px LightSeaGreen,
+                0 40px 0 1px LightSeaGreen,
+                0 50px 0 1px LightSeaGreen,
+                0 60px 0 1px DarkCyan,
+                0 70px 0 1px DarkCyan,
+                0 80px 0 1px DarkCyan,
+                0 90px 0 1px DarkCyan,
+                0 100px 0 1px DarkCyan,
+                0 110px 0 1px Teal,
+                0 120px 0 1px Teal,
+                0 130px 0 1px Teal,
+                0 140px 0 1px Teal,
+                0 150px 0 1px Teal,
+                0 155px 0 5px rgba(0, 0, 0, 0.25),
+                0 155px 5px 10px rgba(0, 0, 0, 0.25),
+                0 155px 10px 15px rgba(0, 0, 0, 0.25);
+    animation: spin 15s linear infinite;
+  }
+
+  form:before {
+    content: '';
+    position: absolute;
+    width: 250px;
+	  height: 250px;
+    border-radius: 250px;
+    background: radial-gradient(circle, DarkKhaki 50%, transparent 50%),
+                radial-gradient(circle, Violet 50%, transparent 50%),
+                radial-gradient(circle, Red 50%, transparent 50%),
+                radial-gradient(circle, Gold 50%, transparent 50%),
+                radial-gradient(circle, Orange 50%, transparent 50%),
+                radial-gradient(circle, Blue 50%, transparent 50%),
+                radial-gradient(circle, Indigo 50%, transparent 50%),
+                radial-gradient(circle, Violet 50%, transparent 50%),
+                radial-gradient(circle, DeepPink 50%, transparent 50%),
+                radial-gradient(circle, LawnGreen 50%, transparent 50%),
+                radial-gradient(circle, YellowGreen 50%, transparent 50%),
+                radial-gradient(circle, Aquamarine 50%, transparent 50%),
+                radial-gradient(circle, DeepSkyBlue 50%, transparent 50%),
+                radial-gradient(circle, LightSeaGreen 50%, transparent 50%),
+                radial-gradient(circle, DarkSeaGreen 50%, transparent 50%),
+                radial-gradient(circle, RebeccaPurple 50%, transparent 50%),
+                radial-gradient(circle, Tomato 50%, transparent 50%),
+                radial-gradient(circle, Fuchsia 50%, transparent 50%),
+                radial-gradient(circle, DarkViolet 50%, transparent 50%),
+                radial-gradient(circle, Silver 50%, transparent 50%);
+    background-size: 25px 25px,
+                     20px 20px,
+                     15px 15px,
+                     30px 30px,
+                     35px 35px;
+    background-position: 60% 30%,
+                         25% 10%,
+                         80% 15%,
+                         10% 0%,
+                         0% 60%,
+                         10% 10%,
+                         90% 40%,
+                         65% 15%,
+                         60% 5%,
+                         0% 0%,
+                         80% 80%,
+                         40% 90%,
+                         50% 70%,
+                         65% 40%,
+                         25% 30%,
+                         30% 50%,
+                         85% 60%,
+                         20% 90%,
+                         20% 60%,
+                         10% 70%;
+    background-repeat: no-repeat;
+  }
+
+  label {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 20px;
+    height: 30px;
+    border-radius: 10px 10px 10px 10px / 25px 25px 10px 10px;
+    background: Orange;
+    box-shadow: 0 0 20px 0 Orange;
+    z-index: 9999;
+    top: -17px;
+    position: absolute;
+    opacity: 0.75;
+    transition: all ease 500ms;
+    cursor: pointer;
+  }
+
+  input:checked + label {
+    opacity: 0;
+    top: -20px;
+    transform: skew(0deg, 45deg);
+    transition: all ease 500ms;
+    cursor: pointer;
+  }
+
+  label:before {
+    content: '';
+
+  }
+
+  input {
+    appearance: none;
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    position: relative;
+    border:solid 1px;
+    z-index: 9999;
+  }
+
+  input:before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    top: -100px;
+    background: LemonChiffon;
+    box-shadow: 0 5px 0 0 LightYellow,
+                0 10px 0 0 Tomato,
+                0 15px 0 0 LightYellow,
+                0 20px 0 0 Tomato,
+                0 25px 0 0 LightYellow,
+                0 30px 0 0 Tomato,
+                0 35px 0 0 LightYellow,
+                0 40px 0 0 Tomato,
+                0 45px 0 0 LightYellow,
+                0 50px 0 0 Tomato,
+                0 55px 0 0 LightYellow,
+                0 60px 0 0 Tomato,
+                0 65px 0 0 LightYellow,
+                0 70px 0 0 Tomato,
+                0 75px 0 0 LightYellow,
+                0 80px 0 0 Tomato,
+                0 85px 0 0 LightYellow,
+                0 90px 0 0 Tomato,
+                0 95px 0 0 LightYellow,
+                0 100px 0 0 Tomato;
+    z-index: -1;
+  }
+
+  input:after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    left: 12px;
+    border-radius: 10px;
+    top: -110px;
+    background: DimGray;
+    box-shadow: 0 1px 0 0 DimGray,
+                0 2px 0 0 DimGray,
+                0 3px 0 0 DimGray,
+                0 4px 0 0 DimGray,
+                0 5px 0 0 Gray,
+                0 6px 0 0 Gray,
+                0 7px 0 0 Gray,
+                0 8px 0 0 Gray,
+                0 9px 0 0 DarkGray,
+                0 10px 0 0 DarkGray,
+                0 11px 0 0 DarkGray,
+                0 12px 0 0 DarkGray,
+                0 13px 0 0 Silver,
+                0 14px 0 0 Silver,
+                0 15px 0 0 Silver,
+                0 16px 0 0 Silver,
+                0 17px 0 0 LightGray,
+                0 18px 0 0 LightGray,
+                0 19px 0 0 LightGray,
+                0 20px 0 0 LightGray;
+    z-index: -1;
+  }
+</style>
