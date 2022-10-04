@@ -1,6 +1,6 @@
 <section>
   <h1>32teeth</h1>
-  <h2>❤</h2>
+  <h2>this pen needs ❤</h2>
 </section>
 <style>
   @charset 'UTF-8';
@@ -18,19 +18,19 @@
     padding: 0;
     background: radial-gradient(
                   circle,
-                  white 100px,
-                  red 100px, red 125px,
-                  orange 125px, orange 150px,
-                  yellow 150px, yellow 175px,
-                  green 175px, green 200px,
-                  blue 200px, blue 225px,
-                  indigo 225px, indigo 250px,
-                  violet 250px, violet 275px,
-                  white 275px
+                  transparent 25vw,
+                  red 25vw, red calc(25vw + 25px),
+                  orange calc(25vw + 25px), orange calc(25vw + 50px),
+                  yellow calc(25vw + 50px), yellow calc(25vw + 75px),
+                  green calc(25vw + 75px), green calc(25vw + 100px),
+                  blue calc(25vw + 100px), blue calc(25vw + 125px),
+                  indigo calc(25vw + 125px), indigo calc(25vw + 150px),
+                  violet calc(25vw + 150px), violet calc(25vw + 175px),
+                  transparent calc(25vw + 175px)
                 );
-    background-size: 550px 550px;
-    background-position: calc(100vw - 275px) calc(100vh - 275px);
-    background-repeat: no-repeat
+    background-position: min(50vh, 50vw) min(50vh, 50vw);
+    background-size: min(100vh, 100vw);
+    background-repeat: no-repeat;
   }
 
   section {

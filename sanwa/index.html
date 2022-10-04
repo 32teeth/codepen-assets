@@ -1,0 +1,171 @@
+<main>
+  <button data-key='q' class='q'></button>
+  <button data-key='w' class='w'></button>
+  <button data-key='e' class='e'></button>
+  <button data-key='r' class='r'></button>
+  <button data-key='q' class='a'></button>
+  <button data-key='s' class='s'></button>
+  <button data-key='d' class='d'></button>
+  <button data-key='f' class='f'></button>
+</main>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+    background: silver;
+    perspective: 1000px;
+  }
+
+  main {
+    transform-style: preserve-3d;
+    position: relative;
+    transform: rotateX(15deg) rotateY(10deg) rotateZ(5deg) translateX(-10mm) translateY(-25mm);
+  }
+
+  :root {
+    --outer-diameter: 33.2mm;
+    --outer-radius: calc(var(--outer-diameter) / 2);
+    --inner-diameter: 25mm;
+    --inner-radius: calc(var(--inner-diameter) / 2);
+    --transparent: rgba(0, 0, 0, 0);
+    --white: rgba(255, 255, 255, 0.25);
+    --black: rgba(0, 0, 0, 0.05);
+  }
+
+  button {
+    position:absolute;
+    width: var(--inner-diameter);
+    height: var(--inner-diameter);
+    border-radius: var(--outer-diameter);
+    border: none;
+    background: radial-gradient(
+                  var(--white),
+                  transparent var(--inner-radius)
+                );
+    box-shadow: 0 0.25mm 0 var(--black),
+                0 0.5mm 0 var(--black),
+                0 0.75mm 0 var(--black),
+                0 1mm 0 var(--black),
+                0 1.25mm 0 var(--black),
+                0 1.5mm 0 var(--black),
+                0 1.75mm 0 var(--black);
+  }
+
+  button:before {
+    content: '';
+    position:absolute;
+    top: calc(var(--inner-radius) - var(--outer-radius));
+    left: calc(var(--inner-radius) - var(--outer-radius));
+    width: var(--outer-diameter);
+    height: var(--outer-diameter);
+    border-radius: var(--outer-diameter);
+    background: radial-gradient(
+                  var(--white),
+                  transparent 75%
+                ),
+                radial-gradient(
+                  transparent var(--inner-radius),
+                  var(--white) var(--inner-radius),
+                  var(--black) calc(var(--inner-radius) + 0.25mm),
+                  var(--black) calc(var(--inner-radius) + 0.25mm)
+                ),
+                hotpink;
+    background-size: 75% 75%, 100%, 100%;
+    background-position: -25% -25%, 0 0, 0 0;
+    background-repeat: no-repeat;
+    box-shadow: 0 0.25mm 0 var(--black);
+    transform: translateY(1.75mm);
+    z-index: -1;
+  }
+
+  button:after {
+    content: attr(data-key);
+    position:absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: MediumVioletRed;
+    width: var(--inner-diameter);
+    height: var(--inner-diameter);
+    border-radius: var(--inner-diameter);
+    background: radial-gradient(
+                  transparent calc(var(--inner-radius) - 1mm),
+                  black
+                ),
+                linear-gradient(
+                  to bottom right,
+                  transparent,
+                  var(--black)
+                ),
+                hotpink;
+    transition: all 100ms;
+  }
+
+  button.active:after,
+  button:active:after {
+    transform: translateY(1.5mm);
+  }
+
+  .q {
+    left: -48.5mm;
+    top: 0;
+  }
+
+  .w {
+    left: -18mm;
+    top: -20mm;
+  }
+
+  .e {
+    left: 18mm;
+    top: -20mm;
+  }
+
+  .r {
+    left: 54mm;
+    top: -11mm;
+  }
+
+  .a {
+    left: -48.5mm;
+    top: 39mm;
+  }
+
+  .s {
+    left: -18mm;
+    top: 19mm;
+  }
+
+  .d {
+    left: 18mm;
+    top: 19mm;
+  }
+
+  .f {
+    left: 54mm;
+    top: 28mm;
+  }
+</style>
+
+<script>
+  document.addEventListener('keydown', function(e) {
+    const key = e.key.toLowerCase();
+    const button = document.querySelector(`button.${key}`);
+    button.classList.add('active');
+  });
+
+  document.addEventListener('keyup', function(e) {
+    const key = e.key.toLowerCase();
+    const button = document.querySelector(`button.${key}`);
+    button.classList.remove('active');
+  });
+</script>
