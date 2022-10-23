@@ -1,0 +1,92 @@
+<nav></nav>
+
+<section>
+  <h1>32teeth</h1>
+  <h2>this pen needs ❤</h2>
+</section>
+
+<style>
+:root {
+  --bun: Goldenrod;
+  --bun-bottom: DarkGoldenrod;
+  --patty: Brown;
+  --cheese: Orange;
+  --lettuce: LimeGreen;
+  --tomato: Tomato;
+  --onion: DarkRed;
+  --ketchup: Red;
+  --mustard: Yellow;
+  --pickles: Lime;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  aspect-ratio: 1/0.5;
+  border-radius: 55% 55% 50% 50% / 75% 75% 40% 40%;
+  background: repeating-radial-gradient(circle at 50%, white, white 1px, transparent 1px, transparent 15px),
+              radial-gradient(ellipse at top, var(--bun) 50px, var(--bun-bottom) 50px ),
+              var(--bun);
+  background-size: 15px 15px,
+                    135% 100%,
+                    100%;
+  background-position: center,
+                        bottom,
+                        center;
+  background-repeat: repeat, no-repeat, no-repeat;
+  box-shadow: 0px 3px 0px 0px var(--tomato),
+              0px 5px 0px 2px var(--lettuce),
+              0px 7px 0px 2px var(--cheese),
+              0px 15px 0px 2px var(--patty),
+              0px 26px 0px 0px var(--bun),
+              5px 35px 5px 1px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease-in-out;
+  transform: translateY(0);
+  box-sizing: border-box;
+}
+
+nav:hover {
+  box-shadow: -3px 10px 1px 1px var(--tomato),
+              3px 18px 1px 3px var(--lettuce),
+              2px 25px 2px 2px var(--cheese),
+              -5px 40px 2px 4px var(--patty),
+              0px 55px 3px 0px var(--bun),
+              5px 55px 10px 5px rgba(0, 0, 0, 0.125);
+  transform: translateY(-10px);
+}
+
+section {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+}
+section h1, section h2 {
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0.25rem;
+}
+section h1 {
+  border-style: solid;
+  border-width: 2mm;
+  border-radius: 10mm;
+  font-size: 2rem;
+  padding: 2mm 8mm;
+}
+section h2 {
+  font-size: 1rem;
+}
+</style>

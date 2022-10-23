@@ -1,0 +1,40 @@
+<main>
+  <p>this is a <strong>highlighted</strong> text</p>
+  <p><strong>highlighted</strong> text is pretty cool</p>
+</main>
+<style>
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Poppins";
+  background: linear-gradient(to bottom, white 50%, black 50%);
+  color: gray;
+  gap: 5rem;
+  font-size: 2rem;
+}
+
+strong {
+  position: relative;
+  mix-blend-mode: hard-light;
+  background-blend-mode: hard-light;
+  color: black;
+}
+
+strong:before {
+  content: '';
+  position:absolute;
+  left: -2%;
+  right: -2%;
+  top: -4%;
+  bottom: 4%;
+  background: #DFFF00;
+  z-index: -1;
+  transform: rotate(3deg) skewX(5deg);
+}
+</style>
