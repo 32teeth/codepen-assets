@@ -58,33 +58,25 @@ figure {
 .bottom{
   width: 200px;
   height: 60px;
-  /*
-  background: radial-gradient(ellipse at center, #FFFFFF 20px, transparent 20px), gray;
-  background-size: 50px 50px, 100% 100%;
-  background-repeat: repeat-x;
-  background-position: 0px 0px, center;
-  position: relative;
-  border: solid 10px gray;
-  */
 }
 
 .top {
-    background: radial-gradient(ellipse at center, #FFFFFF 15px, transparent 15px), gray;
-    background-size: 50px 50px, 100% 100%;
+    background: repeating-radial-gradient(circle, white, white 20px, transparent 21px, transparent 100%), gray;
+    background-size: 50px 50px;
     background-repeat: repeat-x;
     background-position: 0px 5px, center;
     position: relative;
-    transform: rotateX(90deg) translateZ(75px);
+    transform: rotateX(90deg) translateZ(50px);
 }
 
 .bottom {
-    transform: rotateX(270deg) translateZ(75px);
+    transform: rotateX(270deg) translateZ(50px);
 }
 
 .front,
 .back {
   width: 200px;
-  height: 150px;
+  height: 100px;
 }
 
 .front {
@@ -97,9 +89,8 @@ figure {
 
 .left,
 .right {
-  width: 50px;
-  height: 150px;
-  background: red;
+  width: 60px;
+  height: 100px;
 }
 
 .left {
@@ -111,7 +102,7 @@ figure {
 }
 
 section {
-  transform: rotateX(-95deg) rotateY(0deg) rotateZ(0deg);
+  transform: rotateX(-45deg) rotateY(0deg) rotateZ(45deg);
 }
 
 

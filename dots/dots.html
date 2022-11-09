@@ -1,0 +1,57 @@
+<style>
+
+:root {
+  --red: 154 0 0;
+  --yellow: 154 154 0;
+  --green: 0 154 0;
+  --cyan: 0 154 154;
+  --blue: 0 0 154;
+  --magenta: 154 0 154;
+  --white: 255 255 255;
+  --black: 0 0 0;
+  --radius: 20px;
+  --size: 20px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  filter: contrast(60) invert(0);
+  mix-blend-mode: multiply;
+}
+
+body:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg,
+    rgb(var(--red)) 0%,
+    rgb(var(--yellow)) 33%,
+    rgb(var(--cyan)) 66%,
+    rgb(var(--magenta)) 100%);
+  background-size: cover;
+}
+
+body:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: radial-gradient(circle at center, rgb(var(--white)) 3%, rgb(var(--white) / 0.05) calc(var(--radius) * 0.5)),
+              radial-gradient(circle at center, rgb(var(--white)) 3%, rgb(var(--white) / 0.05) calc(var(--radius) * 0.5));
+  background-size: var(--size) var(--size);
+  background-repeat: round;
+  background-position: 0 0, calc(var(--radius) / 2) calc(var(--radius) / 2);
+
+  -webkit-mask-image: linear-gradient(to right, rgb(var(--black)), rgb(var(--black) / 0.5));
+	mask-size: cover;
+	mask-position: center;
+}
+</style>

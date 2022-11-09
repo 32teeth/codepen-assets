@@ -1,0 +1,59 @@
+<aside>
+  <input id="Milk" type="checkbox">
+  <label for="Milk">Milk</label>
+  <input id="Butter" type="checkbox">
+  <label for="Butter">Butter</label>
+  <input id="Cheese" type="checkbox">
+  <label for="Cheese">Cheese</label>
+  <input id="Eggs" type="checkbox">
+  <label for="Eggs">Eggs</label>
+  <input id="Flour" type="checkbox">
+  <label for="Flour">Flour</label>
+  <input id="Sugar" type="checkbox">
+  <label for="Sugar">Sugar</label>
+  <input id="Bread" type="checkbox">
+  <label for="Bread">Bread</label>
+</aside>
+<main>
+  <div data-filter="Milk">Milk</div>
+  <div data-filter="Butter">Butter</div>
+  <div data-filter="Cheese">Cheese</div>
+  <div data-filter="Eggs">Eggs</div>
+  <div data-filter="Flour">Flour</div>
+  <div data-filter="Sugar">Sugar</div>
+  <div data-filter="Bread">Bread</div>
+</main>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+  :root {
+    --filters: 'no';
+  }
+
+  body {
+    display: grid;
+    grid-template-areas: "aside main";
+    grid-template-columns: 200px auto;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+    background: #FFEEEE;
+  }
+
+  aside {
+    grid-area: aside;
+    display: grid;
+    grid-auto-rows: minmax(auto, 25px);
+    grid-template-columns: 25px 1fr;
+    grid-auto-flow: dense;
+    align-items: center;
+    gap: 0.5rem 0;
+  }
+
+  main {
+    grid-area: main;
+  }
+</style>

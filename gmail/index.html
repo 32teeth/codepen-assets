@@ -1,0 +1,158 @@
+<header>
+  <input type="checkbox" id="toggle"/>
+  <label for="toggle">&#9776;</label>
+  <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png" srcset="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png 1x, https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_2x_r5.png 2x " alt="" aria-hidden="true" role="presentation" style="width:109px;height:40px">
+  <input type="search" placeholder="Search in emails" />
+  <div></div>
+</header>
+<nav></nav>
+<aside>
+  <button>Compose</button>
+  <ul>
+    <li class="selected">Inbox</li>
+    <li>Starred</li>
+  </ul>
+</aside>
+<main></main>
+
+<style>
+  @charset "UTF-8";
+  @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+
+  :root {
+    --blue: #EAF1FB;
+    --dark-blue: #E9F1FB;
+    --gray: #F5F8FC;
+    --white: #FFFFFF;
+    --hover: rgba(60,64,67,.08);
+    --button: #C1E7FE;
+    --selected: #D3E2FD
+  }
+
+  body {
+    display: grid;
+    grid-template-areas:
+      "header header header"
+      "nav aside main";
+    grid-template-columns: 4.25rem auto 1fr;
+    grid-template-rows: 4rem 1fr;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "roboto";
+    background: var(--gray);
+  }
+
+  nav {
+    grid-area: nav;
+    background: var(--blue);
+  }
+
+  header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 4.25rem 16rem auto 10rem;
+    background-image: linear-gradient(to right, var(--blue) 4.25rem, var(--gray) 4.25rem);
+    height: 4rem;
+  }
+
+  header > * {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  header input[type="checkbox"] {
+    display: none;
+  }
+
+  header label {
+    width: 3rem;
+    height: 3rem;
+    margin: 0.5rem 0.6875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    background: var(--blue);
+    border-radius: 50%;
+  }
+
+  header label:hover,
+  header input[type="checkbox"]:checked ~ label {
+    background: var(--hover);
+  }
+
+  header input[type="search"] {
+    height: 2.875rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--dark-blue);
+    padding: 0 1rem;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+
+  header img {
+    margin: 0.725rem 0 0 1.325rem;
+  }
+
+  aside {
+    grid-area: aside;
+    width: 1rem;
+    transition: all ease 500ms;
+    font-size: calc(14/16*1rem);
+  }
+
+  aside button {
+    width: 8.625rem;
+    height: 3.5rem;
+    background: var(--button);
+    border-radius: 1rem;
+    border: none;
+    margin: 0.5rem 1rem;
+  }
+
+  aside ul {
+    list-style: none;
+    margin: 0.5rem 1rem;
+    padding: 0;
+  }
+
+  aside ul li {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    padding-inline: 1.25rem calc(12/16 * 1rem);
+  }
+
+  aside ul li.selected {
+    background: var(--selected);
+    border-radius: 1rem;
+    font-weight: 500;
+  }
+
+  main {
+    grid-area: main;
+    background: var(--white);
+    margin: 0 1rem 1rem 0;
+    border-radius: 1rem;
+  }
+
+</style>
+
+<script>
+  const toggle = document.querySelector('#toggle');
+  const aside = document.querySelector('aside');
+  const main = document.querySelector('main');
+
+  toggle.addEventListener('change', () => {
+    if (toggle.checked) {
+      aside.style.width = '16rem';
+    } else {
+      aside.style.width = '1rem';
+    }
+  });
+</script>
