@@ -1,0 +1,50 @@
+<card></card>
+
+<style>
+  :root {
+    --bg: hsl(265, 100%, 6%);
+    --shadow: hsla(0, 0%, 100%, 25%);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: hsl(265, 100%, 100%);
+      --shadow: hsla(0, 0%, 0%, 25%);
+    }
+  }
+
+  body {
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+
+  card {
+    border-radius: 1rem;
+    border: 0.25rem solid transparent;
+    width: 18rem;
+    aspect-ratio: 1.75 / 1;
+    background: linear-gradient(var(--bg), var(--bg)) content-box,
+      linear-gradient(135deg, magenta, turquoise) border-box;
+    background-size: 100% 100%, 500% 500%;
+    box-shadow: 0.25rem 0.25rem 3rem var(--shadow);
+    animation: loading 5s ease infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 0%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+</style>

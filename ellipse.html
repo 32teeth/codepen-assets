@@ -1,0 +1,96 @@
+<section>
+  <h1>32teeth</h1>
+  <h2>this pen needs ❤</h2>
+</section>
+
+<style>
+  @charset 'UTF-8';
+  @import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+  @property --y {
+    syntax: '<length-percentage>';
+    inherits: false;
+    initial-value: 100%;
+  }
+
+  @property --h{
+    syntax: '<length-percentage>';
+    inherits: false;
+    initial-value: 20%;
+  }
+
+  :root {
+    --time: 10s;
+    --alpha: 45%;
+    --blue: hsla(228, 56%, 66%, var(--alpha));
+    --sky: 	hsla(216, 81%, 81%, var(--alpha));
+    --bright: hsla(197, 59%, 90%, var(--alpha));
+    --cloud: 	hsla(189, 30%, 95%, var(--alpha));
+    --white: hsl(255, 0%, 100%);
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Comfortaa";
+
+    background-image: radial-gradient(ellipse 100% var(--h) at 50% var(--y), var(--blue) 100%, transparent),
+                      radial-gradient(ellipse 100% calc(var(--h)*0.9) at 40% calc(var(--y)*0.9), var(--sky) 100%, transparent),
+                      radial-gradient(ellipse 100% calc(var(--h)*0.8) at 30% calc(var(--y)*0.8), var(--bright) 100%, transparent),
+                      radial-gradient(ellipse 100% calc(var(--h)*0.7) at 20% calc(var(--y)*0.7), var(--cloud) 100%, transparent);
+    background-blend-mode: color-burn;
+    animation: dY var(--time) infinite alternate ease-in-out,
+               dH var(--time) infinite alternate ease-in-out;
+  }
+
+  @keyframes dY {
+    0% {
+      --y:120%;
+    }
+    100% {
+      --y:-50%;
+    }
+  }
+
+  @keyframes dH {
+    0% {
+      --h:20%;
+    }
+    100% {
+      --h:150%;
+    }
+  }
+
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+section h1, section h2 {
+  font-size: 2rem;
+  color: var(--sky);
+  margin: 0.25rem;
+}
+
+section h1 {
+  border-style: solid;
+  border-width: 2mm;
+  border-radius: 10mm;
+  font-size: 2rem;
+  padding: 2mm 8mm;
+}
+
+section h2 {
+  font-size: 1rem;
+}
+</style>

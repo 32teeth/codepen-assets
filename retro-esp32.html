@@ -1,5 +1,6 @@
 <nav>
   <section style="--hue: 360">
+    <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/heart.gif">
     <article>⇠ to navigate ⇢</article>
   </section>
   <section style="--hue: 300">
@@ -65,14 +66,19 @@
   }
 
   section {
-    width: calc(100% - 4rem);
+    width: calc(100% - 6rem);
     aspect-ratio: 4/3;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     scroll-snap-stop: always;
     padding: 1rem 0rem 1rem 0.5rem;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+  }
+
+  section:first-child {
+    width: calc(100% - 5rem);
+    padding: 1rem 1.5rem 1rem 0.5rem;
   }
 
   section:last-child {
@@ -83,6 +89,9 @@
   section img {
     mix-blend-mode: screen;
     margin-left: 0rem;
+    opacity: 0.5;
+    transition: opacity 0.5s ease-in,
+                margin-left 0.5s linear;
   }
 
   section h4 {
@@ -93,8 +102,18 @@
   }
 
   section.inview article,
-  section.inview h4 {
+  section.inview h4,
+  section.inview img{
     opacity: 1;
+  }
+
+  nav :has(+ section.inview) img{
+    opacity: 0.5;
+    margin-left: calc(100% - 2rem);
+  }
+
+  nav section:first-child:not(.inview) img{
+    margin-left: calc(100% - 1rem);
   }
 
   article {
@@ -124,7 +143,7 @@
   }, {
     root: document.querySelector("nav"),
     rootMargin: "0px",
-    threshold: 1
+    threshold: 0.75
   });
 
   document.querySelectorAll("section").forEach(target => {
