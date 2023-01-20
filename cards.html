@@ -1,0 +1,136 @@
+<cards>
+  <card>
+    <header>
+      <h1>Title</h1>
+      <label for="card1">
+        <input type="radio" name="card" value="card1"  id="card1">
+      </label>
+    </header>
+    <main>
+      <p>❌ Customer needs to click / tap directly with radio</p>
+    </main>
+    <footer>
+      <a href="link">Link</a>
+      <a href="link">Link</a>
+      <a href="link">Link</a>
+      <a href="link">Link</a>
+    </footer>
+  </card>
+  <card>
+    <label for="card2">
+      <header>
+        <h1>Title</h1>
+          <input type="radio" name="card" value="card2" id="card2">
+      </header>
+      <main>
+        <p>✅ Customer can use entire card as selection</p>
+      </main>
+      <footer>
+        <a href="link">Link</a>
+        <a href="link">Link</a>
+        <a href="link">Link</a>
+        <a href="link">Link</a>
+      </footer>
+    </label>
+  </card>
+  <card></card>
+</cards>
+
+<style>
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+:root {
+  --card-width: 85.6mm;
+  --card-height: 53.98mm;
+  --card-filet: 3mm;
+  --card-border: 0.25mm;
+  --card-border-color: hsl(0, 0%, 0%);
+  --card-shadow: hsla(0, 0%, 0%, 25%);
+  --card-selected: hsla(216, 67%, 50%, 25%);
+  --card-selected-border: hsl(216, 67%, 45%);
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Comfortaa";
+}
+
+cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width), var(--card-width)));
+  gap: var(--card-filet);
+  justify-content: center;
+}
+
+card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(var(--card-width) - 10mm);
+  height: calc(var(--card-height) - 10mm);
+  border: solid var(--card-border) var(--card-border-color);
+  border-radius: var(--card-filet);
+}
+
+card > label {
+  padding: 5mm;
+}
+
+card > header {
+  padding: 5mm 5mm 0 5mm;
+}
+
+card > main {
+  padding: 0 5mm;
+}
+
+card > footer {
+  padding: 0 5mm 5mm 5mm;
+}
+
+card:not(:empty) {
+  box-shadow: 0.5mm 0.5mm 1mm var(--card-shadow);
+}
+
+card:empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: dashed calc(var(--card-border) * 2) var(--card-shadow);
+}
+
+card:empty::before {
+  content: 'empty card';
+  color: var(--card-shadow);
+}
+
+card:has(input:checked) {
+  background: var(--card-selected);
+  border-color: var(--card-selected-border);
+  box-shadow: 0.5mm 0.5mm 1mm var(--card-shadow);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+</style>

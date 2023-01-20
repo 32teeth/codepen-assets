@@ -1,0 +1,301 @@
+<div data-column-span='2' data-row-span='1'></div>
+<div data-column-span='3' data-row-span='3'></div>
+<div data-column-span='5' data-row-span='2'></div>
+<div data-column-span='2' data-row-span='4'></div>
+<div data-column-span='2' data-row-span='3'></div>
+<div data-column-span='3' data-row-span='1'></div>
+<div data-column-span='2' data-row-span='2'></div>
+<div data-column-span='6' data-row-span='1'></div>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+:root {
+  --columns: 12;
+  --rows: 12;
+}
+
+body {
+  display: grid;
+  width: calc(100vw - 2rem);
+  height: calc(100vh - 2rem);
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: masonry;
+  background: white;
+  gap: 1rem;
+  font-family: "roboto";
+  background: #eb0c32;
+  margin: 0;
+  padding: 1rem;
+  color: white;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+[data-column-span="1"] {
+  grid-column: span 1/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="1"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="2"] {
+  grid-column: span 2/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="2"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="3"] {
+  grid-column: span 3/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="3"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="4"] {
+  grid-column: span 4/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="4"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="5"] {
+  grid-column: span 5/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="5"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="6"] {
+  grid-column: span 6/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="6"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="7"] {
+  grid-column: span 7/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="7"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="8"] {
+  grid-column: span 8/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="8"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="9"] {
+  grid-column: span 9/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="9"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="10"] {
+  grid-column: span 10/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="10"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="11"] {
+  grid-column: span 11/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="11"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-column-span="12"] {
+  grid-column: span 12/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-column-span="12"]:before {
+  position: absolute;
+  right: calc(50%);
+  content: attr(data-column-span) " x";
+}
+
+[data-row-span="1"] {
+  grid-row: span 1/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="1"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="2"] {
+  grid-row: span 2/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="2"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="3"] {
+  grid-row: span 3/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="3"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="4"] {
+  grid-row: span 4/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="4"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="5"] {
+  grid-row: span 5/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="5"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="6"] {
+  grid-row: span 6/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="6"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="7"] {
+  grid-row: span 7/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="7"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="8"] {
+  grid-row: span 8/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="8"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="9"] {
+  grid-row: span 9/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="9"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="10"] {
+  grid-row: span 10/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="10"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="11"] {
+  grid-row: span 11/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="11"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}
+
+[data-row-span="12"] {
+  grid-row: span 12/auto;
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+}
+[data-row-span="12"]:after {
+  position: absolute;
+  left: calc(50% + 3px);
+  content: attr(data-row-span);
+}  
+</style>

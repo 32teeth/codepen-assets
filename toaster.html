@@ -1,0 +1,222 @@
+<button onclick='generateRandomToast()'>Generate a Random Toast</button>
+<ui-toaster ref='toaster'></ui-toaster>
+<style>
+
+
+@charset 'UTF-8';
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+
+:root {
+  --info: #87CEFA;
+  --error: #DB3C21;
+  --warning: #FFA500;
+  --success: #32CD32;
+  --offset: 5rem;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'roboto';
+}
+
+button[onclick] {
+  cursor: pointer;
+  padding: calc(var(--offset) / 4) var(--offset);
+  margin: calc(var(--offset) / 4);
+  position: absolute;
+  bottom: 0;
+}
+
+ui-toaster {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column-reverse;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: 100vh;
+  font-size: 0.725rem;
+  overflow: scroll;
+}
+
+ui-toast {
+  display: block;
+  margin: 0.5rem;
+  border: solid 0.05rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.25rem;
+  width: 40rem;
+  min-height: var(--offset);
+  height: var(--offset);
+  transition: all ease 250ms;
+}
+
+ui-toast:hover {
+  border: solid 0.05rem rgba(0, 0, 0, 0.5);
+}
+
+ui-toast figure {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  height: 100%;
+  padding-left: calc(var(--offset) + 1rem);
+  line-height: 1.5;
+}
+
+ui-toast figure[dismissable='false'] {
+  padding-right: calc(var(--offset) / 2);
+}
+
+ui-toast figure[type='info'] {
+  background: linear-gradient(to right, var(--info) var(--offset), white var(--offset))
+}
+
+ui-toast figure[type='error'] {
+  background: linear-gradient(to right, var(--error) var(--offset), white var(--offset))
+}
+
+ui-toast figure[type='warning'] {
+  background: linear-gradient(to right, var(--warning) var(--offset), white var(--offset))
+}
+
+ui-toast figure[type='success'] {
+  background: linear-gradient(to right, var(--success) var(--offset), white var(--offset))
+}
+
+ui-toast figure figcaption {
+  flex: 1;
+}
+
+ui-toast figure figcaption strong {
+  font-size: 0.825rem;
+  color:rgba(0, 0, 0, 0.75);
+}
+
+ui-toast figure a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+ui-toast figure button[type='dismiss'] {
+  border-radius: 0.25rem;
+  display: flex;
+  width: var(--offset);
+  height: var(--offset);
+  align-items: center;
+  justify-content:center;
+  border: none;
+  background: none;
+  color: black;
+  cursor: pointer;
+}
+
+ui-toast figure button[type='dismiss']:before {
+  content: '×';
+  font-size: 1.5rem;
+  color:rgba(0, 0, 0, 0.25)
+}
+
+ui-toast figure button[type='dismiss']:hover:before {
+  color:rgba(0, 0, 0, 0.5)
+}
+</style>
+
+<script>
+class Toaster extends HTMLElement {
+  constructor() {
+    super()
+  }
+
+  connectedCallback() {
+    this.toaster = document.createElement('aside')
+    this.toaster.setAttribute('id', 'toaster')
+    this.appendChild(this.toaster)
+  }
+
+  disconnectedCallback() { }
+
+  attributeChangedCallback() {
+
+  }
+
+  toast(options) {
+    const toast = new Toast(options)
+    this.toaster.appendChild(toast);
+  }
+}
+window.customElements.define('ui-toaster', Toaster);
+
+class Toast extends HTMLElement {
+  constructor(options) {
+    super()
+    Object.assign(this, options);
+    this.type = options.type || 'info';
+    this.action = options.action || false;
+    this.dismissable = options.dismissable ? true : false;
+    this.ref = Math.random().toString(36).substr(2, 9);
+  }
+
+  connectedCallback() {
+
+    /* Create the toast */
+    const toast = document.createElement('figure')
+    toast.setAttribute('ref', this.ref)
+    toast.setAttribute('type', this.type)
+    toast.setAttribute('dismissable', this.dismissable)
+
+    const message = document.createElement('figcaption');
+    message.innerHTML = this.message;
+
+    toast.appendChild(message)
+
+    if(this.action) {
+      const action = document.createElement('a');
+      action.setAttribute('type', 'action');
+      action.setAttribute('href', this.action.href);
+      action.innerHTML = this.action.text;
+      toast.appendChild(action);
+    }
+
+    this.appendChild(toast)
+
+    if(this.dismissable) {
+      const dismiss = document.createElement('button');
+      dismiss.setAttribute('type', 'dismiss');
+      dismiss.addEventListener('click', () => {
+        toast.parentNode.remove();
+      })
+      toast.appendChild(dismiss);
+    }
+
+    this.appendChild(toast)
+  }
+
+  disconnectedCallback() { }
+}
+window.customElements.define('ui-toast', Toast);
+
+function toast(options) {
+  const toaster = document.querySelector('ui-toaster')
+  toaster.toast(options)
+}
+
+setTimeout(() => {
+  toast({ type: 'info', message: 'Go Generate a Random Toast', dismissable: true })
+}, 100)
+
+generateRandomToast = () => {
+  const types = ['info', 'error', 'warning', 'success'];
+  const type = types[Math.floor(Math.random() * types.length)];
+  const message = `<strong>${Math.random().toString(36).substr(2)}</strong><br/>${Math.random().toString(36).substr(2)} ${Math.random().toString(36).substr(2)} ${Math.random().toString(36).substr(2)}`;
+  const action = Math.random() > 0.5 ? { text: 'Follow Up Action', href: 'https://google.com' } : false;
+  const dismissable = Math.random() > 0.5 ? true : false;
+  toast({ type, message, action, dismissable })
+}
+</script>

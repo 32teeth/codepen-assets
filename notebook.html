@@ -13,7 +13,7 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
       "Week Week Week"
       "Day Day Day"
       "Yesterday Today Blockers"
@@ -35,7 +35,7 @@
     background: rgba(255, 255, 255, 1);
     position: relative;
     line-height: 2;
-    text-indent: 10px;    
+    text-indent: 10px;
   }
 
   body > div:before {
@@ -48,8 +48,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to bottom, 
-                  rgba(0, 0, 0, 0.125) 32px, 
+    background: linear-gradient(to bottom,
+                  rgba(0, 0, 0, 0.125) 32px,
                   rgba(0, 0, 0, 1) 32px,
                   rgba(0, 0, 0, 1) 33px,
                   rgba(255, 255, 255, 1) 33px);
@@ -103,19 +103,19 @@
   const Today = new Date();
 
   const week = () => {
-    const date = new Date(new Date())
+    const date = new Date()
     const day = date.getDay();
-    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+    const diff = date.getDate() - day + 1;
 
-    const monday = Intl.DateTimeFormat(navigator.language, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date());
+    const monday = Intl.DateTimeFormat(navigator.language, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(date.setDate(diff)));
     const friday = Intl.DateTimeFormat(navigator.language, { month: 'short', day: 'numeric', year: 'numeric'}).format(new Date(date.setDate(diff + 4)));
-    //return new Date(date.setDate(diff)); 
+    //return new Date(date.setDate(diff));
     return `${monday} - ${friday}`;
   }
 
   const weekEl = document.querySelector('.Week');
   weekEl.innerHTML = week();
-  
+
   const dayEl = document.querySelector('.Day');
   dayEl.innerHTML = `${Intl.DateTimeFormat(navigator.language, { weekday: 'long' }).format(new Date())}`;
 </script>

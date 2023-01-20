@@ -1,0 +1,118 @@
+<main>
+  <section>
+    <box>
+      <face data-title='8-bit Gamer'></face>
+      <spine></spine>
+    </box>
+  </section>
+</main>
+
+<style>
+
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica;
+  background: #FEFEFE;
+  user-select: none;
+}
+
+:root {
+  --box-width: 175px;
+  --box-height: calc(var(--box-width) * 1.37);
+  --box-depth: 50px;
+  --box-rotate-x: -5deg;
+  --box-rotate-y: 30deg;
+  --box-face-rotate: 0deg;
+  --box-spine-rotate: 90deg;
+  --box-background: #1E1E1E;
+  --box-foreground: #47B0FF;
+  --box-outline: 15px;
+  --box-text: 15deg;
+  --box-logo: #861C1F;
+}
+
+section {
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: flex-start;
+  perspective: calc(var(--box-width) + var(--box-height));
+  width: var(--box-width);
+  height: var(--box-height);
+}
+
+box {
+  transform-style: preserve-3d;
+  transform: rotateX(var(--box-rotate-x)) rotateY(var(--box-rotate-y)) rotateZ(0) translate3d(0px, 0px, var(--box-depth));
+}
+
+face, spine {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  transform-origin: left;
+}
+
+face {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: var(--box-width);
+  height: var(--box-height);
+  transform: rotateY(var(--box-face-rotate));
+  background: linear-gradient(165deg, var(--box-foreground) 50%, transparent 50%), var(--box-background);
+  outline: var(--box-background);
+  outline-width: var(--box-outline);
+  outline-offset: calc(var(--box-outline) * -1);
+  outline-style: solid;
+}
+
+face:before {
+  content: attr(data-title);
+  text-transform: uppercase;
+  color: var(--box-foreground);
+  transform: skewY(calc(var(--box-text) * -1));
+  font-size: 1.75rem;
+  font-weight: 900;
+  margin: calc(var(--box-depth) + var(--box-outline)) var(--box-outline) 0 var(--box-outline);
+  line-height: 0.9;
+  letter-spacing: -0.1rem;
+  background: var(--box-background);
+  border:solid var(--box-background);
+  border-width: calc(var(--box-outline) / 2) 0 0 0;
+}
+
+face:after {
+  text-align: center;
+  content: 'nintendo';
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.05rem;
+  color: var(--box-logo);
+  display: block;
+  position: absolute;
+  bottom: calc((var(--box-outline) * 2));
+  left: calc((var(--box-outline) * 2));
+  width: calc(var(--box-width) / 3);
+  height: calc((var(--box-outline) / 1.5));
+  background: var(--box-background);
+  transform: rotateY(calc(var(--box-face-rotate) * -1));
+  margin: calc(var(--box-outline) * -1);
+  padding: 0 0 calc(var(--box-outline) / 6) 0;
+  border: solid calc((var(--box-outline) / 6)) var(--box-logo);
+  border-radius: calc((var(--box-outline) * 2));
+}
+
+spine {
+  width: var(--box-depth);
+  height: var(--box-height);
+  background: var(--box-background);
+  transform: rotateY(var(--box-spine-rotate)) translateX(-0.05rem);
+}
+</style>

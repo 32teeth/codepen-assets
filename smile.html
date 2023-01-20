@@ -1,0 +1,97 @@
+<smile></smile>
+<style>
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+@property --deg {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 120deg;
+}
+
+@property --open {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 16.65%;
+}
+
+@property --rem {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: -1.5rem;
+}
+
+@property --color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #666666;
+}
+
+:root {
+  --time: 5s;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Comfortaa";
+}
+
+smile {
+  width: 10rem;
+  height: 10rem;
+  background: radial-gradient(circle closest-side, white 0.75rem, transparent 0),
+              radial-gradient(circle closest-side, white 0.75rem, transparent 0),
+              radial-gradient(circle closest-side, var(--color) 0.5rem, transparent 0),
+              radial-gradient(circle closest-side, var(--color) 0.5rem, transparent 0),
+              radial-gradient(circle closest-side, white 60%, transparent 60%, transparent 75%, white 0),
+              conic-gradient(from var(--deg), var(--color) 0, var(--color) var(--open), transparent var(--open), transparent 100%);
+  background-position: 1rem -1.25rem, -1rem -1.25rem, 1rem 0rem, -1rem 0rem, 0 0, 0 0rem;
+
+  animation: rem var(--time) infinite alternate ease-in-out,
+             deg var(--time) infinite alternate ease-in-out,
+             open var(--time) infinite alternate ease-in-out,
+             color var(--time) infinite alternate ease-in-out;
+}
+
+@keyframes deg {
+  0% {
+    --deg:150deg;
+  }
+  100% {
+    --deg:120deg;
+  }
+}
+
+@keyframes open {
+  0% {
+    --open:16.65%;
+  }
+  100% {
+    --open:33.3%;
+  }
+}
+
+@keyframes rem {
+  0% {
+    background-position: 1rem -1.25rem, -1rem -1.25rem, 1rem 0rem, -1rem 0rem, 0 0, 0 0rem;
+  }
+  100% {
+    background-position: 0.75rem -0.75rem, -0.75rem -0.75rem, 1rem 0rem, -1rem 0rem, 0 0, 0 0rem;
+  }
+}
+
+@keyframes color {
+  0% {
+    --color:#666666;
+  }
+  100% {
+    --color:#990000%;
+  }
+}
+</style>
