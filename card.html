@@ -1,16 +1,15 @@
 <main>
   <card>
-    <picture>
-
-    </picture>
     <detail>
       <badge>new</badge>
       <h1>some title</h1>
-      <p>a bit about the thing we are talking about</p>
+      <p>try resizing your browser</p>
       <button>call to action</button>
     </detail>
   </card>
 </main>
+<h1>Some Title</h1>
+<p>Some Content</p>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
@@ -19,37 +18,58 @@
   --yellow: #ffb900;
   --blue: #0067b8;
   --black: #222222;
+  --shadow: #CCCCCC;
   --white: #f2f2f2;
 
   --font-size-small: 1rem;
   --font-size-medium: 1.5rem;
   --font-size-large: 1.825rem;
 
-  --full-width: calc(768/16 * 1rem);
+  --height-small: calc(350/16 * 1rem);
+  --height-medium: calc(450/16 * 1rem);
+  --height-large: calc(600/16 * 1rem);
+  --height-xlarge: calc(800/16 * 1rem);
 }
 
 body {
   display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   margin: 0;
   padding: 0;
   font-family: 'Open Sans';
   text-transform: capitalize;
+  background: var(--white);
+  container-type: inline-size;
 }
 
 main {
-	container-type: inline-size;
   display: flex;
   align-items: center;
-	max-inline-size: 100vw;
   width: 100vw;
-  height: calc(350/16 * 1rem);
+  height: var(--height-small);
 	background: var(--white);
 }
 
 card {
-	display: flex;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+	flex: 1;
+  background: linear-gradient(to top, var(--white) calc(64/16 * 1rem), transparent calc(64/16 * 1rem)), url(https://content.instructables.com/F6V/H6QU/KK8AMGJJ/F6VH6QUKK8AMGJJ.jpg?auto=webp&frame=1&width=700&height=1024&fit=bounds&md=8920da64715d0f84e642069aead1c0e1), url(https://content.instructables.com/F6V/H6QU/KK8AMGJJ/F6VH6QUKK8AMGJJ.jpg?auto=webp&frame=1&width=700&height=1024&fit=bounds&md=8920da64715d0f84e642069aead1c0e1);
+  background-size: 0, cover;
+  background-repeat: no-repeat;
+  background-position: right center;
+  height: inherit;
+}
+
+detail {
+  padding: calc(24/16 * 1rem);
+  margin-right: calc(128/16 * 1rem);
+  color: var(--white);
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(5px);
 }
 
 badge {
@@ -59,12 +79,55 @@ badge {
   padding: calc(6/16 * 1rem) calc(12/16 * 1rem);
 }
 
-@container (min-width: calc(768/16 * 1rem)) {
-	card {
-
-	}
+button {
+  border: none;
+  background: var(--blue);
+  color: var(--white);
+  font-size: var(--font-size-small);
+  padding: calc(10/16 * 1rem) calc(12/16 * 1rem);
+  text-transform: capitalize;
 }
 
+@container (max-width: calc(1080/16 * 1rem)) {
+  main {
+    height: var(--height-large);
+  }
 
+  card {
+    justify-content: center;
+    align-items: flex-end;
+    background-size: 100%, cover;
+  }
 
+  detail {
+    display: block;
+    background: var(--white);
+    width: calc(100vw - (24/16 * 4rem));
+    padding: calc(24/16 * 1rem);
+    margin-right: 0;
+    color: var(--blck);
+    box-shadow: 0 calc(3/16 * 1rem) calc(7/16 * 1rem) 0 rgb(0 0 0 / 13%),
+                0 calc(1/16 * 1rem) calc(2/16 * 1rem) 0 rgb(0 0 0 / 11%);
+  }
+}
+
+@container (max-width: calc(860/16 * 1rem)) {
+  main {
+    height: var(--height-large);
+  }
+
+  card {
+    background-position: center, center 150%;
+  }
+
+  detail {
+    display: block;
+    background: var(--white);
+    width: 100vw;
+    padding: calc(24/16 * 1rem);
+    margin-right: 0;
+    color: var(--blck);
+    box-shadow: 0 calc(3/16 * 1rem) calc(7/16 * 1rem) 0 rgb(0 0 0 / 13%);
+  }
+}
 </style>
