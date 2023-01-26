@@ -1,0 +1,250 @@
+<grid>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+  <tile></tile>
+</grid>
+
+<arrow></arrow>
+<arrow></arrow>
+<arrow></arrow>
+<arrow></arrow>
+
+<section>
+  <h1>32teeth</h1>
+  <h2>this pen needs ❤</h2>
+</section>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300');
+
+:root {
+  --columns: 8;
+  --rows: 8;
+  --black: #36454f;
+  --white: #f7f7f7;
+  --gray: #ff1493;
+  --size: 2.5rem;
+  --dX: 0;
+  --dY: 0;
+}
+
+body {
+  font-family: "Poppins";
+  margin: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  height: 100vh;
+  width: 100vw;
+  overflow-x: auto;
+  overflow-y: auto;
+  scroll-snap-type: both mandatory;
+  scroll-behavior: smooth;
+  counter-reset: tile;
+}
+
+tile {
+  color: white;
+  justify-content: center;
+  align-items: center;
+  min-width: calc(25vw);
+  aspect-ratio: 1;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  outline: solid 0.125rem;
+  outline-offset: -0.125rem;
+}
+
+tile:nth-child(1),
+tile:nth-child(3),
+tile:nth-child(5),
+tile:nth-child(7),
+tile:nth-child(10),
+tile:nth-child(12),
+tile:nth-child(14),
+tile:nth-child(16),
+tile:nth-child(17),
+tile:nth-child(19),
+tile:nth-child(21),
+tile:nth-child(23),
+tile:nth-child(26),
+tile:nth-child(28),
+tile:nth-child(30),
+tile:nth-child(32),
+tile:nth-child(33),
+tile:nth-child(35),
+tile:nth-child(37),
+tile:nth-child(39),
+tile:nth-child(42),
+tile:nth-child(44),
+tile:nth-child(46),
+tile:nth-child(48),
+tile:nth-child(49),
+tile:nth-child(51),
+tile:nth-child(53),
+tile:nth-child(55),
+tile:nth-child(58),
+tile:nth-child(60),
+tile:nth-child(62),
+tile:nth-child(64) {
+  background: var(--black);
+}
+
+arrow {
+  position: absolute;
+  width: calc(var(--size)*2);
+  height: calc(var(--size)*2);
+  border-radius: 0 calc(var(--size)*2) calc(var(--size)*2) 0;
+  background: var(--gray);
+  z-index: 1;
+  transition: transform 0.25s ease;
+  opacity: 0.75;
+}
+
+arrow:before {
+  content:'➜';
+  width: calc(var(--size)*2);
+  height: calc(var(--size)*2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--size);
+  color: var(--white);
+  transform: rotate(180deg);
+
+}
+
+arrow:nth-of-type(1) {
+  top: calc(50% - var(--size) / 2);
+  left: 0;
+  transform: translateX(calc(var(--size) * -2));
+}
+
+arrow:nth-of-type(2) {
+  top: calc(50% - var(--size) / 2);
+  right: 0;
+  transform: translateX(0)  rotate(180deg);
+}
+
+arrow:nth-of-type(3) {
+  top: 0;
+  left: calc(50% - var(--size) / 2);
+  transform: translateY(calc(var(--size) * -2)) rotate(90deg);
+}
+
+arrow:nth-of-type(4) {
+  bottom: 0;
+  left: calc(50% - var(--size) / 2);
+  transform: translateY(0) rotate(270deg);
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+section h1, section h2 {
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.25);
+  margin: 0.25rem;
+}
+section h1 {
+  border-style: solid;
+  border-width: 2mm;
+  border-radius: 10mm;
+  font-size: 2rem;
+  padding: 2mm 8mm;
+}
+section h2 {
+  font-size: 1rem;
+}
+</style>
+
+<script>
+const grid = document.querySelector('grid');
+grid.addEventListener('scroll', (e) => {
+  const dX = grid.scrollLeft;
+  const dY = grid.scrollTop;
+  document.documentElement.style.setProperty('--dX', dX + "px");
+  document.documentElement.style.setProperty('--dY', dY + "px");
+
+  document.querySelector('arrow:nth-of-type(1)').style.transform = dX === 0 ? "translateX(calc(var(--size) * -2))" : "translateX(0)";
+  document.querySelector('arrow:nth-of-type(2)').style.transform = dX === grid.scrollWidth - grid.clientWidth ? "translateX(calc(var(--size) * 2)) rotate(180deg)" : "translateX(0) rotate(180deg)";
+  document.querySelector('arrow:nth-of-type(3)').style.transform = dY === 0 ? "translateY(calc(var(--size) * -2)) rotate(90deg)" : "translateY(0) rotate(90deg)";
+  document.querySelector('arrow:nth-of-type(4)').style.transform = dY === grid.scrollHeight - grid.clientHeight ? "translateY(calc(var(--size) * 2)) rotate(270deg)" : "translateY(0) rotate(270deg)";
+});
+</script>

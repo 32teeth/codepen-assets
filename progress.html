@@ -1,0 +1,44 @@
+<main>
+  <progress max="100" value="0" style="--hue: 0"></progress>
+  <progress max="100" value="10" style="--hue: 10"></progress>
+  <progress max="100" value="20" style="--hue: 20"></progress>
+  <progress max="100" value="30" style="--hue: 30"></progress>
+  <progress max="100" value="40" style="--hue: 40"></progress>
+  <progress max="100" value="50" style="--hue: 50"></progress>
+  <progress max="100" value="60" style="--hue: 60"></progress>
+  <progress max="100" value="70" style="--hue: 70"></progress>
+  <progress max="100" value="80" style="--hue: 80"></progress>
+  <progress max="100" value="90" style="--hue: 90"></progress>
+  <progress max="100" value="100" style="--hue: 100"></progress>
+</main>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Comfortaa";
+  }
+
+  main {
+    display: flex;
+    justify-content: center;;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  progress {
+    --hue: 0;
+    --hsl: hsl(var(--hue) 100% 50%);
+    accent-color: var(--hsl);
+    width: 50vw;
+  }
+</style>

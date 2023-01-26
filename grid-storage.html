@@ -1,0 +1,129 @@
+<main>
+  <section data-area="left" data-width data-store>
+    <article>left</article>
+  </section>
+  <section data-area="center">
+    <article>
+    </article>
+  </section>
+  <section data-area="right" data-width data-store>
+    <article>right</article>
+  </section>
+</main>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  main {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: inline-grid;
+    grid-template-areas: "left center right";
+    grid-template-rows: 1fr;
+    grid-auto-columns: auto 1fr auto;
+    gap: 0.25rem;
+    background: rgba(0, 153, 0, 0.25);
+  }
+
+  header,
+  section,
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 153, 0, 0.25);
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  header {
+    grid-area: header;
+  }
+
+  [data-area="center"] {
+    grid-area: center;
+    min-width: 20vw;
+    overflow: hidden;
+  }
+
+  [data-area="left"],
+  [data-area="right"] {
+    grid-area: left;
+    resize: horizontal;
+    overflow: auto;
+    min-width: 10vw;
+    max-width: 40vw;
+  }
+
+  [data-area="right"] {
+    grid-area: right;
+    transform: rotateY(180deg);
+  }
+
+  [data-area="right"]:before,
+  [data-area="right"] > article {
+    transform: rotateY(180deg);
+  }
+
+  [data-width] {
+    position: relative;
+  }
+
+  [data-width]:before {
+    position: absolute;
+    content: attr(data-width);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.25rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.25);
+    font-size: 0.75rem
+  }
+
+  footer {
+    grid-area: footer;
+  }
+</style>
+
+<script>
+const resizeObserver = new ResizeObserver(entries => {
+  for (const entry of entries) {
+    const { width } = entry.contentRect;
+    entry.target.setAttribute("data-width", width);
+    sessionStorage.setItem(entry.target.dataset.area, width);
+  }
+});
+
+const initiateObserver = () => {
+  document.querySelectorAll("[data-store]").forEach(el => {
+    resizeObserver.observe(el);
+  });
+};
+
+window.addEventListener("load", () => {
+  document.querySelectorAll("[data-store]").forEach(el => {
+    const width = sessionStorage.getItem(el.dataset.area);
+    if (width) {
+      el.style.width = width + "px";
+    }
+  });
+
+  initiateObserver();
+});
+</script>

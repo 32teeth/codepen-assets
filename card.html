@@ -1,0 +1,70 @@
+<main>
+  <card>
+    <picture>
+
+    </picture>
+    <detail>
+      <badge>new</badge>
+      <h1>some title</h1>
+      <p>a bit about the thing we are talking about</p>
+      <button>call to action</button>
+    </detail>
+  </card>
+</main>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root {
+  --yellow: #ffb900;
+  --blue: #0067b8;
+  --black: #222222;
+  --white: #f2f2f2;
+
+  --font-size-small: 1rem;
+  --font-size-medium: 1.5rem;
+  --font-size-large: 1.825rem;
+
+  --full-width: calc(768/16 * 1rem);
+}
+
+body {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans';
+  text-transform: capitalize;
+}
+
+main {
+	container-type: inline-size;
+  display: flex;
+  align-items: center;
+	max-inline-size: 100vw;
+  width: 100vw;
+  height: calc(350/16 * 1rem);
+	background: var(--white);
+}
+
+card {
+	display: flex;
+}
+
+badge {
+  background: var(--yellow);
+  color: var(--black);
+  font-size: var(--font-size-small);
+  padding: calc(6/16 * 1rem) calc(12/16 * 1rem);
+}
+
+@container (min-width: calc(768/16 * 1rem)) {
+	card {
+
+	}
+}
+
+
+
+</style>
