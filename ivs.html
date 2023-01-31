@@ -1,0 +1,10 @@
+<script src="https://player.live-video.net/1.16.0/amazon-ivs-player.min.js"></script>
+<video id="video-player" playsinline></video>
+<script>
+  if (IVSPlayer.isPlayerSupported) {
+    const player = IVSPlayer.create();
+    player.attachHTMLVideoElement(document.getElementById('video-player'));
+    player.load("PLAYBACK_URL");
+    player.play();
+  }
+</script>

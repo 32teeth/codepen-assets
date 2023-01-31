@@ -1,0 +1,47 @@
+<main>
+
+</main>
+
+<style>
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+:root {
+  --pixel-size: 3px;
+  --pixel-gap: 1px;
+  --shadow-depth: 5px;
+  --shadow: #00000033;
+  --base-background: #84d07d;
+  --base-color: #5e785d;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--base-background);
+  box-shadow: inset var(--shadow-depth) var(--shadow-depth) calc(var(--shadow-depth) * 2) var(--shadow),
+              inset calc(var(--shadow-depth) * -1) calc(var(--shadow-depth) * -1) calc(var(--shadow-depth) * 2) var(--shadow);
+  font-family: "DotGothic16";
+  font-size: 1rem;
+  color: var(--base-color);
+}
+
+body:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, var(--shadow) var(--pixel-gap), transparent var(--pixel-gap)),
+              linear-gradient(to bottom, var(--shadow) var(--pixel-gap), transparent var(--pixel-gap));
+  background-size: var(--pixel-size) var(--pixel-size), var(--pixel-size) var(--pixel-size);
+}
+
+body > * {
+  mix-blend-mode: luminosity;
+}
+
+</style>

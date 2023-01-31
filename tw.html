@@ -1,0 +1,134 @@
+
+<header>
+  <nav>
+    <section>
+      <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+
+      </svg>
+    </section>
+    <section></section>
+    <section></section>
+  </nav>
+</header>
+<aside>
+  <nav>
+    <label for="collapse">
+      <span>For You</span>
+      <input type="checkbox" id="collapse">
+      <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" stroke="black" stroke-width="3" stroke-linecap="round">
+        <g transform="scale(0.8) translate(10, 5)">
+          <line x1="38" y1="10" x2="38" y2="30"/>
+          <g class="arrow">
+            <line x1="10" y1="20" x2="18" y2="12"/>
+            <line x1="10" y1="20" x2="18" y2="28"/>
+            <line x1="10" y1="20" x2="30" y2="20"/>
+          </g>
+        </g>
+      </svg>
+    </label>
+  </nav>
+</aside>
+<main></main>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root {
+  /**
+    * dimensions
+    */
+  --header-height: calc(50/16 * 1rem);
+  --header-background: hsl(0, 0%, 100%);
+  --aside-width: calc(240/16 * 1rem);
+  --aside-width-collapsed: calc(50/16 * 1rem);
+  /**
+    * colors
+    */
+  --aside-background: hsl(240, 7%, 94%);
+  --body-background: hsl(240, 7%, 97%);
+  --main-background: var(--body-background);
+  --logo-primary-color: hsl(264, 100%, 64%);
+
+}
+
+body {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "aside main main";
+  grid-template-columns: auto auto 1fr;
+  grid-template-rows: var(--header-height) 1fr;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--body-background);
+  font-family: 'Open Sans';
+}
+
+header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--header-background);
+}
+
+aside {
+  grid-area: aside;
+  background: var(--aside-background);
+  display: flex;
+  flex-direction: column;
+  width: var(--aside-width);
+  user-select: none;
+}
+
+aside nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 0.825rem;
+}
+
+aside nav label[for=collapse] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(50/16 * 1rem);
+}
+
+aside nav input[id='collapse'] {
+  display: none;
+}
+
+aside.collapsed {
+  width: var(--aside-width-collapsed);
+}
+
+aside.collapsed nav {
+  padding: 0;
+}
+
+aside.collapsed nav label[for=collapse] span {
+  display: none;
+}
+
+aside.collapsed nav label[for=collapse] .arrow {
+  transform: rotate(180deg);
+  transform-origin: center;
+}
+
+main {
+  grid-area: main;
+  background: var(--main-background);
+}
+</style>
+
+<script>
+const collapse = document.querySelector("[for=collapse]");
+collapse.addEventListener('change', (e) => {
+  const isCollapsed = e.target.checked;
+  const aside = document.querySelector('aside');
+  aside.classList.toggle('collapsed', isCollapsed);
+});
+</script>
