@@ -1,0 +1,123 @@
+<scene>
+  <ground></ground>
+  <sidewalk></sidewalk>
+  <grass></grass>
+  <fence side="front-left"></fence>
+  <fence side="front-right"></fence>
+  <fence side="back"></fence>
+  <fence side="right"></fence>
+  <fence side="left"></fence>
+</scene>
+
+<style>
+:root {
+  --scene: calc(500/16 * 1rem);
+  --ground: hsl(310, 6%, 36%);
+  --ground-shadow: hsl(310, 6%, 18%);
+  --sidewalk: hsl(20, 48%, 84%);
+  --grass: 	hsl(60, 34%, 55%);
+  --fence: hsl(19, 42%, 69%);
+  --tree: hsl(70, 29%, 44%);
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  perspective: 1000px;
+}
+
+scene {
+  width: var(--scene);
+  aspect-ratio: 1/1;
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: center;
+  transform: rotateX(60deg) rotateY(0deg) rotateZ(45deg);
+}
+
+ground {
+  position: absolute;
+  width: var(--scene);
+  aspect-ratio: 1/1;
+  background: var(--ground);
+  border-radius: calc(12/16 * 1rem);
+}
+
+sidewalk {
+  position: absolute;
+  bottom: calc(58/16 * 1rem);
+  width: calc(442/16 * 1rem);
+  height: calc(32/16 * 1rem);
+  background: linear-gradient(to right, transparent calc(224/16 * 1rem), var(--ground) calc(224/16 * 1rem), var(--ground) calc(300/16 * 1rem), transparent calc(300/16 * 1rem) ),
+              repeating-linear-gradient(to left, transparent, transparent calc(50/16 * 1rem), rgba(0, 0, 0, 0.1) calc(50/16 * 1rem),  rgba(0, 0, 0, 0.1) calc(52/16 * 1rem)),
+              var(--sidewalk);
+  border-radius: 0 0 calc(8/16 * 1rem) 0;
+  z-index: 1;
+}
+
+sidewalk:before {
+  content: '';
+  position: absolute;
+  width: calc(442/16 * 1rem);
+  height: calc(32/16 * 1rem);
+  background: repeating-linear-gradient(to left, transparent, transparent calc(50/16 * 1rem), rgba(0, 0, 0, 0.1) calc(50/16 * 1rem),  rgba(0, 0, 0, 0.1) calc(52/16 * 1rem)),
+              var(--sidewalk);
+  border-radius: 0 calc(8/16 * 1rem) 0 0;
+  transform-origin: calc(410/16 * 1rem) 0;
+  transform: rotateZ(90deg) translateY(calc(32/16 * -1rem));
+  z-index: 9999;
+}
+
+grass {
+  position: absolute;
+  width: calc(410/16 * 1rem);
+  height: calc(410/16 * 1rem);
+  background: var(--grass);
+}
+
+fence {
+  position: absolute;
+  bottom: calc(90/16 * 1rem);
+  height: calc(32/16 * 1rem);
+  background: repeating-linear-gradient(to left, var(--fence), var(--fence) calc(4/16 * 1rem), transparent calc(4/16 * 1rem), transparent calc(6/16 * 1rem));
+  transform-origin: bottom right;
+  transform: rotateX(90deg) translateY(calc(32/16 * 1rem));
+  z-index: 2;
+}
+
+fence[side="front-left"] {
+  width: calc(224/16 * 1rem);
+}
+
+fence[side="front-right"] {
+  right: calc(92/16 * 1rem);
+  width: calc(108/16 * 1rem);
+}
+
+fence[side="back"] {
+  width: calc(410/16 * 1rem);
+  bottom: 100%;
+  background: repeating-linear-gradient(to left, var(--fence), var(--fence) calc(4/16 * 1rem), transparent calc(4/16 * 1rem), transparent calc(6/16 * 1rem));
+  transform: rotateX(90deg) translateY(calc(32/16 * 1rem));
+}
+
+fence[side="right"] {
+  width: calc(410/16 * 1rem);
+  background: repeating-linear-gradient(to left, rgba(0,0,0,0.25), rgba(0,0,0,0.25) calc(4/16 * 1rem), transparent calc(4/16 * 1rem), transparent calc(6/16 * 1rem)),
+  repeating-linear-gradient(to left, var(--fence), var(--fence) calc(4/16 * 1rem), transparent calc(4/16 * 1rem), transparent calc(6/16 * 1rem));
+  transform: rotateX(0deg) rotateY(90deg) rotateZ(90deg) translateY(calc(32/16 * 1rem));
+}
+
+fence[side="left"] {
+  width: calc(410/16 * 1rem);
+  right: 100%;
+  background: repeating-linear-gradient(to left, rgba(0,0,0,0.25), rgba(0,0,0,0.25) calc(4/16 * 1rem), transparent calc(4/16 * 1rem), transparent calc(6/16 * 1rem)),
+  repeating-linear-gradient(to left, var(--fence), var(--fence) calc(4/16 * 1rem), transparent calc(4/16 * 1rem), transparent calc(6/16 * 1rem));
+  transform: rotateX(0deg) rotateY(90deg) rotateZ(90deg) translateY(calc(32/16 * 1rem));
+}
+</style>

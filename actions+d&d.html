@@ -1,0 +1,149 @@
+<actions>
+  <h3>drag a thing</h3>
+  <action draggable="true">a<code>x + y = 1</code></action>
+  <action draggable="true">b<code>x * y = 1</code></action>
+  <action draggable="true">c<code>x - y = 1</code></action>
+  <action draggable="true">d<code>x / y = 1</code></action>
+</actions>
+
+<dropzone></dropzone>
+<sourcecode><code></code></sourcecode>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root {
+  --actions-width: calc(240/16 * 1rem);
+  --actions-background: hsl(240, 7%, 94%);
+  --action-width: calc(220/16 * 1rem);
+  --action-height: calc(120/16 * 1rem);
+  --action-filet: 0.25rem;
+  --action-border: 0.5mm;
+  --action-border-color: hsl(0, 0%, 80%);
+  --action-border-color-hover: hsl(0, 0%, 0%);
+  --action-shadow: hsla(0, 0%, 0%, 25%);
+}
+body {
+  display: grid;
+  grid-template-areas: "actions dropzone sourcecode";
+  grid-template-columns: var(--actions-width) 1fr 1fr;
+  grid-template-rows: 1fr;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--body-background);
+  font-family: 'Open Sans';
+}
+
+code {
+  display: block;
+  white-space: pre-wrap
+}
+
+actions {
+  grid-area: actions;
+  background: var(--actions-background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  gap: 0.5rem;
+  padding-block: 1rem;
+}
+
+action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: var(--action-width);
+  height: var(--action-height);
+  border: solid var(--action-border) var(--action-border-color);
+  border-radius: var(--action-filet);
+  box-shadow: 0 0 0 var(--action-shadow);
+  transition: all ease 0.2s;
+  background: hsl(0, 0%, 100%)
+}
+
+action:hover {
+  cursor: grab;
+  border: solid var(--action-border) var(--action-border-color-hover);
+}
+
+action:active {
+  cursor: grabbing;
+}
+
+dropzone {
+  grid-area: dropzone;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--action-width), var(--action-width)));
+  grid-template-rows: repeat(auto-fill, minmax(var(--action-height), var(--action-height)));
+  gap: calc(var(--action-filet) * 2);
+  background: hsl(0, 0%, 80%);
+  transition: all ease 0.2s;
+  position: relative;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+dropzone:before {
+  position: absolute;
+  content: 'drop a thing here';
+  color:hsl(0, 0%, 40%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+dropzone > * {
+  position: relative;
+  z-index: 1;
+}
+
+sourcecode {
+  grid-area: sourcecode;
+  background: hsl(0, 0%, 90%);
+  padding: 1rem;
+}
+</style>
+
+<script>
+const actions = document.querySelector('actions');
+const action = document.querySelectorAll('action');
+const dropzone = document.querySelector('dropzone');
+const sourcecode = document.querySelector('sourcecode');
+let source;
+action.forEach(a => {
+  a.addEventListener('dragstart', e => {
+    source = e.target;
+  }, false);
+
+  a.addEventListener('dragend', e => {
+    source = null;
+  }, false);
+});
+
+dropzone.addEventListener('dragover', e => {
+  e.preventDefault();
+  e.target.style.background = 'hsl(0, 0%, 70%)';
+}, false);
+
+dropzone.addEventListener('dragleave', e => {
+  e.preventDefault();
+  e.target.style.background = 'hsl(0, 0%, 80%)';
+}, false);
+
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  e.target.style.background = 'hsl(0, 0%, 80%)';
+  const clone = source.cloneNode(true);
+  e.target.appendChild(clone);
+  sourcecode.querySelector('code').innerHTML += `\n${source.querySelector('code').innerHTML}`;
+}, false);
+
+
+</script>

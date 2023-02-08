@@ -1,0 +1,49 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+  <g transform="scale(0.75) translate(6, 6)">
+    <line x1="30" y1="8" x2="30" y2="24"/>
+    <g>
+      <line x1="2" y1="16" x2="10" y2="8"/>
+      <line x1="2" y1="16" x2="10" y2="24"/>
+      <line x1="2" y1="16" x2="20" y2="16"/>
+    </g>
+  </g>
+</svg>
+
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+  <g transform="scale(0.75) translate(6, 6)">
+    <line x1="30" y1="8" x2="30" y2="24"/>
+    <g transform="rotate(180) translate(10 0)" transform-origin="center">
+      <line x1="2" y1="16" x2="10" y2="8"/>
+      <line x1="2" y1="16" x2="10" y2="24"/>
+      <line x1="2" y1="16" x2="20" y2="16"/>
+    </g>
+  </g>
+</svg>
+
+<style>
+  :root {
+    --black: hsl(204, 19%, 26%);
+    --white: hsl(0, 0%, 100%);
+    --fill: hsl(240, 7%, 97%);
+    --stroke: var(--black);
+    --stroke-width: 4;
+    --stroke-linecap: round;
+  }
+
+  body {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, calc(32/16 * 1rem));
+    grid-template-columns: repeat(auto-fill, calc(32/16 * 1rem));
+    gap: calc(8/16 * 1rem);
+    margin: calc(8/16 * 1rem);
+    padding: 0;
+    background: var(--fill);
+  }
+
+  svg {
+    background: var(--white);
+    stroke: var(--stroke);
+    stroke-width: var(--stroke-width);
+    stroke-linecap: var(--stroke-linecap);
+  }
+</style>
