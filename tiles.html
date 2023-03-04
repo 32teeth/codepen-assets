@@ -1,86 +1,15 @@
-<grid>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-  <tile></tile>
-</grid>
-
+<grid></grid>
 <arrow></arrow>
 <arrow></arrow>
 <arrow></arrow>
 <arrow></arrow>
-
-<section>
-  <h1>32teeth</h1>
-  <h2>this pen needs ❤</h2>
-</section>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300');
 
 :root {
-  --columns: 8;
-  --rows: 8;
+  --columns: 32;
+  --rows: var(--columns);
   --black: #36454f;
   --white: #f7f7f7;
   --gray: #ff1493;
@@ -110,50 +39,16 @@ grid {
 }
 
 tile {
+  display: flex;
   color: white;
   justify-content: center;
   align-items: center;
-  min-width: calc(25vw);
+  width: calc(25vw);
   aspect-ratio: 1;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  outline: solid 0.125rem;
-  outline-offset: -0.125rem;
-}
-
-tile:nth-child(1),
-tile:nth-child(3),
-tile:nth-child(5),
-tile:nth-child(7),
-tile:nth-child(10),
-tile:nth-child(12),
-tile:nth-child(14),
-tile:nth-child(16),
-tile:nth-child(17),
-tile:nth-child(19),
-tile:nth-child(21),
-tile:nth-child(23),
-tile:nth-child(26),
-tile:nth-child(28),
-tile:nth-child(30),
-tile:nth-child(32),
-tile:nth-child(33),
-tile:nth-child(35),
-tile:nth-child(37),
-tile:nth-child(39),
-tile:nth-child(42),
-tile:nth-child(44),
-tile:nth-child(46),
-tile:nth-child(48),
-tile:nth-child(49),
-tile:nth-child(51),
-tile:nth-child(53),
-tile:nth-child(55),
-tile:nth-child(58),
-tile:nth-child(60),
-tile:nth-child(62),
-tile:nth-child(64) {
-  background: var(--black);
+  outline: solid 0.05rem;
+  outline-offset: -0.5rem;
 }
 
 arrow {
@@ -177,7 +72,6 @@ arrow:before {
   font-size: var(--size);
   color: var(--white);
   transform: rotate(180deg);
-
 }
 
 arrow:nth-of-type(1) {
@@ -203,39 +97,20 @@ arrow:nth-of-type(4) {
   left: calc(50% - var(--size) / 2);
   transform: translateY(0) rotate(270deg);
 }
-
-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 9999;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-}
-section h1, section h2 {
-  font-size: 2rem;
-  color: rgba(0, 0, 0, 0.25);
-  margin: 0.25rem;
-}
-section h1 {
-  border-style: solid;
-  border-width: 2mm;
-  border-radius: 10mm;
-  font-size: 2rem;
-  padding: 2mm 8mm;
-}
-section h2 {
-  font-size: 1rem;
-}
 </style>
 
 <script>
+
+const columns = Math.pow(parseInt(getComputedStyle(document.body).getPropertyValue('--columns')), 2);
+const tile =  document.createElement('tile');
 const grid = document.querySelector('grid');
+
+for (let i = 0; i < columns; i++) {
+  const t = tile.cloneNode();
+  t.innerHTML = i + 1;
+  grid.appendChild(t);
+}
+
 grid.addEventListener('scroll', (e) => {
   const dX = grid.scrollLeft;
   const dY = grid.scrollTop;

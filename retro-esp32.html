@@ -1,0 +1,199 @@
+<nav>
+  <section style="--hue: 360">
+    <header>
+      <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/heart.gif">
+    </header>
+    <article>to navigate ⇢</article>
+  </section>
+  <section style="--hue: 300">
+    <header>
+      <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/settings.gif">
+      <h4>Settings</h4>
+    </header>
+    <article></article>
+  </section>
+  <section style="--hue: 270">
+    <header>
+      <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/fav.gif">
+      <h4>Favorites</h4>
+    </header>
+    <article></article>
+  </section>
+  <section style="--hue: 240">
+    <header>
+      <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/recent.gif">
+      <h4>Recently Played</h4>
+    </header>
+    <article></article>
+  </section>
+  <section style="--hue: 200">
+    <header>
+      <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/nes.gif">
+      <h4>Nintendo Entertainment System</h4>
+    </header>
+    <article></article>
+  </section>
+  <section style="--hue: 160">
+    <header>
+      <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/gb.gif">
+      <h4>Gameboy</h4>
+    </header>
+    <article></article>
+  </section>
+  <section style="--hue: 100">
+    <header>
+      <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/gbc.gif">
+      <h4>Gameboy Color</h4>
+    </header>
+    <article></article>
+  </section>
+  <section style="--hue: 30">
+    <header>
+      <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/nec.gif">
+      <h4>PC Engine</h4>
+    </header>
+    <article></article>
+  </section>
+</nav>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
+
+:root {
+  --hue: 300;
+  --hsl: hsl(var(--hue) 100% 50%);
+  --body-hsl: hsl(var(--hue) 50% 25%);
+  --pixel-size: 3px;
+  --pixel-gap: 1px;
+  --shadow-depth: 5px;
+  --shadow: #00000033;
+  --base-background: #84d07d;
+  --base-color: #5e785d;
+}
+
+body {
+  font-family: "DotGothic16";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  color: white;
+  width: 100vw;
+  height: 100vh;
+  letter-spacing: 0.125rem;
+  background: var(--body-hsl);
+  transition: background 0.75s ease-in;
+}
+
+nav {
+  position: relative;
+  display: flex;
+  width: 32rem;
+  aspect-ratio: 4/3;
+  background: var(--hsl);
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.25) 4rem, transparent 4rem);
+  overflow-x: auto;
+  overflow-y: none;
+  scroll-snap-type: x mandatory;
+  transition: background 0.5s ease-in;
+}
+
+nav::before {
+  content: "";
+  position: fixed;
+  width: 32rem;
+  aspect-ratio: 4/3;
+  background: linear-gradient(to right, var(--shadow) var(--pixel-gap), transparent var(--pixel-gap)),
+              linear-gradient(to bottom, var(--shadow) var(--pixel-gap), transparent var(--pixel-gap));
+  background-size: var(--pixel-size) var(--pixel-size), var(--pixel-size) var(--pixel-size);
+}
+
+section {
+  display: grid;
+  grid-template-areas:
+  "header"
+  "article";
+  grid-template-rows: 4rem 1fr;
+  width: 100%;
+  aspect-ratio: 4/3;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  transform:translateX(0rem);
+  mix-blend-mode: screen;
+}
+
+section:not(:first-child) {
+  transform:translateX(-4rem);
+}
+
+section.inview article,
+section.inview h4,
+section.inview img{
+  opacity: 1;
+}
+
+section.inview h4 {
+  margin: 1rem;
+  font-size: 0.825rem;
+}
+
+section header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  padding-inline: 1rem;
+  height: 4rem;
+}
+
+section img {
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  transition: opacity 0.5s ease-in;
+}
+
+section h4 {
+  line-height: 0;
+  margin: 1rem 4rem;
+  opacity: 0;
+  transition: opacity 0.5s ease-in, margin 0.25s ease-in;
+}
+
+article {
+  grid-area: article;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100%);
+  padding-left: 1rem;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+</style>
+
+<script>
+const intersectionObserver = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (entry.isIntersecting) {
+      const section = entry.target;
+      const hue = section.style.getPropertyValue("--hue");
+      document.documentElement.style.setProperty("--hue", hue);
+      section.classList.add("inview");
+    } else {
+      entry.target.classList.remove("inview");
+    }
+  }
+}, {
+  root: document.querySelector("nav"),
+  rootMargin: "0px",
+  threshold: 0.8
+});
+
+document.querySelectorAll("section").forEach(target => {
+  intersectionObserver.observe(target);
+});
+
+document.querySelector("nav").focus();
+</script>
