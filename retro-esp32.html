@@ -1,56 +1,56 @@
 <nav>
-  <section style="--hue: 360">
+  <section style="--hue: 360;">
     <header>
       <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/heart.gif">
     </header>
     <article>to navigate ⇢</article>
   </section>
-  <section style="--hue: 300">
-    <header>
-      <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/settings.gif">
-      <h4>Settings</h4>
-    </header>
-    <article></article>
-  </section>
-  <section style="--hue: 270">
+  <section style="--hue: 300; --background: url(https://raw.githubusercontent.com/32teeth/retro-go-themes/master/themes/pixel/background_favorite_clear.png)">
     <header>
       <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/fav.gif">
       <h4>Favorites</h4>
     </header>
     <article></article>
   </section>
-  <section style="--hue: 240">
+  <section style="--hue: 270; --background: url(https://raw.githubusercontent.com/32teeth/retro-go-themes/master/themes/pixel/background_recent_001_clear.png)">
     <header>
       <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/recent.gif">
       <h4>Recently Played</h4>
     </header>
     <article></article>
   </section>
-  <section style="--hue: 200">
+  <section style="--hue: 240; --background: url(https://raw.githubusercontent.com/32teeth/retro-go-themes/master/themes/pixel/background_nes_clear.png)">
     <header>
       <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/nes.gif">
       <h4>Nintendo Entertainment System</h4>
     </header>
     <article></article>
   </section>
-  <section style="--hue: 160">
+  <section style="--hue: 200; --background: url(https://raw.githubusercontent.com/32teeth/retro-go-themes/master/themes/pixel/background_gb_clear.png)">
     <header>
       <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/gb.gif">
       <h4>Gameboy</h4>
     </header>
     <article></article>
   </section>
-  <section style="--hue: 100">
+  <section style="--hue: 160; --background: url(https://raw.githubusercontent.com/32teeth/retro-go-themes/master/themes/pixel/background_gbc_clear.png)">
     <header>
       <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/gbc.gif">
       <h4>Gameboy Color</h4>
     </header>
     <article></article>
   </section>
-  <section style="--hue: 30">
+  <section style="--hue: 100; --background: url(https://raw.githubusercontent.com/32teeth/retro-go-themes/master/themes/pixel/background_pce_clear.png)">
     <header>
       <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/nec.gif">
       <h4>PC Engine</h4>
+    </header>
+    <article></article>
+  </section>
+  <section style="--hue: 30;">
+    <header>
+      <img src="https://raw.githubusercontent.com/retro-esp32/RetroESP32/master/Assets/retro-esp32/systems/settings.gif">
+      <h4>Settings</h4>
     </header>
     <article></article>
   </section>
@@ -69,6 +69,9 @@
   --shadow: #00000033;
   --base-background: #84d07d;
   --base-color: #5e785d;
+  --in: in 0.5s ease-out forwards;
+  --out: out 0.25s ease-in forwards;
+  --direction: var(--in);
 }
 
 body {
@@ -99,7 +102,7 @@ nav {
   transition: background 0.5s ease-in;
 }
 
-nav::before {
+nav:before {
   content: "";
   position: fixed;
   width: 32rem;
@@ -107,6 +110,39 @@ nav::before {
   background: linear-gradient(to right, var(--shadow) var(--pixel-gap), transparent var(--pixel-gap)),
               linear-gradient(to bottom, var(--shadow) var(--pixel-gap), transparent var(--pixel-gap));
   background-size: var(--pixel-size) var(--pixel-size), var(--pixel-size) var(--pixel-size);
+}
+
+nav:after {
+  content: "";
+  position: fixed;
+  background-image: var(--background);
+  background-size: cover;
+  background-position: 0 10rem;
+  background-repeat: no-repeat;
+  width: 32rem;
+  aspect-ratio: 4/3;
+  mix-blend-mode: multiply;
+  z-index: 9999;
+  overflow: hidden;
+  animation: var(--direction);
+}
+
+@keyframes out {
+  0% {
+    background-position: 0 0rem;
+  }
+  100% {
+    background-position: 0 10rem;
+  }
+}
+
+@keyframes in {
+  0% {
+    background-position: 0 10rem;
+  }
+  100% {
+    background-position: 0 0rem;
+  }
 }
 
 section {
@@ -134,8 +170,9 @@ section.inview img{
 }
 
 section.inview h4 {
-  margin: 1rem;
+  margin: 1rem 1rem;
   font-size: 0.825rem;
+  letter-spacing: 0.25rem;
 }
 
 section header {
@@ -146,7 +183,7 @@ section header {
   height: 4rem;
 }
 
-section img {
+section header img {
   mix-blend-mode: screen;
   opacity: 0.5;
   transition: opacity 0.5s ease-in;
@@ -157,6 +194,8 @@ section h4 {
   margin: 1rem 4rem;
   opacity: 0;
   transition: opacity 0.5s ease-in, margin 0.25s ease-in;
+  letter-spacing: 2.5rem;
+  transition: all ease 0.5s;
 }
 
 article {
@@ -175,12 +214,19 @@ article {
 
 <script>
 const intersectionObserver = new IntersectionObserver(entries => {
+  document.documentElement.style.setProperty("--direction", "var(--out)");
   for (const entry of entries) {
     if (entry.isIntersecting) {
       const section = entry.target;
       const hue = section.style.getPropertyValue("--hue");
       document.documentElement.style.setProperty("--hue", hue);
+
+      const background = section.style.getPropertyValue("--background");
+      document.documentElement.style.setProperty("--background", background);
+
       section.classList.add("inview");
+
+      document.documentElement.style.setProperty("--direction", "var(--in)");
     } else {
       entry.target.classList.remove("inview");
     }
@@ -195,5 +241,4 @@ document.querySelectorAll("section").forEach(target => {
   intersectionObserver.observe(target);
 });
 
-document.querySelector("nav").focus();
 </script>

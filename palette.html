@@ -1,0 +1,136 @@
+<main></main>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+:root {
+  --chip-width: calc(240 / 16 * 1em);
+  --chip-height: calc(var(--chip-width) * 2/3);
+  --chip-border: calc(0 / 16 * 1em);
+  --chip-shadow: calc(0 / 16 * 1em);
+  --chip-filet: calc(4 / 16 * 1em);
+  --chip-gap: calc(32 / 16 * 1em);
+  --padding: calc(24 / 16 * 1em);
+}
+
+body {
+  width: calc(100vw - 2 * var(--padding));
+  height: 100vh;
+  margin: 0;
+  padding: var(--padding);
+  font-family: "Comfortaa";
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--chip-width), var(--chip-width)));
+  gap: var(--chip-gap);
+  justify-content: center;
+}
+
+palette-chip {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: baseline;
+  padding-top: calc(var(--chip-height)/2);
+  position: relative;
+  outline: solid calc(1 / 16 * 1rem) rgba(0, 0, 0, 0.05);
+  outline-offset: calc(var(--chip-filet) * 2);
+}
+
+palette-chip:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: calc(var(--chip-height)/2.5);
+  background: var(--color);
+  box-shadow: inset var(--chip-border) var(--chip-border) var(--chip-filet) rgba(0, 0, 0, 0.1);
+}
+
+li {
+  list-style: none;
+  font-size: calc(12 / 16 * 1em);
+  line-height: 1.5;
+  display: flex;
+  width: calc(100% - 2 * var(--chip-filet));
+  padding-inline: calc(4 / 16 * 1em);
+  justify-content: space-between;
+}
+</style>
+
+<script>
+
+/**
+ * custom element
+ */
+class PaletteChip extends HTMLElement {
+  constructor(color) {
+    super();
+    this.color = color || '#000000';
+  }
+
+  connectedCallback() {
+    this.style.setProperty("--color", this.color);
+    this.innerHTML = `
+      <li>HEX: <span>${this.color}</span></li>
+      <li>RGB: <span>${this.hexToRgb(this.color)}</span></li>
+      <li>HSL: <span>${this.rgbToHsl(this.hexToRgb(this.color).split(','))}</span></li>
+    `;
+  }
+
+  disconnectedCallback() {}
+
+  attributeChangedCallback() {}
+
+  hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+      ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
+      : null;
+  };
+
+  rgbToHsl([r, g, b]) {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    const l = Math.max(r, g, b);
+    const s = l - Math.min(r, g, b);
+    const h = s
+      ? l === r
+        ? (g - b) / s
+        : l === g
+        ? 2 + (b - r) / s
+        : 4 + (r - g) / s
+      : 0;
+    return [
+      Math.ceil(60 * h < 0 ? 60 * h + 360 : 60 * h),
+      Math.ceil(100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0)),
+      Math.ceil((100 * (2 * l - s)) / 2),
+    ];
+  };
+}
+
+customElements.define('palette-chip', PaletteChip);
+
+/**
+ * main
+ */
+const colors = [
+  "#c8b7a6",
+  "#7d94b5",
+  "#c29591",
+  "#703f37",
+  "#b6c199",
+  "#2a2a2a",
+];
+
+const main = document.querySelector("main");
+
+colors.forEach(color => {
+  const chip = new PaletteChip(color);
+  main.appendChild(chip);
+});
+</script>

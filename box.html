@@ -49,7 +49,18 @@ section {
 
 box {
   transform-style: preserve-3d;
-  transform: rotateX(var(--box-rotate-x)) rotateY(var(--box-rotate-y)) rotateZ(0) translate3d(0px, 0px, var(--box-depth));
+  transform: rotateX(var(--box-rotate-x))
+             rotateY(var(--box-rotate-y))
+             rotateZ(0)
+             translate3d(0, 0, var(--box-depth));
+  transition: transform 0.5s ease;
+}
+
+box:hover {
+  transform: rotateX(calc(var(--box-rotate-x) + 10deg))
+             rotateY(calc(var(--box-rotate-y) - 10deg))
+             rotateZ(-10deg)
+             translate3d(0, 0, var(--box-depth));
 }
 
 face, spine {
