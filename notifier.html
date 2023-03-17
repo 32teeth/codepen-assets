@@ -1,0 +1,105 @@
+<header>
+  <h1>Notifier</h1>
+  <label for="notifier">
+    <input type='checkbox' id='notifier' /> Recieve Notifications
+  </label>
+</header>
+<main>
+  <button>Notify</button>
+</main>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  font-family: "Comfortaa";
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1em;
+  background: hsl(0, 0%, 90%);
+}
+
+label {
+  display: flex;
+  align-items: center;
+}
+
+input[type='checkbox'] {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-inline: 0.5em;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  padding-inline: 2em;
+  padding-block: 1em;
+  aspect-ratio: 9/4;
+  font-size: 1.5em;
+  background: hsl(0, 0%, 90%);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+</style>
+<script>
+class Notifier {
+  constructor() {
+    const checkbox = document.getElementById('notifier');
+    if(localStorage.getItem('notification') === 'granted') {
+      checkbox.setAttribute('checked', true);
+    }
+  }
+
+  request() {
+    Notification.requestPermission(() => {
+      this.storage();
+    });
+  }
+
+  storage() {
+    const checkbox = document.getElementById('notifier');
+    if(!localStorage.getItem('notification') && checkbox.checked === true) {
+      this.request();
+      return;
+    }
+    localStorage.setItem('notification', checkbox.checked === true ? 'granted' : 'denied');
+  }
+
+  notify(options) {
+    Object.assign(this, options);
+    if(localStorage.getItem('notification') === 'granted') {
+      new Notification(options.title, {
+        body: this.message || 'pew pew pew'
+      });
+    }
+  }
+}
+
+window.addEventListener("load", () => {
+  const notifier = new Notifier();
+  document.getElementById('notifier').addEventListener('click', () => {
+    notifier.request();
+  }, false);
+
+  document.querySelector('button').addEventListener('click', () => {
+    notifier.notify({
+      title: 'Notification',
+      message: `${Date()}`
+    });
+  }, false);
+});
+</script>
