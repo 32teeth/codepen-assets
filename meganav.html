@@ -1,4 +1,3 @@
-<h1>Menu</h1>
 <nav>
   <figure>
     <figcaption>Fruit</figcaption>
@@ -42,7 +41,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
 
   :root {
-
+    --curve: cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
   body {
@@ -67,7 +66,7 @@
     padding: 0;
     color: hsl(0, 0%, 50%);
     cursor: default;
-    transition: all ease 0.5s;
+    transition: all var(--curve) 0.5s;
   }
 
   figure:hover {
@@ -90,7 +89,7 @@
   li {
     color: hsl(0, 0%, 75%);
     cursor: pointer;
-    transition: all ease 0.5s;
+    transition: all var(--curve) 0.5s;
   }
 
   li:hover {
@@ -129,7 +128,7 @@
       height: 1px;
       width: 1px;
       opacity: 0;
-      transition: all ease 0.5s;
+      transition: all var(--curve) 0.5s;
     }
 
     figure:hover ul {
