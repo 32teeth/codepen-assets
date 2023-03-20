@@ -1,0 +1,27 @@
+<button></button>
+<code>hello</code>
+<script>
+  const randomizer = () => {
+    const api = 'https://www.generatorslist.com/random/websites/random-website/ajax';
+    fetch(api, {
+      "headers": {
+        "accept": "application/json, text/plain, */*",
+        "accept-language": "en-US,en;q=0.9",
+      },
+      "referrer": "https://ttcarrivals.firebaseapp.com/",
+      "referrerPolicy": "strict-origin-when-cross-origin",
+      "body": null,
+      "method": "GET",
+      "mode": "cors",
+      "credentials": "omit"
+    })
+      .then(response => response.json())
+      .then(data => {
+        const code = document.querySelector('code');
+        code.innerHTML = data;
+      });
+  }
+  randomizer();
+
+
+</script>

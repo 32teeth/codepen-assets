@@ -1,0 +1,46 @@
+<map></map>
+<style>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica;
+  background: #FEFEFE;
+  user-select: none;
+}
+map {
+  height: 100vh;
+  width: 100vw;
+}
+</style>
+<script>
+fetch("https://us-central1-ttcarrivals.cloudfunctions.net/api/agencies/ttc/routes/504/vehicles", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "en-US,en;q=0.9",
+  },
+  "referrer": "https://ttcarrivals.firebaseapp.com/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+}).then(
+  async (response) => {
+    const json = await response.json();
+    console.log(json)
+    return json;
+  }, (error) => {
+    let errors = {};
+    Object.getOwnPropertyNames(error).forEach((entry) => {
+      errors[entry] = error[entry]
+    });
+    error.errors = errors;
+    return error
+  }
+);
+</script>
