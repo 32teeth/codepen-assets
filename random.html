@@ -1,0 +1,72 @@
+<button>suprise me</button>
+
+<style>
+:root {
+  --hue: 180;
+  --complimentary: calc(var(--hue) - 180);
+  --saturation: 50%;
+  --lightness: 50%;
+  --radius: 1;
+  --background: hsl(var(--hue) var(--saturation) var(--lightness));
+  --color: hsl(var(--complimentary) 50% 20%);
+  --x: 0;
+  --y: 0;
+  --width: 5rem;
+  --ox: 0;
+  --oy: 0;
+  --br: 0;
+  --sr: 0;
+  --kerning: 0.125rem;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+button {
+  background: var(--background);
+  border-radius: calc(var(--radius) * 1rem);
+  border: none;
+  color: var(--color);
+  width: var(--width);
+  min-width: max-content;
+  aspect-ratio: 16/4;
+  letter-spacing: var(--kerning);
+  box-shadow: calc(var(--ox) * 1rem) calc(var(--oy) * 1rem) calc(var(--br) * 1rem) calc(var(--sr) * 1rem) rgba(0, 0, 0, 0.1);
+  transform: translateX(calc(var(--x) * 1rem)) translateY(calc(var(--y) * 1rem));
+  transition: all ease 0.5s;
+}
+</style>
+
+<script>
+  const randomizer = () => {
+    [
+      "hue|180",
+      "saturation|100|%",
+      "lightness|100|%",
+      "radius|10",
+      "x|10",
+      "y|10",
+      "width|50|rem",
+      "ox|10",
+      "oy|10",
+      "br|10",
+      "sr|10",
+      "kerning|2|rem"
+    ].forEach((item) => {
+      const props = item.split("|");
+      const prop = props[0];
+      const value = Math.floor(Math.random() * props[1]) + (props[2] || "");
+      document.documentElement.style.setProperty(`--${prop}`, value);
+    });
+  };
+  const button = document.querySelector("button");
+  button.addEventListener('click', () => {
+    randomizer();
+  });
+  randomizer();
+</script>

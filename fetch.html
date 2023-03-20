@@ -1,0 +1,32 @@
+<script>
+fetch("https://sjxx3cd0ie.execute-api.eu-west-1.amazonaws.com/beta/echo", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "en-US,en;q=0.9",
+    "AccessKey": "abc",
+    "SecretKey": "seckey",
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers" : "Content-Type",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+  },
+  "referrer": "https://amazonaws.com",
+  "query": '{"customerId":["1211112111"],"offerName":"ShashaankNight09"}',
+  "method": "POST",
+  "mode": "no-cors",
+  "credentials": "omit"
+}).then(
+  async (response) => {
+    const json = typeof response === "object" ? response : await response.json();
+    console.log(json)
+    return json;
+  }, (error) => {
+    let errors = {};
+    Object.getOwnPropertyNames(error).forEach((entry) => {
+      errors[entry] = error[entry]
+    });
+    error.errors = errors;
+    return error
+  }
+);
+</script>
