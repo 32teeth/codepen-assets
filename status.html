@@ -1,66 +1,66 @@
 <status style="--code: 0"></status>
 <description style="--description: ''"></description>
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
 
-  @property --code {
-    syntax: "<integer>";
-    initial-value: 0;
-    inherits: false;
-  }
+@property --code {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
 
-  :root {
-    --stroke: 0.05rem;
-    --black: hsl(0, 0%, 15%);
-    --gray: hsl(0, 0%, 75%);
-    --curve: cubic-bezier(.5,-0.53,.14,1.23);
-  }
+:root {
+  --stroke: 0.05rem;
+  --black: hsl(0, 0%, 15%);
+  --gray: hsl(0, 0%, 75%);
+  --curve: cubic-bezier(.5,-0.53,.14,1.23);
+}
 
-  body {
-    font-family: "Comfortaa";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--black);
-    gap: 3rem;
-    user-select: none;
-    background: linear-gradient(
-                  to right,
-                  transparent calc(50% - var(--stroke)),
-                  var(--gray) calc(50% - var(--stroke)),
-                  var(--gray) calc(50% + var(--stroke)),
-                  transparent calc(50% + var(--stroke))
-                );
-    background-size: 100% calc(96 / 16 * 1rem);
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+body {
+  font-family: "Comfortaa";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  gap: 3rem;
+  user-select: none;
+  background: linear-gradient(
+                to right,
+                transparent calc(50% - var(--stroke)),
+                var(--gray) calc(50% - var(--stroke)),
+                var(--gray) calc(50% + var(--stroke)),
+                transparent calc(50% + var(--stroke))
+              );
+  background-size: 100% calc(96 / 16 * 1rem);
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-  status,
-  description {
-    width: 50vw;
-  }
+status,
+description {
+  width: 50vw;
+}
 
-  status {
-    counter-set: code var(--code);
-    text-align: right;
-    transition: --code var(--curve) 250ms;
-  }
+status {
+  counter-set: code var(--code);
+  text-align: right;
+  transition: --code var(--curve) 250ms;
+}
 
-  status:before {
-    content: counter(code);
-    font-size: calc(48 / 16 * 1rem);
-    color: var(--gray);
-  }
+status:before {
+  content: counter(code);
+  font-size: calc(48 / 16 * 1rem);
+  color: var(--gray);
+}
 
 
-  description {
-    text-align: left;
-  }
+description {
+  text-align: left;
+}
 
-  description:before {
-    content: var(--description);
-  }
+description:before {
+  content: var(--description);
+}
 
 </style>
 <script>
