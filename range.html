@@ -1,0 +1,114 @@
+<button dir="decrease">-</button>
+<input type="range" min="40" max="100" value="60" step="10" />
+<button dir="increase">+</button>
+<output></output>
+
+<style>
+  :root {
+    --slider-width: calc(150 / 16 * 1rem);
+    --slider-track-height: calc(2 / 16 * 1rem);
+    --slider-track-color: #CCCCCC;
+    --slider-track-color-fill: #000000;
+    --slider-track-color-fill-percent: 0%;
+    --slider-thumb-height: calc(18 / 16 * 1rem);
+    --slider-thumb-width: calc(16 / 16 * 1rem);
+    --slider-thumb-solid-width: calc(8 / 16 * 1rem);
+    --slider-thumb-color: #333333;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: var(--slider-width);
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    background: linear-gradient(
+                  to right,
+                  white calc(var(--slider-thumb-width) / 2),
+                  transparent calc(var(--slider-thumb-width) / 2),
+                  transparent calc(100% - var(--slider-thumb-width) / 2),
+                  white calc(100% - var(--slider-thumb-width) / 2)
+                ),
+                linear-gradient(
+                  to right,
+                  var(--slider-track-color-fill) var(--slider-track-color-fill-percent),
+                  var(--slider-track-color) var(--slider-track-color-fill-percent)
+                );
+    height: var(--slider-track-height);
+  }
+
+  input[type="range"]::-moz-range-track {
+    background: linear-gradient(
+      to right,
+      var(--slider-track-color-fill) var(--slider-track-color-fill-percent),
+      var(--slider-track-color) var(--slider-track-color-fill-percent)
+    );
+    height: var(--slider-track-height);
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--slider-thumb-width);
+    height: var(--slider-thumb-height);
+    margin-top: calc((var(--slider-thumb-height) / 2 * -1) + (var(--slider-track-height) / 2));
+    background: linear-gradient(
+                  to right,
+                  transparent calc(50% - var(--slider-thumb-solid-width) / 2),
+                  var(--slider-thumb-color) calc(50% - var(--slider-thumb-solid-width) / 2),
+                  var(--slider-thumb-color) calc(50% + var(--slider-thumb-solid-width) / 2),
+                  transparent calc(50% + var(--slider-thumb-solid-width) / 2)
+                );
+  }
+</style>
+
+<script>
+  const getValues = () => {
+    const input = document.querySelector('input');
+    const min = parseInt(input.getAttribute('min'));
+    const max = parseInt(input.getAttribute('max'));
+    const step = parseInt(input.getAttribute('step'));
+    const value = parseInt(input.value);
+
+    return { min, max, step, value };
+  }
+
+  const sliderFill = () => {
+    const { min, max, value } = getValues();
+    const percent = `${((value - min) / (max - min)) * 100}%`;
+    document.documentElement.style.setProperty('--slider-track-color-fill-percent', percent);
+  }
+
+  const adjustSlider = (dir) => {
+    const { min, max, step, value: current } = getValues();
+    const value = dir === 'increase' ? current + step: current - step;
+    if(value >= min && value <= max) {
+      const input = document.querySelector('input');
+      const output = document.querySelector('output');
+      output.innerHTML = value;
+      input.value = value;
+      sliderFill();
+    }
+  }
+
+  window.addEventListener("load", () => {
+    const input = document.querySelector('input');
+    const output = document.querySelector('output');
+
+    input.addEventListener('input', (ev) => {
+      output.innerHTML = ev.target.value;
+      sliderFill();
+    });
+
+    document.querySelectorAll('button').forEach( (button) => {
+      button.addEventListener('click', (ev) => {
+        adjustSlider(ev.target.getAttribute('dir'))
+      })
+    })
+    output.innerHTML = input.value;
+    sliderFill();
+  });
+</script>
