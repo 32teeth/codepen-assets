@@ -1,0 +1,143 @@
+<status style="--code: 0"></status>
+<description style="--description: ''"></description>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+  @property --code {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+  }
+
+  :root {
+    --stroke: 0.05rem;
+    --black: hsl(0, 0%, 15%);
+    --gray: hsl(0, 0%, 75%);
+    --curve: cubic-bezier(.5,-0.53,.14,1.23);
+  }
+
+  body {
+    font-family: "Comfortaa";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+    gap: 3rem;
+    user-select: none;
+    background: linear-gradient(
+                  to right,
+                  transparent calc(50% - var(--stroke)),
+                  var(--gray) calc(50% - var(--stroke)),
+                  var(--gray) calc(50% + var(--stroke)),
+                  transparent calc(50% + var(--stroke))
+                );
+    background-size: 100% calc(96 / 16 * 1rem);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  status,
+  description {
+    width: 50vw;
+  }
+
+  status {
+    counter-set: code var(--code);
+    text-align: right;
+    transition: --code var(--curve) 250ms;
+  }
+
+  status:before {
+    content: counter(code);
+    font-size: calc(48 / 16 * 1rem);
+    color: var(--gray);
+  }
+
+
+  description {
+    text-align: left;
+  }
+
+  description:before {
+    content: var(--description);
+  }
+
+</style>
+<script>
+const status = {
+  "100": "Continue",
+  "101": "Switching Protocols",
+  "102": "Processing",
+  "103": "Early Hints",
+  "200": "OK",
+  "201": "Created",
+  "202": "Accepted",
+  "203": "Non-Authoritative Information",
+  "204": "No Content",
+  "205": "Reset Content",
+  "206": "Partial Content",
+  "207": "Multi-Status",
+  "208": "Already Reported",
+  "226": "IM Used",
+  "300": "Multiple Choices",
+  "301": "Moved Permanently",
+  "302": "Found",
+  "303": "See Other",
+  "304": "Not Modified",
+  "307": "Temporary Redirect",
+  "308": "Permanent Redirect",
+  "400": "Bad Request",
+  "401": "Unauthorized",
+  "402": "Payment Required",
+  "403": "Forbidden",
+  "404": "Not Found",
+  "405": "Method Not Allowed",
+  "406": "Not Acceptable",
+  "407": "Proxy Authentication Required",
+  "408": "Request Timeout",
+  "409": "Conflict",
+  "410": "Gone",
+  "411": "Length Required",
+  "412": "Precondition Failed",
+  "413": "Content Too Large",
+  "414": "URI Too Long",
+  "415": "Unsupported Media Type",
+  "416": "Range Not Satisfiable",
+  "417": "Expectation Failed",
+  "421": "Misdirected Request",
+  "422": "Unprocessable Content",
+  "423": "Locked",
+  "424": "Failed Dependency",
+  "425": "Too Early",
+  "426": "Upgrade Required",
+  "428": "Precondition Required",
+  "429": "Too Many Requests",
+  "431": "Request Header Fields Too Large",
+  "451": "Unavailable for Legal Reasons",
+  "500": "Internal Server Error",
+  "501": "Not Implemented",
+  "502": "Bad Gateway",
+  "503": "Service Unavailable",
+  "504": "Gateway Timeout",
+  "505": "HTTP Version Not Supported",
+  "506": "Variant Also Negotiates",
+  "507": "Insufficient Storage",
+  "508": "Loop Detected",
+  "511": "Network Authentication Required"
+};
+
+const display = () => {
+  const index = Math.floor(Math.random() * Object.keys(status).length);
+  const code = Object.keys(status)[index];
+  document.querySelector("status").setAttribute("style", `--code: ${code};`);
+  document.querySelector("description").setAttribute("style", `--description: '${status[code]}';`);
+}
+
+window.addEventListener("load", () => {
+  display();
+  document.addEventListener('click', () => {
+    display();
+  });
+});
+
+</script>

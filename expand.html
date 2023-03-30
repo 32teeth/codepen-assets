@@ -1,0 +1,102 @@
+<button></button>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+  :root {
+    --curve: cubic-bezier(.5,-0.53,.14,1.23);
+    --button-width: calc(240 / 16 * 1em);
+    --button-height: calc(40 / 16 * 1em);
+    --button-background: hsl(209, 24%, 55%);
+    --button-background-after: hsl(209, 24%, 52%);
+    --button-foreground: hsl(0, 0%, 100%);
+    --left: 10%;
+    --right: 10%;
+    --shadow: rgb(240 240 240);
+    --shadow-distance: calc(10 / 16 * 1em);
+  }
+
+  body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Comfortaa";
+  }
+
+  body:before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100vh;
+    background: linear-gradient(to right, var(--button-background-after) 50%, var(--button-background) 50%);
+    transition: all 0.5s var(--curve);
+    box-shadow: var(--shadow-distance) var(--shadow-distance)  0 var(--shadow);
+  }
+
+  body:has(button:focus):before {
+    width: calc(100% - var(--left) - var(--right) - var(--button-width));
+  }
+
+  button {
+    position: relative;
+    width: 100%;
+    height: var(--button-height);
+    border: none;
+    background: transparent;
+    font-family: "Comfortaa";
+    font-size: calc(16 / 16 * 1em);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.5s var(--curve);
+    color: var(--button-foreground);
+  }
+
+  button:before {
+    content: "but";
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    top: 0;
+    left: calc(50% - var(--button-width) / 2);
+    width: calc(var(--button-width) / 2);
+    height: var(--button-height);
+    background-color: var(--button-background);
+    border-radius: 0.5rem 0 0 0.5rem ;
+    transition: all 0.5s var(--curve);
+    box-shadow: var(--shadow-distance) var(--shadow-distance)  0 var(--shadow);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% + var(--shadow-distance)), 0% calc(100% + var(--shadow-distance)));
+  }
+
+  button:after {
+    content: "ton";
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    top: 0;
+    right: calc(50% - var(--button-width) / 2);
+    width: calc(var(--button-width) / 2);
+    height: var(--button-height);
+    background-color: var(--button-background);
+    border-radius: 0 0.5rem 0.5rem 0;
+    transition: all 0.5s var(--curve);
+    box-shadow: 0rem var(--shadow-distance)  0 var(--shadow),
+                var(--shadow-distance) var(--shadow-distance)  0 var(--shadow);
+  }
+
+  button:focus:before {
+    background-color: var(--button-background-after);
+    left: var(--left);
+  }
+
+  button:focus:after {
+    right: var(--right);
+  }
+
+</style>
