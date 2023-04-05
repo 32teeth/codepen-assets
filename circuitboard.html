@@ -1,0 +1,54 @@
+<circuitboard>
+  <top></top>
+  <bottom></bottom>
+</circuitboard>
+
+<style>
+:root {
+  --circuitboard-width: 496;
+  --circuitboard-height: 800;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+circuitboard {
+  display: flex;
+  width: calc(var(--circuitboard-width) / 16 * 1em);
+  height: calc(var(--circuitboard-height) / 16 * 1em);
+  position: relative;
+  animation: turn 5s infinite;
+}
+
+top,
+bottom {
+  background: url('https://raw.githubusercontent.com/32teeth/codepen-assets/main/images/circuitboard-top.png');
+  background-repeat: no-repeat;
+  width: calc(var(--circuitboard-width) / 16 * 1em);
+  height: calc(var(--circuitboard-height) / 16 * 1em);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+top {
+  backface-visibility: hidden;
+  z-index: 1;
+}
+
+bottom {
+  background: url('https://raw.githubusercontent.com/32teeth/codepen-assets/main/images/circuitboard-bottom.png');
+  transform: rotateY(180deg);
+}
+
+@keyframes turn {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+</style>
