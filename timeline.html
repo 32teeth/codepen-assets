@@ -1,0 +1,209 @@
+<header>
+  <logo>
+    <svg width="65" height="50" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(10, 10)">
+        <rect width="40" height="25" rx="3" fill="var(--logo-primary-color)"/>
+        <polygon points="35 32, 35 20, 20 20" fill="var(--logo-primary-color)"/>
+        <rect x="3" y="3" width="34" height="19" rx="2" fill="var(--header-background)"/>
+        <polygon points="32 26, 32 22, 23 20"fill="var(--header-background)"/>
+        <rect width="5" height="7" x="10" y="10" rx="1" fill="var(--logo-primary-color)"/>
+        <rect width="5" height="7" x="16" y="10" rx="1" fill="var(--logo-primary-color)"/>
+      </g>
+    </svg>
+  </logo>
+  <nav>
+    <select>
+      <option>Default</option>
+    </select>
+    <select>
+      <option>Default</option>
+    </select>
+  </nav>
+  <form>
+    <input type="search" placeholder="search">
+  </form>
+  <nav>
+    <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(2, 5)">
+        <circle cx="10" cy="10" r="12" fill="var(--logo-primary-color)"/>
+        <circle cx="10" cy="10" r="9" fill="var(--header-background)"/>
+      </g>
+    </svg>
+    <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(2, 5)">
+        <circle cx="10" cy="10" r="12" fill="var(--logo-primary-color)"/>
+        <circle cx="10" cy="10" r="9" fill="var(--header-background)"/>
+      </g>
+    </svg>
+    <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(2, 5)">
+        <circle cx="10" cy="10" r="12" fill="var(--logo-primary-color)"/>
+        <circle cx="10" cy="10" r="9" fill="var(--header-background)"/>
+      </g>
+    </svg>
+  </nav>
+</header>
+<aside>
+  <nav></nav>
+</aside>
+<main>
+  <nav></nav>
+  <header></header>
+  <aside>
+    <h4>Changes</h4>
+  </aside>
+  <section>
+    <h4>Progress</h4>
+  </section>
+  <aside></aside>
+</main>
+<footer></footer>
+
+<style>
+@import url('https://fonts.cdnfonts.com/css/amazon-ember');
+
+:root {
+  /**
+    * dimensions
+    */
+  --header-height: calc(50/16 * 1rem);
+  --footer-height: calc(36/16 * 1rem);
+  --aside-width: calc(200/16 * 1rem);
+  --aside-collapsed-width: calc(50/16 * 1rem);
+  --section-header-height: calc(65/16 * 1rem);
+  --inner-section-header-height: calc(96/16 * 1rem);
+  /**
+    * colors
+    */
+  --header-background: hsl(0, 0%, 100%);
+  --footer-background: hsl(0, 0%, 10%);
+  --aside-background: hsl(240, 7%, 94%);
+  --body-background: hsl(240, 7%, 97%);
+  --section-header-background: hsl(213, 35%, 15%);
+  --inner-section-header-background: hsl(221, 100%, 4%);
+  --main-background: var(--body-background);
+  --logo-primary-color: hsl(193, 100%, 64%);
+  --border-color: hsl(206, 8%, 83%);
+  --body-color: hsl(221, 100%, 4%);
+}
+
+body {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "aside main"
+    "footer footer";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: var(--header-height) 1fr var(--footer-height);
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--body-background);
+  font-family: 'Amazon Ember', sans-serif;
+  color: var(--body-color);
+}
+
+/**
+  * top level elements
+  */
+header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: auto auto 1fr min-content;
+  grid-template-rows: calc(50/16 * 1rem);
+  background: var(--header-background);
+  gap: 1rem;
+}
+
+header > nav,
+header > form {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+header select,
+header input[type="search"] {
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
+  font-family: 'Amazon Ember', sans-serif;
+}
+
+header input[type="search"] {
+  width: 100%;
+  height: 80%;
+  padding-inline: 1rem;
+  background: var(--aside-background);
+}
+
+aside {
+  grid-area: aside;
+  background: var(--aside-background);
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+aside > nav {
+  width: var(--aside-collapsed-width);
+}
+
+main {
+  --actions-width: calc(350 / 16 * 1rem);
+}
+
+main {
+  grid-area: main;
+  background: var(--main-background);
+  display: grid;
+  grid-template-areas:
+    "nav nav nav"
+    "header header header"
+    "actions content logs";
+  grid-template-columns: minmax(20vw, var(--actions-width)) 1fr auto;
+  grid-template-rows: auto auto 1fr;
+}
+
+main nav {
+  grid-area: nav;
+  background: var(--section-header-background);
+  height: var(--section-header-height);
+}
+
+main header {
+  grid-area: header;
+  background: var(--inner-section-header-background);
+  height: var(--inner-section-header-height);
+}
+
+main aside:first-of-type {
+  grid-area: actions;
+  background: var(--body-background);;
+  border-right: solid 1px var(--border-color);
+}
+
+main section {
+  grid-area: content;
+}
+
+main aside:last-of-type {
+  grid-area: logs;
+}
+
+main h4 {
+  padding: 1.5rem 1rem;
+  margin: 0;
+  line-height: 0;
+  font-size: calc(14/16 * 1rem);
+  border-bottom: solid 1px var(--border-color);
+}
+
+footer {
+  grid-area: footer;
+  background: var(--footer-background);
+}
+</style>

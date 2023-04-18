@@ -1,0 +1,25 @@
+<!--
+  create a web component called palette that will
+  display a color palette
+  - the palette should have a property called colors
+  - the colors property should be an array of strings
+  - the palette should display a div for each color in the array
+  - each div should have a background color of the color in the array
+  - each div should have a border of 1px solid black
+  - each div should have a width of 100px
+  - each div should have a height of 100px
+  - each div should have a margin of 10px
+  - each div should have a text color of white
+  - each div should have a text alignment of center
+-->
+<palette id="palette"></palette>
+
+<script>
+  class Palette extends HTMLElement {
+    constructor() {
+      super();
+      this.colors = ['red', 'green', 'blue'];
+    }
+  }
+  customElements.define('palette', Palette);
+</script>
