@@ -1,20 +1,22 @@
-<circuitboard>
-  <top></top>
-  <bottom></bottom>
-</circuitboard>
+<flora>
+  <yard></yard>
+  <face></face>
+  <mug></mug>
+</flora>
 
 <grid></grid>
 
 <style>
 :root {
-  --circuitboard-width: 496;
-  --circuitboard-height: 800;
-  --circuitboard-depth: 1;
-  --rotateY: 0deg;
-  --rotateX: 0deg;
-  --translateZ: calc(var(--circuitboard-depth) / 16 * 1rem);
+  --flora-width: 600;
+  --flora-height: 600;
+  --flora-depth: 1;
+  --translateY: 0;
+  --translateX: 0;
   --rows: 16;
   --columns: var(--rows);
+  --border: calc(16 / 16 * 1rem);
+  --factor: 8;
 }
 
 body {
@@ -27,21 +29,24 @@ body {
   margin: 0;
 }
 
-circuitboard {
+flora {
   display: flex;
-  width: calc(var(--circuitboard-width) / 16 * 1rem);
-  height: calc(var(--circuitboard-height) / 16 * 1rem);
+  width: calc(var(--flora-width) / 16 * 1rem);
+  height: calc(var(--flora-height) / 16 * 1rem);
   position: relative;
-  perspective: calc(var(--circuitboard-height) * 1px);
+  perspective: calc(var(--flora-height) * 1px);
   transform-style: preserve-3d;
+  outline: var(--border) solid white;
+  outline-offset: calc(var(--border) * -1);
+  overflow: hidden;
+  border-radius: calc(36 / 16 * 1rem);
 }
 
-top,
-bottom {
-  background: url('https://raw.githubusercontent.com/32teeth/codepen-assets/main/images/circuitboard-top.png');
+mug, face, yard {
   background-repeat: no-repeat;
-  width: calc(var(--circuitboard-width) / 16 * 1rem);
-  height: calc(var(--circuitboard-height) / 16 * 1rem);
+  background-size: contain;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -49,17 +54,22 @@ bottom {
   transform-style: preserve-3d;
   transform-origin: center;
   transition: transform 0.5s ease;
+  z-index: -1;
 }
 
-top {
-  backface-visibility: hidden;
-  transform: rotateY(var(--rotateY)) rotateX(var(--rotateX)) translateZ(var(--translateZ));
-  z-index: 1;
+mug {
+  background-image: url('https://raw.githubusercontent.com/32teeth/codepen-assets/main/images/flora-003.png');
+  transform: translateX(calc(var(--translateX)/var(--factor))) translateY(calc(var(--translateY)/var(--factor)));
 }
 
-bottom {
-  background: url('https://raw.githubusercontent.com/32teeth/codepen-assets/main/images/circuitboard-bottom.png');
-  transform: rotateY(var(--rotateY)) rotateX(var(--rotateX)) translateZ(calc(var(--translateZ) * -1));
+face {
+  background-image: url('https://raw.githubusercontent.com/32teeth/codepen-assets/main/images/flora-002.png');
+  transform: translateX(calc(var(--translateX)/(var(--factor)*2))) translateY(calc(var(--translateY)/(var(--factor)*2)));
+}
+
+yard {
+  background-image: url('https://raw.githubusercontent.com/32teeth/codepen-assets/main/images/flora-001.png');
+  transform: translateX(calc(var(--translateX)/(var(--factor)*3))) translateY(calc(var(--translateY)/(var(--factor)*3)));
 }
 
 grid {
@@ -93,11 +103,11 @@ window.addEventListener('load', () => {
     for (let row = 0; row < count; row++) {
       const t = tile.cloneNode();
       const spanX = -(row - (count / 2));
-      const spanY = (col - (count / 2));
-      const rotateY = spanX * count;
-      const rotateX = spanY * count;
-      t.style.setProperty("--rotateX", `${rotateX}deg`);
-      t.style.setProperty("--rotateY", `${rotateY}deg`);
+      const spanY = -(col - (count / 2));
+      const translateX = spanX * count;
+      const translateY = spanY * count;
+      t.style.setProperty("--translateX", `${translateX}px`);
+      t.style.setProperty("--translateY", `${translateY}px`);
       t.style.setProperty("--spanX", `${count}`);
       t.style.setProperty("--spanY", `${count}`);
       grid.appendChild(t);
@@ -107,8 +117,8 @@ window.addEventListener('load', () => {
   const tiles = document.querySelectorAll('tile');
   tiles.forEach((tile) => {
     tile.addEventListener('mouseenter', (e) => {
-      document.documentElement.style.setProperty("--rotateY", tile.style.getPropertyValue("--rotateY"));
-      document.documentElement.style.setProperty("--rotateX", tile.style.getPropertyValue("--rotateX"));
+      document.documentElement.style.setProperty("--translateY", tile.style.getPropertyValue("--translateY"));
+      document.documentElement.style.setProperty("--translateX", tile.style.getPropertyValue("--translateX"));
     });
   });
 });

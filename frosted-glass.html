@@ -1,0 +1,39 @@
+<div><h1>abc</h1></div>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:900,400,100,500,300italic,500italic,700italic,900,300");
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Poppins;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 600px),
+                url('https://www.teahub.io/photos/full/31-317717_abstract-bubbles-wallpaper-17-inch-laptop-background.jpg'),
+                linear-gradient(rgba(0, 0, 0, 1) 0 0);
+    background-size: cover, 1000px, cover;
+    background-position: center, center, center;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+  }
+
+  div {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(calc(12 / 16 * 1rem));
+    -webkit-mask: linear-gradient(rgba(255, 255, 255, 1) 0 0) text;
+    mask: linear-gradient(rgba(255, 255, 255, 1) 0 0) text;
+  }
+
+  h1 {
+    font-size: calc(288 / 16 * 1rem);
+    font-weight: bolder;
+    color: white;
+    position: absolute;
+  }
+
+</style>

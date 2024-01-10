@@ -1,0 +1,59 @@
+<canvas></canvas>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+  @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+  @import url('https://fonts.googleapis.com/css2?family=Rubik+Pixels&display=swap');
+
+  :root {
+    --canvas-width: 640px;
+    --color: #0000000D;
+    --size: 10px;
+    --gap: 3px;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    background: radial-gradient(circle at center, var(--color) calc((var(--size) / 2) - var(--gap)), transparent calc((var(--size) / 2) - var(--gap))),
+                radial-gradient(circle at center, var(--color) calc((var(--size) / 2) - var(--gap)), transparent calc((var(--size) / 2) - var(--gap)));
+    background-repeat: repeat repeat;
+    background-size: var(--size) var(--size);
+    background-position: 0 0, calc(var(--size) / 2) calc(var(--size) / 2);
+    mask-image: linear-gradient(rgb(0 0 0), rgb(0 0 0 / 0.5));
+    -webkit-mask-image: linear-gradient(rgb(0 0 0), rgb(0 0 0 / 0.5));
+  }
+
+  canvas {
+    width: var(--canvas-width);
+    height: calc(var(--canvas-width) / 16 * 9);
+  }
+</style>
+
+<script>
+  window.addEventListener('load', () => {
+    const canvas = document.querySelector('canvas');
+    canvas.width = 640;
+    canvas.height = 640 / 16 * 9;
+    const ctx = canvas.getContext('2d');
+
+    const fontSize = 48;
+    ctx.font = `${fontSize}px 'Poppins'`;
+    ctx.fillStyle = '#FFCC33';
+
+    const text = 'Hello, World!';
+    const textWidth = ctx.measureText(text).width;
+    const textHeight = fontSize;
+    const textX = (canvas.width - textWidth) / 2;
+    const textY = (canvas.height - textHeight) / 2 + textHeight;
+
+    ctx.fillText(text, textX, textY);
+  });
+</script>
