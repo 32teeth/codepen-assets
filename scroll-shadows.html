@@ -1,0 +1,103 @@
+<table>
+  <thead></thead>
+  <tbody></tbody>
+  <tfoot>
+    <tr>
+      <td colspan="7">Footer</td>
+    </tr>
+  </tfoot>
+</table>
+<script>
+const generateTable = (rows = 10) => {
+  const table = document.querySelector('table');
+  const thead = table.querySelector('thead');
+  const tbody = table.querySelector('tbody');
+
+  const cols = [
+    'ID',
+    'Title',
+    'Assignee',
+    'Status',
+    'Created',
+    'Updated',
+    'Due Date',
+  ];
+
+  cols.forEach(col => {
+    const th = document.createElement('th');
+    th.textContent = col;
+    thead.appendChild(th);
+  });
+
+  Array.from({ length: rows }).forEach((_, i) => {
+    const tr = document.createElement('tr');
+    cols.forEach(col => {
+      const td = document.createElement('td');
+      td.textContent = `${col} ${i + 1}`;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+};
+generateTable(100);
+</script>
+
+<style>
+  @charset "UTF-8";
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+  body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans';
+    display: block;
+  }
+
+  table {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+  }
+
+  table thead {
+    position: sticky;
+    top: 0;
+    background: hsl(255, 7%, 90%);
+  }
+
+  table thead th,
+  table tbody td {
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  table tfoot {
+    position: sticky;
+    bottom: 0;
+    height:50px;
+    background: green;
+  }
+
+  table tfoot:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient( to bottom, transparent, rgba(0,0,0,1) 5px);
+    z-index: -1;
+  }
+
+  table tfoot td {
+    padding: 0.5rem;
+    text-align: left;
+  }
+</style>

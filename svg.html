@@ -1,0 +1,101 @@
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  svg g {
+    stroke: black;
+  }
+</style>
+<body>
+  <!--
+  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+    <g fill="rgba(255,255,255,1)" stroke="rgba(0,0,0,1)" stroke-width="2">
+      <rect x="1" y="15" width="22" height="6" rx="3"/>
+      <circle cx="15" cy="14" r="6"/>
+      <circle cx="8" cy="15" r="3"/>
+    </g>
+    <g fill="rgba(255,255,255,1)">
+      <rect x="1" y="15" width="22" height="6" rx="3"/>
+      <circle cx="15" cy="14" r="6"/>
+      <circle cx="8" cy="15" r="3"/>
+    </g>
+  </svg>
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+  <g fill="rgba(255,255,255,1)" stroke="rgba(0,0,0,1)" stroke-width="2" stroke-linecap="round">
+    <line x1="3" x2="21" y1="8" y2="8"/>
+    <line x1="3" x2="21" y1="12" y2="12"/>
+    <line x1="3" x2="21" y1="16" y2="16"/>
+    <rect x="6" y="4" width="12" height="16" rx="6"/>
+    <circle cx="12" cy="0" r="4"/>
+    <line x1="10" x2="14" y1="10" y2="10"/>
+    <line x1="10" x2="14" y1="14" y2="14"/>
+  </g>
+</svg>
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+  <g fill="rgba(0,0,0,1)">
+    <rect x="0" y="14" width="24" height="8" rx="4"/>
+    <circle cx="15" cy="14" r="7"/>
+    <circle cx="8" cy="15" r="4"/>
+  </g>
+  <g fill="rgba(255,255,255,1)">
+    <rect x="1" y="15" width="22" height="6" rx="3"/>
+    <circle cx="15" cy="14" r="6"/>
+    <circle cx="8" cy="15" r="3"/>
+  </g>
+</svg>
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+  <g fill="rgba(255,255,255,1)" stroke="rgba(0,0,0,1)" stroke-width="2" stroke-linecap="round">
+    <rect x="6" y="7" width="12" height="14" rx="2"/>
+    <g transform="translate(0, -1)">
+      <line x1="5" x2="19" y1="9" y2="9" stroke="rgba(255,255,255,1)"/>
+      <rect x="9" y="4" width="6" height="3" rx="1"/>
+      <line x1="5" x2="19" y1="7" y2="7"/>
+    </g>
+    <line x1="10" x2="10" y1="12" y2="17"/>
+    <line x1="14" x2="14" y1="12" y2="17"/>
+  </g>
+</svg>
+-->
+<svg width='128' height='128' viewBox='0 0 128 128' version='1.1' xmlns='http://www.w3.org/2000/svg'>
+  <g fill='none' stroke-width='1' transform="scale(8)">
+    <g transform-origin='8 8' transform='rotate(45)'>
+      <circle cx='8' cy='8' r='7.5' stroke-dasharray='35.5 1.75 8'/>
+
+      <circle cx='8' cy='8' r='5' stroke-dasharray='23.5 1.25 5.5'/>
+    </g>
+
+    <g>
+      <line x1='8' y1='1' x2='8' y2='3'/>
+      <line x1='1' y1='8' x2='3' y2='8'/>
+      <line x1='8' y1='13' x2='8' y2='15'/>
+    </g>
+  </g>
+</svg>
+
+<script>
+  const convertToPNG = (svg) => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const svgURL = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData);
+    img.src = svgURL;
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      const imgURL = canvas.toDataURL('image/png');
+      const imgTag = `<img src="${imgURL}" alt="image" />`;
+      document.body.innerHTML = imgTag;
+    }
+  }
+
+  const svg = document.querySelector('svg');
+  //convertToPNG(svg);
+</script>
+</body>

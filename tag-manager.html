@@ -1,0 +1,332 @@
+
+
+<ui-tags></ui-tags>
+<style>
+  :root {
+    --ui-tags-height: calc(32 / 16 * 1rem);
+    --ui-tags-padding: calc(24 / 16 * 1rem);
+    --ui-tags-gap: calc(16 / 16 * 1rem);
+
+    --ui-tag-height: calc(48 / 16 * 1rem);
+    --ui-tag-padding: calc(8 / 16 * 1rem);
+    --ui-tag-border-radius: calc(var(--ui-tag-height));
+    --ui-tag-color: rgb(0, 0, 0);
+
+    --undefined: rgb(204, 204, 204);
+    --blocked: rgb(219, 60, 33);
+    --duplicate: rgb(255, 165, 0);
+    --related: rgb(50, 205, 50);
+
+    --ui-tag-colors: var(--undefined), var(--blocked), var(--duplicate), var(--related);
+    --ui-tag-colors-length: 4;
+    --ui-tag-colors-threshold: 0.5;
+  }
+  body {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: end;
+    margin: 0;
+    padding: 0;
+  }
+
+  ui-tags *:focus {
+    outline: none;
+  }
+
+  ui-tags {
+    --ui-tag-colors-index: 0;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: var(--ui-tags-padding);
+  }
+
+  ui-tags input {
+    position: relative;
+    display: block;
+    height: var(--ui-tag-height);
+    padding-block: var(--ui-tag-padding);
+    padding-inline: calc(var(--ui-tag-padding) * 3);
+    border: none;
+    border-radius: var(--ui-tag-border-radius);
+    background: linear-gradient(var(--ui-tag-colors)) no-repeat
+                0 calc(var(--ui-tag-colors-index)*100%/(var(--ui-tag-colors-length) - 1))
+                /100% calc(1px*infinity);
+    color: var(--ui-tag-color);
+    cursor: pointer;
+    transition: all ease 250ms;
+  }
+
+  ui-tags input:before {
+    display: block;
+    content: '☆';
+    color: white;
+    padding: 0.25rem;
+    transition: all ease 250ms;
+    z-index: 9999;
+  }
+
+  ui-tags input:after {
+    content: 'hello';
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    top: 10px;
+    bottom: 50px;
+    border-radius: var(--ui-tag-border-radius);
+    background: #000000;
+    z-index: 9999;
+  }
+
+  ui-tags input::placeholder {
+    color: var(--ui-tag-color);
+  }
+
+  ui-tags input[empty] {
+
+  }
+
+  debug {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 50dvh;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+</style>
+<body>
+
+</body>
+<script>
+
+  class Tags extends HTMLElement {
+    constructor() {
+      super();
+
+      this.Types = (() => {
+        const UNASSIGNED = 'unassigned';
+        const BLOCKED = 'blocked';
+        const DUPLICATE = 'duplicate';
+        const RELATED = 'related';
+
+        return {
+          UNASSIGNED,
+          BLOCKED,
+          DUPLICATE,
+          RELATED
+        }
+      });
+      this.types = [
+        this.Types().UNASSIGNED,
+        this.Types().BLOCKED,
+        this.Types().DUPLICATE,
+        this.Types().RELATED
+      ];
+      this.type;
+
+      this.Stages = (() => {
+        const TAGS = 'tags';
+        const TYPES = 'types';
+        const ADD = 'add';
+        const RESET = 'reset';
+
+        return {
+          TAGS,
+          TYPES,
+          ADD,
+          RESET
+        }
+      });
+      this.stages = [
+        this.Stages().TAGS,
+        this.Stages().TYPES,
+        this.Stages().ADD,
+        this.Stages().RESET
+      ];
+      this.stage = this.Stages().TAGS;
+      this.next = this.Stages().TYPES;
+
+      this.placeholders = {
+        tags: 'Select a tag',
+        types: 'Assign tag type'
+      };
+
+
+      this.tag = {
+        id: '',
+        name: '',
+        type: this.Types().UNASSIGNED
+      };
+
+      this.available = [];
+      this.assigned = [];
+
+      this.DEBUG = true;
+    }
+
+    static get observedAttributes() {
+      return ['data-available', 'data-assigned', 'data-type', 'data-stage', 'data-tag'];
+    }
+
+    /**
+     * Tags
+     */
+    createInput() {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'text');
+      input.setAttribute('placeholder', this.placeholders[this.stage]);
+      input.setAttribute('list', `${this.stage}`);
+
+      ['keydown', 'keyup', 'change', 'input'].forEach((event) => {
+        input.addEventListener(event, (event) => {
+          const valid = this.available.filter((item) => item.includes(event.target.value)).length ? true : false;
+          valid ? input.removeAttribute('empty') : input.setAttribute('empty', true);
+          if (event.key === 'Enter' || event.type === 'input') {
+            event.preventDefault();
+            let tag = {};
+            this.stage === this.Stages().TAGS
+              ? tag = {
+                id: event.target.value.replace('#', ''),
+                name: event.target.value,
+                type: this.type
+              } : tag = {
+                id: this.tag.id,
+                name: this.tag.name,
+                type: event.target.value
+            };
+            switch (this.stage) {
+              case this.Stages().TAGS:
+                this.stage = this.Stages().TYPES;
+                this.next = this.Stages().ADD;
+                break;
+              case this.Stages().TYPES:
+                this.stage = this.Stages().ADD;
+                this.next = this.Stages().RESET;
+                this.setAttribute('style', `--ui-tag-colors-index: ${this.types.indexOf(event.target.value)}`);
+                break;
+              default:
+                this.setAttribute('style', `--ui-tag-colors-index: ${this.types.indexOf(event.target.value)}`);
+              break;
+            }
+            event.target.value = '';
+            this.setAttribute('data-stage', this.stage);
+            this.setAttribute('data-tag', JSON.stringify(tag));
+            this.setAttribute('data-id', this.tag.id);
+            this.setAttribute('data-name', this.tag.name);
+          }
+        });
+      });
+
+      return input;
+    }
+
+    updateInput() {
+      const input = this.querySelector('input');
+      input.setAttribute('placeholder', this.stage === this.Stages().TAGS ? 'Select a tag' : 'Assign tag type');
+      input.setAttribute('list', `${this.stage}`);
+    }
+
+    createList() {
+      const datalist = document.createElement('datalist');
+      const id = this.stage === this.Stages().TAGS ? 'tags' : 'types';
+      datalist.setAttribute('id', `${this.Stages().TAGS}`);
+      return datalist;
+    }
+
+    updateList() {
+      const datalist = this.querySelector('datalist');
+      datalist.setAttribute('id', `${this.stage}`);
+      datalist.innerHTML = '';
+      const list = this.stage === this.Stages().TAGS? this.available : this.types;
+      list.forEach((item) => {
+        const option = document.createElement('option');
+        option.setAttribute('value', item);
+        datalist.appendChild(option);
+      });
+    }
+
+    /**
+     * Tag
+     */
+    addTag() {
+      console.log({
+        ...this.tag
+      })
+    }
+
+    /**
+     * State
+     */
+
+    connectedCallback() {
+      this.render();
+    }
+
+    disconnectedCallback() {}
+
+    attributeChangedCallback(name, prev, current) {
+      this.available = JSON.parse(this.getAttribute('data-available')) || [];
+      this.assigned = JSON.parse(this.getAttribute('data-assigned')) || [];
+      this.type = this.getAttribute('data-type') || this.Types().UNASSIGNED;
+      this.stage = this.getAttribute('data-stage') || this.Stages().TAGS;
+      this.tag = JSON.parse(this.getAttribute('data-tag')) || this.tag;
+
+      if (this.stage === this.Stages().TAGS || this.stage === this.Stages().TYPES) {
+        this.updateList();
+        this.updateInput();
+      }
+
+      if (this.stage === this.Stages().ADD) {
+        this.addTag();
+      }
+      //this.stage = this.next;
+
+      if(this.DEBUG) {
+        if(this.querySelector('debug')) this.removeChild(this.querySelector('debug'));
+        const debug = document.createElement('debug');
+        debug.innerHTML = `
+<pre>
+/**
+ * props
+ */
+
+avaliable: ${JSON.stringify(this.available)}
+assigned: ${JSON.stringify(this.assigned)}
+type: ${JSON.stringify(this.types)}
+
+/**
+ * state
+ */
+
+stage: ${JSON.stringify(this.stage)}
+next: ${JSON.stringify(this.next)}
+type: ${JSON.stringify(this.type)}
+tag: ${JSON.stringify(this.tag, null, 2)}
+</pre>`;
+        this.appendChild(debug);
+      }
+    }
+
+    render() {
+      this.appendChild(this.createList());
+      this.appendChild(this.createInput());
+    }
+  }
+  window.customElements.define('ui-tags', Tags);
+
+  /**
+   *
+   */
+  const _tags = Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000) + 1).filter((value, index, self) => self.indexOf(value) === index).sort((a, b) => a - b).map((tag) => `#${tag}`);
+  const _assigned = _tags.filter(() => Math.random() > 0.5);
+  const _available = _tags.filter((tag) => !_assigned.includes(tag));
+
+  const tags = document.querySelector('ui-tags');
+  tags.setAttribute('data-assigned', JSON.stringify(_assigned));
+  tags.setAttribute('data-available', JSON.stringify(_available));
+  //tags.setAttribute('style', '--background: #000000;');
+</script>

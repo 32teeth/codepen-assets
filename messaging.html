@@ -1,9 +1,4 @@
-<counter>Toasts on screen: <count></count></counter>
-<buttons>
-  <button onclick='generateRandomToast()'>Generate a Random Toast</button>
-  <button onclick='generate10RandomToast()'>Generate 10 Random Toast</button>
-  <button onclick='generate50RandomToast()'>Generate 50 Random Toast</button>
-</buttons>
+<counter>Toasts on screen: <count>0</count></counter>
 <ui-toaster ref='toaster'></ui-toaster>
 <style>
   @charset "UTF-8";
@@ -27,7 +22,6 @@
     margin: 0;
     padding: 0;
     font-family: "roboto";
-    background: linear-gradient(to bottom right, var(--info), var(--info50));
   }
 
   buttons {
@@ -44,8 +38,12 @@
   }
 
   counter {
-    padding: calc(var(--offset) / 4);
-    margin: calc(var(--offset) / 8);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: calc(var(--offset) / 4);
+    height: var(--offset);
+    background: rgba(0, 0, 0, 0.25);
   }
 
   count {
@@ -289,43 +287,27 @@
     const toaster = document.querySelector('ui-toaster')
     toaster.toast(options)
   }
-
-  setTimeout(() => {
-    toast({ type: 'info', message: 'Go Generate a Random Toast', dismissable: true, delay: 5000 })
-  }, 100)
-
-  generateRandomToast = () => {
-    const types = ['info', 'error', 'warning', 'success'];
-    const type = types[Math.floor(Math.random() * types.length)];
-    const message = `<strong>${Math.random().toString(36).substr(2)}</strong><br/>${Math.random().toString(36).substr(2)} ${Math.random().toString(36).substr(2)} ${Math.random().toString(36).substr(2)}`;
-    const action = Math.random() > 0.5 ? { text: 'Follow Up Action', href: 'https://google.com' } : false;
-    const dismissable = Math.random() > 0.5 ? true : false;
-    const delay = Math.random() > 0.5 ? Math.floor(Math.random() * 5000) + 5000 : false;
-    toast({ type, message, action, dismissable, delay })
-  }
-
-  generate50RandomToast = () => {
-    var n = 0
-    const generateInterval = setInterval(() => {
-      if(n > 50) clearInterval(generateInterval)
-      console.log(n);
-      generateRandomToast()
-      n++
-    }, 100);
-  }
-
-  generate10RandomToast = () => {
-    var n = 0
-    const generateInterval = setInterval(() => {
-      if(n > 10) clearInterval(generateInterval)
-      console.log(n);
-      generateRandomToast()
-      n++
-    }, 100);
-  }
-
-  setInterval(() => {
-    const count = document.querySelectorAll('ui-toast').length
-    document.querySelector('count').innerHTML = count;
-  }, 100)
 </script>
+
+<script>
+  window.addEventListener(
+    'message',
+    (event) => {
+      if (event.origin !== 'http://127.0.0.1:3000/') return;
+      console.log(event.origin, event.data)
+      const { data } = event;
+      toast(data);
+    },
+    false
+  );
+
+  const send = (message) => {
+    console.log(message)
+    setTimeout(() => {
+      window.opener.postMessage(message, 'http://127.0.0.1:3000/');
+    }, 2500);
+  };
+
+</script>
+
+<button onclick='send({message: "Hello, World!"})'>Send a Message</button>

@@ -1,0 +1,42 @@
+<header></header>
+<div>1</div>
+<div>1</div>
+<div>1</div>
+<div>1</div>
+<footer></footer>
+<style>
+body {
+  margin: 0;
+}
+div {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header {
+  background: cyan;
+  height: 80px;
+}
+footer {
+  background: magenta;
+  height: 80px;
+  position: sticky;
+  bottom: 0;
+}
+footer[stuck] {
+  box-shadow: 0 0 16px black;
+}
+</style>
+<script>
+  const observer = new IntersectionObserver(
+  ([e]) => {
+    e.target.toggleAttribute('stuck', e.intersectionRatio < 1);
+    e.target.innerHTML = e.intersectionRatio < 1 ? `Stuck at ${e.intersectionRatio}` : '';
+  },
+  {threshold: [1]}
+);
+
+observer.observe(document.querySelector('footer'));
+</script>

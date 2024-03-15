@@ -1,0 +1,74 @@
+<script>
+  class HealthScore extends HTMLElement {
+    constructor() {
+      super();
+
+      const shadow = this.attachShadow({ mode: 'open' });
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'healthScoreWrapper';
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', 'healthScoreBar');
+      svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+
+      const rectBackground = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rectBackground.setAttribute('width', '100%');
+      rectBackground.setAttribute('height', '24');
+      rectBackground.setAttribute('x', '0');
+      rectBackground.setAttribute('y', '0');
+      rectBackground.setAttribute('fill', 'gray');
+
+      const rectFill = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rectFill.setAttribute('width', '35%');
+      rectFill.setAttribute('height', '24');
+      rectFill.setAttribute('x', '0');
+      rectFill.setAttribute('y', '0');
+      rectFill.setAttribute('fill', 'red');
+
+      const dataSpan = document.createElement('span');
+      dataSpan.className = 'healthScoreData';
+      dataSpan.textContent = '';
+
+      svg.appendChild(rectBackground);
+      svg.appendChild(rectFill);
+      wrapper.appendChild(svg);
+      wrapper.appendChild(dataSpan);
+
+      const style = document.createElement('style');
+      style.textContent = `
+        .healthScoreWrapper {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: calc(24 / 16 * 1rem);
+          margin: 1rem;
+          width: fit-content;
+          gap: 1rem;
+        }
+
+        .healthScoreBar {
+          resize: horizontal;
+          height: calc(24 / 16 * 1rem);
+        }
+
+        .healthScoreData {
+          width: fit-content;
+        }
+      `;
+
+      shadow.appendChild(style);
+      shadow.appendChild(wrapper);
+    }
+
+    connectedCallback() {
+      const dataSpan = this.shadowRoot.querySelector('.healthScoreData');
+      const score = this.getAttribute('data-score');
+      dataSpan.textContent = `${score} / 100`;
+    }
+  }
+
+  customElements.define('health-score', HealthScore);
+</script>
+
+<health-score data-score="40"></health-score>

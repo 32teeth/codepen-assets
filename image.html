@@ -1,0 +1,54 @@
+<!-- absolute path -->
+<h4>source image</h4>
+<img id="source" src="https://pbs.twimg.com/profile_images/1070375193447620608/eBGx9OIh_400x400.jpg" >
+
+<!-- relative path -->
+<h4>base64</h4>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+<script>
+  window.addEventListener("load", () => {
+    const source = document.querySelector("#source");
+
+    const img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const formats = ['png', 'jpeg', 'webp'];
+
+      canvas.height = this.naturalHeight;
+      canvas.width = this.naturalWidth;
+      ctx.drawImage(this, 0, 0);
+
+      formats.forEach(format => {
+        const dataURL = canvas.toDataURL(`image/${format}`, 0.1, 0.1);
+        const imgElement = document.createElement('img');
+        imgElement.src = dataURL;
+
+        const div = document.createElement('div');
+        div.appendChild(imgElement);
+        div.innerHTML += `
+          <br /> ${format} --> ${(dataURL.length / 1000)} KB <br /><br />
+          <textarea cols="100" rows="10">${dataURL}</textarea>
+        `;
+        document.body.appendChild(div);
+      });
+    };
+
+    if (source.complete || source.complete === undefined) {
+      // Set a placeholder image while the source image is loading
+      img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+      img.src = source.src;
+    } else {
+      // Use the source image directly if it is already loaded
+      img.src = source.src;
+    }
+  });
+</script>

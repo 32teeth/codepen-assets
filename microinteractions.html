@@ -1,49 +1,66 @@
-<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-  <g transform="scale(0.75) translate(6, 6)">
-    <line x1="30" y1="8" x2="30" y2="24"/>
-    <g>
-      <line x1="2" y1="16" x2="10" y2="8"/>
-      <line x1="2" y1="16" x2="10" y2="24"/>
-      <line x1="2" y1="16" x2="20" y2="16"/>
-    </g>
+
+
+<svg
+role="img"
+aria-label="High priority"
+width="16"
+height="16"
+fill="none"
+xmlns="http://www.w3.org/2000/svg"
+>
+  <g stroke="#d91515" stroke-width="2" stroke-linecap="round">
+    <line x1="3" y1="5.25" x2="8" y2="1.5"/>
+    <line x1="8" y1="1.5" x2="13" y2="5.25"/>
+    <line x1="3" y1="10" x2="8" y2="6.25"/>
+    <line x1="8" y1="6.25" x2="13" y2="10"/>
+    <line x1="3" y1="14.75" x2="8" y2="11"/>
+    <line x1="8" y1="11" x2="13" y2="14.75"/>
   </g>
 </svg>
 
-<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-  <g transform="scale(0.75) translate(6, 6)">
-    <line x1="30" y1="8" x2="30" y2="24"/>
-    <g transform="rotate(180) translate(10 0)" transform-origin="center">
-      <line x1="2" y1="16" x2="10" y2="8"/>
-      <line x1="2" y1="16" x2="10" y2="24"/>
-      <line x1="2" y1="16" x2="20" y2="16"/>
-    </g>
+<svg
+role="img"
+aria-label="Medium priority"
+width="16"
+height="16"
+fill="none"
+xmlns="http://www.w3.org/2000/svg"
+>
+  <g stroke="#037f0c" stroke-width="2" stroke-linecap="round">
+    <line x1="3" y1="7.25" x2="8" y2="3.5"/>
+    <line x1="8" y1="3.5" x2="13" y2="7.25"/>
+    <line x1="3" y1="12" x2="8" y2="8.25"/>
+    <line x1="8" y1="8.25" x2="13" y2="12"/>
+  </g>
+</svg>
+
+<svg
+role="img"
+aria-label="Low priority"
+width="16"
+height="16"
+fill="none"
+xmlns="http://www.w3.org/2000/svg"
+>
+  <g stroke="#539fe5" stroke-width="2" stroke-linecap="round">
+    <line x1="3" y1="10" x2="8" y2="6.25"/>
+    <line x1="8" y1="6.25" x2="13" y2="10"/>
+  </g>
+</svg>
+
+<svg
+role="img"
+aria-label="No priority"
+width="16"
+height="16"
+fill="none"
+xmlns="http://www.w3.org/2000/svg"
+>
+  <g stroke="#414d5c" stroke-width="2" stroke-linecap="round">
+    <line x1="4" y1="8" x2="12" y2="8"/>
   </g>
 </svg>
 
 <style>
-  :root {
-    --black: hsl(204, 19%, 26%);
-    --white: hsl(0, 0%, 100%);
-    --fill: hsl(240, 7%, 97%);
-    --stroke: var(--black);
-    --stroke-width: 4;
-    --stroke-linecap: round;
-  }
 
-  body {
-    display: grid;
-    grid-template-rows: repeat(auto-fill, calc(32/16 * 1rem));
-    grid-template-columns: repeat(auto-fill, calc(32/16 * 1rem));
-    gap: calc(8/16 * 1rem);
-    margin: calc(8/16 * 1rem);
-    padding: 0;
-    background: var(--fill);
-  }
-
-  svg {
-    background: var(--white);
-    stroke: var(--stroke);
-    stroke-width: var(--stroke-width);
-    stroke-linecap: var(--stroke-linecap);
-  }
 </style>

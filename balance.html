@@ -1,0 +1,56 @@
+<div>
+  <h4>Lorem ipsum</h4>
+  <p>Lorem ipsum dolor sit amet, adipisicing elit. Ad consectetur eveniet adipisci quia repellat? </p>
+</div>
+<div>
+  <h4>Lorem ipsum</h4>
+  <p class="balanced">Lorem ipsum dolor sit amet, adipisicing elit. Ad consectetur eveniet adipisci quia repellat? </p>
+</div>
+
+<style>
+  :root {
+    --box-size: calc(320 / 16 * 1rem);
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica;
+    background: #FEFEFE;
+    user-select: none;
+    gap: calc(32 / 16 * 1rem);
+  }
+
+  div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-direction: column;
+    width: var(--box-size);
+    height: var(--box-size);
+    border: solid 1px;
+    background: rgba(0, 0, 0, 0.1);
+    outline: solid calc(12 / 16 * 1rem) white;
+    outline-offset: calc((12 / 16 * -1rem) - 1px);
+    padding: calc(12 / 16 * 1rem);
+  }
+
+  h4, p {
+    margin: 0;
+    line-height: 1.5;
+    background: white;
+    padding: calc(12 / 16 * 1rem);
+    display: flex;
+    wdith: 100%;
+    max-inline-size: 40ch;
+  }
+
+  .balanced {
+    white-space: unset;
+    text-wrap: balance;
+  }
+</style>

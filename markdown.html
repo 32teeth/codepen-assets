@@ -1,0 +1,119 @@
+<style nonce="ubjEjHGGRcOh5sZEDv5EFQ==">._MarkdownRenderer_7n0ot_1 {
+  font-family: var(--font-family-base-m6jzpk, "Amazon Ember", "Helvetica Neue", Roboto, Arial, sans-serif);
+}
+._MarkdownRenderer_7n0ot_1 h1 {
+  font-size: 28.38px;
+  font-weight: 900;
+}
+._MarkdownRenderer_7n0ot_1 h2 {
+  font-size: 25.23px;
+  font-weight: 900;
+}
+._MarkdownRenderer_7n0ot_1 h3 {
+  font-size: 22.43px;
+  font-weight: 900;
+}
+._MarkdownRenderer_7n0ot_1 h4 {
+  font-size: 19.93px;
+  font-weight: heavy;
+}
+._MarkdownRenderer_7n0ot_1 h5 {
+  font-size: 17.72px;
+  font-weight: bold;
+}
+._MarkdownRenderer_7n0ot_1 h6 {
+  font-size: 15.75px;
+  font-weight: bold;
+}
+._MarkdownRenderer_7n0ot_1 p {
+  font-size: 14px;
+  font-weight: normal;
+}
+._MarkdownRenderer_7n0ot_1 blockquote {
+  margin: 1.3em 0;
+}
+._MarkdownRenderer_7n0ot_1 blockquote > p {
+  display: inline;
+  padding: 3px 0;
+  background: rgba(0, 0, 0, 0.1019607843);
+  border-radius: 2px;
+}
+._MarkdownRenderer_7n0ot_1 blockquote > p:before {
+  content: open-quote;
+}
+._MarkdownRenderer_7n0ot_1 img {
+  max-width: 100%;
+}
+._MarkdownRenderer_7n0ot_1 table,
+._MarkdownRenderer_7n0ot_1 th,
+._MarkdownRenderer_7n0ot_1 td {
+  border: 1px solid #ddd;
+  padding: 5px;
+}</style>
+
+<div class="_MarkdownRenderer_7n0ot_1"><p>This Is Awesome, why do we exclude it????</p>
+<pre><code class="hljs language-bash"><span class="hljs-meta">#!/bin/bash</span>
+min_sleep_duration=60
+max_sleep_duration=600
+
+<span class="hljs-built_in">source</span> headers.sh
+<span class="hljs-built_in">source</span> params.sh
+<span class="hljs-built_in">source</span> words.sh
+
+setIssueId <span class="hljs-string">"7"</span>
+
+<span class="hljs-function"><span class="hljs-title">createCommentForIssue</span></span>() {
+  <span class="hljs-keyword">if</span> [[ -z <span class="hljs-string">"<span class="hljs-variable">$commentRepliedToId</span>"</span> || <span class="hljs-string">"<span class="hljs-variable">$commentRepliedToId</span>"</span> == <span class="hljs-string">"NULL"</span> ]]; <span class="hljs-keyword">then</span>
+    json=<span class="hljs-string">'{
+      "query": "mutation CreateCommentForIssue($input: CreateCommentForIssueInput!) { createCommentForIssue(input: $input) { id } }",
+      "variables": {
+        "input": {
+          "content": "'</span><span class="hljs-string">"<span class="hljs-variable">$content</span>"</span><span class="hljs-string">'",
+          "contentType": "'</span><span class="hljs-string">"<span class="hljs-variable">$contentType</span>"</span><span class="hljs-string">'",
+          "issueId": "'</span><span class="hljs-string">"<span class="hljs-variable">$issueId</span>"</span><span class="hljs-string">'",
+          "spaceName": "'</span><span class="hljs-string">"<span class="hljs-variable">$spaceName</span>"</span><span class="hljs-string">'",
+          "projectName": "'</span><span class="hljs-string">"<span class="hljs-variable">$projectName</span>"</span><span class="hljs-string">'"
+        }
+      }
+    }'</span>
+  <span class="hljs-keyword">else</span>
+    json=<span class="hljs-string">'{
+      "query": "mutation CreateCommentForIssue($input: CreateCommentForIssueInput!) { createCommentForIssue(input: $input) { id } }",
+      "variables": {
+        "input": {
+          "content": "'</span><span class="hljs-string">"<span class="hljs-variable">$content</span>"</span><span class="hljs-string">'",
+          "contentType": "'</span><span class="hljs-string">"<span class="hljs-variable">$contentType</span>"</span><span class="hljs-string">'",
+          "issueId": "'</span><span class="hljs-string">"<span class="hljs-variable">$issueId</span>"</span><span class="hljs-string">'",
+          "spaceName": "'</span><span class="hljs-string">"<span class="hljs-variable">$spaceName</span>"</span><span class="hljs-string">'",
+          "projectName": "'</span><span class="hljs-string">"<span class="hljs-variable">$projectName</span>"</span><span class="hljs-string">'",
+          "commentRepliedToId": "'</span><span class="hljs-string">"<span class="hljs-variable">$commentRepliedToId</span>"</span><span class="hljs-string">'"
+        }
+      }
+    }'</span>
+  <span class="hljs-keyword">fi</span>
+
+  curl --location <span class="hljs-string">"<span class="hljs-variable">$url</span>"</span> \
+    --header <span class="hljs-string">"Cookie: <span class="hljs-variable">$cookie</span>"</span> \
+    --header <span class="hljs-string">"anti-csrftoken-a2z: <span class="hljs-variable">$token</span>"</span> \
+    --header <span class="hljs-string">'Content-Type: application/json'</span> \
+    --data <span class="hljs-string">"<span class="hljs-variable">$json</span>"</span>
+}
+
+<span class="hljs-built_in">source</span> listCommentsForIssue.sh
+
+allCommentRepliedToId=$(getAllCommentRepliedToId)
+
+
+<span class="hljs-keyword">for</span> ((i=1; i&lt;=depth; i++)); <span class="hljs-keyword">do</span>
+  <span class="hljs-comment"># Generate a random string of 5 random words</span>
+  random_index=$((RANDOM % <span class="hljs-variable">${#words[@]}</span>))
+  content=<span class="hljs-string">" <span class="hljs-variable">${words[random_index]}</span> says:\n\n"</span>
+  <span class="hljs-keyword">for</span> ((j=0; j&lt;$((RANDOM % <span class="hljs-number">10</span> + <span class="hljs-number">1</span>)); j++)); <span class="hljs-keyword">do</span>
+    random_index=$((RANDOM % <span class="hljs-variable">${#words[@]}</span>))
+    content+=<span class="hljs-string">"* <span class="hljs-variable">${words[random_index]}</span>\n"</span>
+  <span class="hljs-keyword">done</span>
+
+  commentRepliedToId=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">"<span class="hljs-variable">${allCommentRepliedToId[@]}</span>"</span> | <span class="hljs-built_in">tr</span> <span class="hljs-string">' '</span> <span class="hljs-string">'\n'</span> | <span class="hljs-built_in">shuf</span> -n 1)
+  createCommentForIssue
+<span class="hljs-keyword">done</span>
+</code></pre></div>

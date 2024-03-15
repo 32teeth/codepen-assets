@@ -52,37 +52,18 @@
   <nav></nav>
   <header></header>
   <active>
-    <h4>Active</h4>
-    <img src="https://camo.githubusercontent.com/37f15f5ddd57e10ad6dbbdaa8873e4298dfebed486cf893a59f17908d3244a46/68747470733a2f2f7374617469632e77696b69612e6e6f636f6f6b69652e6e65742f74617473756e6f6b6f7673636170636f6d2f696d616765732f352f35342f476f6c645f4c69676874616e2e6a7067">
+    <table>
+      <thead></thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="7">Footer</td>
+        </tr>
+      </tfoot>
+    </table>
   </active>
   <panel>
     <h4>Panel</h4>
-    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-      <rect width="16" height="12" rx="2" fill="#333333"/>
-      <rect width="13" height="9" rx="1"  x="1.5" y="1.5" fill="#FFFFFF"/>
-      <polygon points="3 12, 3 16, 9 12" fill="#333333"/>
-      <polygon points="4.5 10, 4.5 14.5, 7.5 10" fill="#FFFFFF"/>
-      <text
-        dominantBaseline="middle"
-        textAnchor="left"
-        fill="#333333"
-        x="3"
-        y="10">
-        4
-      </text>
-    </svg>
-    <svg width="65" height="50" xmlns="http://www.w3.org/2000/svg">
-      <g transform="translate(10, 10)">
-        <rect width="40" height="25" rx="3" fill="var(--logo-primary-color)"/>
-        <polygon points="35 32, 35 20, 20 20" fill="var(--logo-primary-color)"/>
-        <rect x="3" y="3" width="34" height="19" rx="2" fill="white"/>
-        <polygon points="32 26, 32 22, 23 20" fill="white"/>
-      </g>
-    </svg>
-
-    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-comment v-align-middle">
-      <path d="M1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 13.25 12H9.06l-2.573 2.573A1.458 1.458 0 0 1 4 13.543V12H2.75A1.75 1.75 0 0 1 1 10.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h4.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
-  </svg>
   </panel>
   <pin>
     <input type="checkbox" id="pin"/>
@@ -245,6 +226,8 @@ main header {
 
 main active {
   grid-area: actions;
+  height: calc(100vh - var(--inner-section-header-height));
+  overflow-y: scroll;
   border-right: solid 1px var(--border-color);
 }
 
@@ -339,5 +322,96 @@ pin label:before {
 
 pin input[type="checkbox"]:checked ~ label:before {
   content: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPgo8c3ZnIGZpbGw9IiMwMDAwMDAiIHdpZHRoPSI4MDBweCIgaGVpZ2h0PSI4MDBweCIgdmlld0JveD0iMCAwIDI1NiAyNTYiIGlkPSJGbGF0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik01Ni44Nzg5MSwzMS45Mjc3M0ExMS45OTk4NiwxMS45OTk4NiwwLDEsMCwzOS4xMjEwOSw0OC4wNzIyN0w2NC44NDQyNCw3Ni4zNjcxOUM1My42MDA1OSw3Ny41NzAzMSw0MC40NTMxMyw4MS45MTI2LDI3LjA2NzM4LDkyLjcxYTIwLjAxNDQyLDIwLjAxNDQyLDAsMCwwLTEuNTk5NjEsMjkuNzI4NTJMNzEuMDI5MywxNjgsMzkuNTE0NjUsMTk5LjUxNDY1YTEyLjAwMDEsMTIuMDAwMSwwLDAsMCwxNi45NzA3LDE2Ljk3MDdMODgsMTg0Ljk3MDcsMTMzLjM2MzI4LDIzMC4zMzRhMjAuMDAxOTMsMjAuMDAxOTMsMCwwLDAsMTQuMTQ3NDYsNS44NjMyOWMuNDY2OCwwLC45MzY1My0uMDE2NjEsMS40MDUyOC0uMDQ5MzJhMTkuOTY1NTYsMTkuOTY1NTYsMCwwLDAsMTQuNTYyNS03LjkxNkE4OS43OTUsODkuNzk1LDAsMCwwLDE3Ny44MDQ2OSwyMDAuNjI0bDIxLjMxNjQsMjMuNDQ4MjVhMTEuOTk5ODYsMTEuOTk5ODYsMCwxLDAsMTcuNzU3ODItMTYuMTQ0NTRabTkwLjEwMzUxLDE3OC4wODM1TDQ1LjY5NTMxLDEwOC43MjQ2MUM2Ni43NzE0OCw5NC4xMzc3LDg1LjIwOSwxMDIuMDg0LDg2LjY4NDU3LDEwMi43NTk3N2ExMS42MjMyMywxMS42MjMyMywwLDAsMCwzLjE1NDMsMS4xMDE1Nmw2NS45Mjk2OCw3Mi41MjI0NkMxNTguNTY0OTQsMTg5LjA4MzUsMTUyLjQ1MzEzLDIwMS43NjM2NywxNDYuOTgyNDIsMjEwLjAxMTIzWk0yNDAuNjg2NTIsOTZhMTkuODcsMTkuODcsMCwwLDEtNS44NTkzNywxNC4xNDM1NUwxOTkuMDg3ODksMTQ1Ljg4MzNhMTEuOTk5OTIsMTEuOTk5OTIsMCwwLDEtMTYuOTcwNy0xNi45NzAyMUwyMTUuMDI5Myw5NiwxNjAsNDAuOTcwMjEsMTMwLjUxNTYzLDcwLjQ1NDU5YTEyLjAwMDEsMTIuMDAwMSwwLDEsMS0xNi45NzA3MS0xNi45NzA3bDMyLjMxMjUtMzIuMzEyNWEyMC4wMjY4LDIwLjAyNjgsMCwwLDEsMjguMjg0MTgtLjAwMWw2MC42ODY1Myw2MC42ODc1QTE5Ljg2NzIxLDE5Ljg2NzIxLDAsMCwxLDI0MC42ODY1Miw5NloiLz4KPC9zdmc+)
-}
+};
+
+@charset "UTF-8";
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+  body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans';
+    display: block;
+  }
+
+  table {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    background: linear-gradient( 0deg, white calc(0% + 50px), white calc(0% + 50px), rgba(0,0,0,0.5) calc(0% + 49px), transparent calc(0% + 54px), transparent);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  table thead {
+    position: sticky;
+    top: 0;
+    background: hsl(255, 7%, 90%);
+  }
+
+  table thead th,
+  table tbody td {
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  table tbody tr td:first-child {
+    position: sticky;
+  }
+
+  table tfoot {
+    position: sticky;
+    bottom: 0;
+    height:50px;
+    background: white;
+    z-index: which 1;
+  }
+
+  table tfoot td {
+    padding: 0.5rem;
+    text-align: left;
+    background: white;
+  }
 </style>
+
+<script>
+const generateTable = (rows = 10) => {
+  const table = document.querySelector('table');
+  const thead = table.querySelector('thead');
+  const tbody = table.querySelector('tbody');
+
+  const cols = [
+    'ID',
+    'Title',
+    'Assignee',
+    'Status',
+    'Created',
+    'Updated',
+    'Due Date',
+  ];
+
+  cols.forEach(col => {
+    const th = document.createElement('th');
+    th.textContent = col;
+    thead.appendChild(th);
+  });
+
+  Array.from({ length: rows }).forEach((_, i) => {
+    const tr = document.createElement('tr');
+    cols.forEach(col => {
+      const td = document.createElement('td');
+      td.textContent = `${col} ${i + 1}`;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+};
+generateTable(2500);
+</script>

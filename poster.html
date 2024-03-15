@@ -1,0 +1,57 @@
+<div class="wrapper1">
+  <video/>
+</div>
+<div class="wrapper2">
+  <video/>
+</div>
+
+
+<style>
+  :root {
+    --video-width: 1280;
+    --aspect-ratio: 16 / 9;
+    --scale: 0.5;
+    --border-radius: 50% / 100%;
+    --black: hsl(0, 0%, 0%);
+    --gray: hsl(0, 0%, 50%);
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: var(--gray);
+  }
+
+  .wrapper1 {
+    width: calc(var(--video-width) / 16 * 1rem);
+    aspect-ratio: var(--aspect-ratio);
+    background: url('https://i.ytimg.com/vi/FfJ5XG5i2aw/maxresdefault.jpg'), var(--black);
+    border-radius: var(--border-radius);
+    background-size: cover, 100% 100%;
+    background-clip: border-box;
+    overflow: hidden;
+    transform: scale(var(--scale));
+  }
+
+  .wrapper2 {
+    width: calc(var(--video-width) / 16 * 1rem);
+    aspect-ratio: var(--aspect-ratio);
+    background: url('this image does not exist'), var(--black);
+    border-radius: var(--border-radius);
+    background-size: cover, 100% 100%;
+    background-clip: border-box;
+    overflow: hidden;
+    transform: scale(var(--scale));
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+
+</style>

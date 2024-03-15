@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>HUD Gamepad</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <script>
+const GamePadHud = (function() {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const touches = {};
+  const buttons = [];
+  const keys = {};
+
+  let width;
+  let height;
+  let scale;
+  let radius;
+  let opacity;
+  let layout;
+  let hint;
+  let joystick;
+
+  const colors = {
+    red: 'rgba(255,0,0,0.4)',
+    green: 'rgba(0,255,0,0.4)',
+    blue: 'rgba(0,0,255,0.4)',
+    purple: 'rgba(255,0,255,0.4)',
+    yellow: 'rgba(255,255,0,0.4)',
+    cyan: 'rgba(0,255,255,0.4)',
+    black: 'rgba(0,0,0,0.4)',
+    white: 'rgba(255,255,255,0.4)',
+    joystick: {
+      base: 'rgba(0,0,0,0.4)',
+      dust: 'rgba(0,0,0,0.4)',
+      stick: 'rgba(204,204,204,1)',
+      ball: 'rgba(255,255,255,1)'
+    }
+  };
+
+  function init(config = {}) {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    scale = Math.min(window.innerWidth / width, window.innerHeight / height);
+    radius = 25;
+    opacity = 0.4;
+    layout = 'BOTTOM_RIGHT';
+    hint = false;
+
+    if (config.colors) {
+      Object.assign(colors, config.colors);
+    }
+
+    if (config.radius) {
+      radius = config.radius;
+    }
+
+    if (config.opacity) {
+      opacity = config.opacity;
+    }
+
+    if (config.layout) {
+      layout = config.layout;
+    }
+
+    if (config.hint) {
+      hint = config.hint;
+    }
+
+    if (config.joystick) {
+      joystick = {
+        x: width / 2,
+        y: height / 2,
+        radius: 50,
+        pressed: false
+      };
+      setupJoystick();
+    }
+
+    setupCanvas();
+    setupEventListeners();
+    draw();
+  }
+
+  function setupCanvas() {
+    canvas.width = width;
+    canvas.height = height;
+    document.body.appendChild(canvas);
+  }
+
+  function setupEventListeners() {
+    ['touchstart', 'touchend', 'touchmove', 'mousedown', 'mouseup', 'mousemove', 'keydown', 'keyup'].forEach(event => {
+      window.addEventListener(event, handleEvent);
+    });
+  }
+
+  function handleEvent(event) {
+    event.preventDefault();
+    const type = event.type;
+    const touch = event.changedTouches ? event.changedTouches[0] : event;
+    const { identifier, pageX, pageY } = touch;
+    const x = pageX * scale;
+    const y = pageY * scale;
+
+    switch (type) {
+      case 'touchstart':
+      case 'mousedown':
+        touches[identifier] = { id: null, x, y };
+        detectButtonPress(x, y);
+        detectJoystickPress(x, y);
+        break;
+      case 'touchend':
+      case 'mouseup':
+        if (touches[identifier]) {
+          const { id } = touches[identifier];
+          if (id) {
+            releaseButton(id);
+          }
+          delete touches[identifier];
+        }
+        break;
+      case 'touchmove':
+      case 'mousemove':
+        if (touches[identifier]) {
+          const { id } = touches[identifier];
+          if (id) {
+            moveJoystick(x, y);
+          }
+        }
+        break;
+      case 'keydown':
+        keys[event.key] = true;
+        break;
+      case 'keyup':
+        keys[event.key] = false;
+        break;
+    }
+
+    if (type.startsWith('touch') || type.startsWith('mouse')) {
+      draw();
+    }
+  }
+
+  function detectButtonPress(x, y) {
+    const button = buttons.find(button => isInsideButton(x, y, button));
+    if (button) {
+      button.pressed = true;
+      touches[button.id].id = button.id;
+    }
+  }
+
+  function releaseButton(id) {
+    const button = getButtonById(id);
+    if (button) {
+      button.pressed = false;
+      touches[button.id].id = null;
+    }
+  }
+
+  function getButtonById(id) {
+    return buttons.find(button => button.id === id);
+  }
+
+  function isInsideButton(x, y, button) {
+    const dx = x - button.x;
+    const dy = y - button.y;
+    return Math.sqrt(dx * dx + dy * dy) <= radius;
+  }
+
+  function addButton(name, x, y, color) {
+    buttons.push({ id: name, x, y, color, pressed: false });
+  }
+
+  function drawButton(button) {
+    const { x, y, color, pressed } = button;
+
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.fillStyle = color;
+    ctx.globalAlpha = pressed ? 1 : opacity;
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = 'bold 14px Arial';
+    ctx.fillText(button.id, x, y);
+  }
+
+  function setupJoystick() {
+    if (!joystick) {
+      return;
+    }
+
+    const { x, y, radius } = joystick;
+
+    addButton('joystick_base', x, y, colors.joystick.base);
+    addButton('joystick_dust', x, y, colors.joystick.dust);
+    addButton('joystick_stick', x, y, colors.joystick.stick);
+    addButton('joystick_ball', x, y, colors.joystick.ball);
+  }
+
+  function moveJoystick(x, y) {
+    if (!joystick) {
+      return;
+    }
+
+    const { x: baseX, y: baseY, radius } = joystick;
+    const dx = x - baseX;
+    const dy = y - baseY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance <= radius) {
+      joystick.x = x;
+      joystick.y = y;
+    } else {
+      const angle = Math.atan2(dy, dx);
+      const newX = baseX + Math.cos(angle) * radius;
+      const newY = baseY + Math.sin(angle) * radius;
+      joystick.x = newX;
+      joystick.y = newY;
+    }
+  }
+
+  function drawJoystick() {
+    if (!joystick) {
+      return;
+    }
+
+    const { x, y, radius } = joystick;
+
+    drawButton(getButtonById('joystick_base'));
+    drawButton(getButtonById('joystick_dust'));
+
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.fillStyle = colors.joystick.stick;
+    ctx.globalAlpha = opacity;
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.arc(x, y, radius / 2, 0, 2 * Math.PI);
+    ctx.fillStyle = colors.joystick.ball;
+    ctx.globalAlpha = opacity;
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    if (hint) {
+      ctx.fillStyle = colors.white;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = 'bold 14px Arial';
+      ctx.fillText('Tap to interact', width / 2, height / 2);
+    }
+
+    buttons.forEach(button => drawButton(button));
+    drawJoystick();
+  }
+
+  return { init };
+})();
+
+GamePadHud.init();
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<fireworks>
+  <banner></banner>
+  <banner></banner>
+</fireworks>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap:400,100,500,300italic,500italic,700italic,900,300");
+
+  :root {
+    --padding: 1rem;
+    --white: #FFEEEE;
+    --black: #1F1F1F;
+    --banner-gold-1: #DAA800;
+    --banner-gold-2: #A26C01;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+    background: var(--white);
+  }
+
+  fireworks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100vw - var(--padding) * 2);
+    height: calc(100vh - var(--padding) * 2);
+    background: var(--black);
+  }
+
+  banner:first-child {
+    width: 800px;
+    height: 300px;
+    background: var(--white);
+  }
+
+  banner:first-child:before {
+    content: "";
+    display: flex;
+    width: 250px;
+    height: 300px;
+    transform: skewY(-15deg);
+    background: linear-gradient(210deg, transparent 255px, var(--banner-gold-2) 50%),
+                linear-gradient(70deg, var(--banner-gold-1), var(--banner-gold-2));
+  }
+</style>

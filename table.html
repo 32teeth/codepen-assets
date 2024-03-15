@@ -1,0 +1,62 @@
+!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .table th {
+      background-color: #f2f2f2;
+    }
+
+    .table .expanded-row {
+      display: none;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>john.doe@example.com</td>
+        <td>555-1234</td>
+      </tr>
+      <tr>
+        <td>Mary Smith</td>
+        <td>mary.smith@example.com</td>
+        <td>555-5678</td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+
+  <script>
+    const rows = document.querySelectorAll('.table tbody tr');
+
+    rows.forEach(row => {
+      row.addEventListener('click', () => {
+        row.classList.toggle('expanded-row');
+      });
+    });
+  </script>
+</body>
+</html>

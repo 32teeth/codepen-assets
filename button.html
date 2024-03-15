@@ -1,0 +1,25 @@
+<my-button data-tooltip="Click me!">My Button</my-button>
+<script>
+class MyButton extends HTMLButtonElement {
+  constructor() {
+    super();
+    this.addEventListener("mouseover", () => {
+      const tooltip = document.createElement("div");
+      tooltip.setAttribute("class", "tooltip");
+      tooltip.innerText = this.dataset.tooltip;
+      document.body.appendChild(tooltip);
+    });
+    this.addEventListener("mousemove", (e) => {
+      const tooltip = document.querySelector(".tooltip");
+      tooltip.style.top = e.clientY + "px";
+      tooltip.style.left = e.clientX + "px";
+    });
+    this.addEventListener("mouseout", () => {
+      const tooltip = document.querySelector(".tooltip");
+      document.body.removeChild(tooltip);
+    });
+  }
+}
+
+customElements.define("my-button", MyButton, { extends: "button" });
+</script>

@@ -1,0 +1,20 @@
+<audio
+  preload
+  controls
+  autoplay
+  muted
+>
+  <source src="https://cdn.uppbeat.io/audio-output/237/3191/main-version/streaming-previews/STREAMING-jazz-and-hop-kidcut-main-version-02-09-12098.mp3" type="audio/mpeg">
+</audio>
+<p></p>
+
+<script>
+  window.addEventListener("load", () => {
+    const audio = document.querySelector("audio");
+    audio.play().then(() => {
+      audio.muted = false;
+    }).catch((err) => {
+      document.querySelector("p").textContent = err.message;
+    })
+  });
+</script>

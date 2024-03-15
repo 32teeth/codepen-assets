@@ -1,0 +1,61 @@
+<button state="off">
+  <svg width="100" height="100"  xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <path/>
+      <path/>
+    </g>
+  </svg>
+</button>
+
+<style>
+  :root {
+    --path-left-off: path("M0 0,40 20,40 80,0 100");
+    --path-left-on: path("M0 5,40 5,40 90,0 90");
+    --path-left-state: var(--path-left-off);
+    --path-right-off: path("M40 20,100 50,100 50,40 80");
+    --path-right-on: path("M50 5,90 5,90 90,50 90");
+    --path-right-state: var(--path-right-off);
+    --button-color: hsl(209, 24%, 55%);
+  }
+
+  body {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  path {
+    transition: all ease 0.25s;
+  }
+
+  path:first-child {
+    d: var(--path-left-state);
+    fill: var(--button-color);
+  }
+
+  path:last-child {
+    d: var(--path-right-state);
+    fill: var(--button-color);
+  }
+</style>
+
+<script>
+  //document.documentElement.style.setProperty('--dY', dY + "px");
+  window.addEventListener("load", () => {
+    const button = document.querySelector("button");
+
+    button.addEventListener("click", () => {
+      button.setAttribute("state", button.getAttribute("state") === "off" ? "on" : "off");
+      document.documentElement.style.setProperty('--path-left-state', button.getAttribute("state") === "off" ? "var(--path-left-off)" : "var(--path-left-on)");
+      document.documentElement.style.setProperty('--path-right-state', button.getAttribute("state") === "off" ? "var(--path-right-off)" : "var(--path-right-on)");
+    });
+  });
+</script>
